@@ -53,7 +53,7 @@ export default class Class extends Component {
 
 	render() {
 
-		const { classes, tasks } = this.props.store;
+		const { classes, taskList } = this.props.store;
 		let currentSubject = null;
 
 		classes.forEach((subject) => {
@@ -79,11 +79,11 @@ export default class Class extends Component {
 					<hr />
 					<h4>Tasks due for this class</h4>
 
-					{tasks.map((task) => {
+					{taskList.map((task) => {
 						if (task.subjectName === currentSubject.name) {
 							return (
 								<div class={style.taskListElement} onClick={() => route('/task/' + task.id, false)}>
-									<span class={style.taskTimeLeft}>2d left</span>
+									<span class={style.taskTimeLeft}>{task.timeLeft} left</span>
 									<h5>{task.title}</h5>
 									<span class={style.taskDescription}>{task.body}</span>
 									<div class={style.colorIndicator} style={{ backgroundColor: currentSubject.color }} />

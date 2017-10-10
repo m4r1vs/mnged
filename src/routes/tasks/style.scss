@@ -1,0 +1,28 @@
+@import '../../style/vars.scss';
+
+.tasks {
+  padding: 64px 0px 0px;
+  min-height: 100%;
+  width: 100%;
+
+  @media (min-width: 500px) {
+    width: 450px;
+    margin: 0 auto;
+  }
+
+  .taskElement {
+    background: #fff;
+    padding: 5px 16px;
+    box-shadow: $card-box-shadow;
+    margin-bottom: 8px;
+
+    h4 {
+      margin: 0;
+      color: $secondary-text-color;
+    }
+
+    span {
+      color: $primary-text-color;
+    }
+  }
+}

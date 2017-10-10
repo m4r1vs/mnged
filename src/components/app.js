@@ -13,32 +13,6 @@ import initializeState from '../lib/state/initializeState';
 @observer
 export default class App extends Component {
 
-	addTask() {
-		firestore
-			.collection('users')
-			.doc('aqCB6Pw5QZSgNuxzueuR')
-			.collection('tasks')
-			.doc()
-			.set({
-				body: 'Nice body babe',
-				due: new Date(),
-				subject: 'Science',
-				title: 'sOmE tAsK'
-			});
-	}
-
-	removeTask(id) {
-		firestore
-			.collection('users')
-			.doc('aqCB6Pw5QZSgNuxzueuR')
-			.collection('tasks')
-			.doc(id)
-			.delete()
-			.catch((e) => {
-				this.props.store.throwError('#003', 'Error deleting task');
-			});
-	}
-
 	componentWillMount() {
 		initializeState(this.props.store);
 	}

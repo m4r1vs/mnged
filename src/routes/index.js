@@ -3,6 +3,7 @@ import { Router } from 'preact-router';
 import { observer } from 'preact-mobx';
 
 import Dashboard from './dashboard';
+import Tasks from './tasks';
 import Class from './class';
 import Task from './task';
 import SignIn from './signin';
@@ -27,6 +28,7 @@ export default class Routes extends Component {
 						<Dashboard path="/" store={this.props.store} />
 						<Class store={this.props.store} path="/class/:class" />
 						<Task store={this.props.store} path="/task/:task" />
+						<Tasks store={this.props.store} path="/tasks/" />
 						<div path="/signin/"><br /><br /><br />redirecting...</div>
 						<ErrorPage default />
 					</Router>

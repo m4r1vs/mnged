@@ -48,6 +48,13 @@ class Task {
 		this.title = task.title;
 	}
 
+	@computed get timeLeft() {
+		const now = new Date();
+		const dueDate = this.due;
+		const newDate = new Date(dueDate - now);
+		return Math.round(newDate.getTime() / (1000*60*60*24)) + 'd ' + Math.round(newDate.getTime() / (1000*60*60)) + 'h';
+	}
+
 }
 
 export class Store {
@@ -57,6 +64,11 @@ export class Store {
 	@observable notification = null
 	@observable general = {}
 	@observable error = null
+
+	@computed get taskList() {
+		const taskList = this.tasks.sort((a, b) => a.due.getTime() - b.due.getTime());
+		return taskList;
+	}
 	
 	setUser(user) {
 		this.user = new User(user);
