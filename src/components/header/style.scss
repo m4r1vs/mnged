@@ -1,48 +1,121 @@
+@import '../../style/vars.scss';
+
 .header {
 	position: fixed;
 	left: 0;
 	top: 0;
 	width: 100%;
 	height: 56px;
-	padding: 0;
-	background: #673AB7;
+	padding: 16px;
+	background: $primary-color;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 	z-index: 50;
-}
+	transition: height .22s;
 
-.header h1 {
-	float: left;
-	margin: 0;
-	padding: 0 15px;
-	font-size: 24px;
-	line-height: 56px;
-	font-weight: 400;
-	color: #FFF;
-}
+	@media (max-width: 1024px) {
+		&[id=header-big] {
+			height: 132px;
+			h1 {
+				margin-left: 0;
+				padding-left: 0;
+				bottom: 16px;
+				font-size: 28px;
+			}
+	
+			i {
+				display: block;
+			}
+		}
+	}
 
-.header nav {
-	float: right;
-	font-size: 100%;
-}
+	i {
+		float: right;
+		color: #fff;
+		display: none;
+	}
 
-.header nav a {
-	display: inline-block;
-	height: 56px;
-	line-height: 56px;
-	padding: 0 15px;
-	min-width: 50px;
-	text-align: center;
-	background: rgba(255,255,255,0);
-	text-decoration: none;
-	color: #FFF;
-	will-change: background-color;
-}
+	// svg {
+	// 	height: 24px;
+	// 	fill: #fff;
+	// 	padding: 0 15px;
+	// 	margin: 0 0 0 30px;
 
-.header nav a:hover,
-.header nav a:active {
-	background: rgba(0,0,0,0.2);
-}
+	// 	@media (min-width: 1025px) {
+	// 		padding: 0 !important;
+	// 		margin: 0 0 0 8px;
+	// 	}
+	// }
 
-.header nav a.active {
-	background: rgba(0,0,0,0.4);
+	.navbtn {
+		width: 22px;
+		height: 18px;
+		position: absolute;
+		margin: 3px auto;
+		cursor: pointer;
+		transition: 0.2s ease-in-out;
+
+		@media (min-width: 1025px) {
+			display: none !important;
+		}
+
+		span {
+			display: block;
+			position: absolute;
+			height: 2px;
+			width: 100%;
+			background: #fff;
+			left: 0;
+			transition: 0.2s ease-in-out;
+
+			&:nth-child(1) {
+				top: 2px;
+			}
+
+			&:nth-child(2) {
+				top: 8px;
+			}
+
+			&:nth-child(3) {
+				top: 14px;
+			}
+		}
+
+		&[id=navbtn-arrow] {
+			transform: rotate(180deg) !important;
+			
+			span {
+
+				&:nth-child(1) {
+					transform: rotate(45deg);
+					width: 50%;
+					left: 12px;
+					top: 4px;
+				}
+
+				&:nth-child(3) {
+					transform: rotate(-45deg);
+					width: 50%;
+					left: 12px;
+					top: 12px;
+				}
+			}
+		}
+	}
+
+	h1 {
+		text-decoration: none;
+		color: #fff;
+		font-size: 20px;
+		padding: 0 15px;
+		margin: 0 0 0 30px;
+		position: absolute;
+		font-weight: 400;
+		transition: all .22s;
+
+		@media (min-width: 1025px) {
+			padding: 0 !important;
+			margin: 0 0 0 8px;
+		}
+
+	}
 }

@@ -1,19 +1,27 @@
 {
-  "name": "Preact PWA",
-  "short_name": "Preact PWA",
+  "name": "Managed Me",
+  "short_name": "MNGED",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#fff",
-  "theme_color": "#673ab8",
-  "icons": [{
-    "src": "/assets/icons/android-chrome-192x192.png",
-    "type": "image/png",
-    "sizes": "192x192"
-  },
-  {
-    "src": "/assets/icons/android-chrome-512x512.png",
-    "type": "image/png",
-    "sizes": "512x512"
-  }]
+  "background_color": "#FAFAFA",
+  "theme_color": "#282d8c",
+  "gcm_sender_id": "103953800507",
+  "icons": [
+    {
+      "src": "/assets/icons/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/icons/android-chrome-256x256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/assets/icons/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
 }

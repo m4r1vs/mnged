@@ -1,0 +1,47 @@
+@import '../../style/vars.scss';
+
+.snackbar {
+  z-index: 11;
+  text-align: left;
+  box-shadow: 0 3px 6px;
+  background: #323232;
+  position: fixed;
+  bottom: 0;
+  font-size: 16px;
+  user-select: none;
+  width: 100vw;
+  transition: bottom .22s;
+
+  @media only screen and (min-width: 700px) {
+    min-width: 288px;
+    max-width: 568px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+    left: 24px !important;
+  }
+
+  span {
+    color: rgba(255,255,255,.87);
+    user-select: none;
+    float: left;
+    padding: 20px;
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    color: $secondary-color;
+    user-select: none;
+    float: right;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 3px;
+    margin: 12px;
+    font-size: 16px;
+    outline: none;
+
+    &:hover, &:active {
+      background: rgba(255,255,255,.13);
+    } 
+  }
+}

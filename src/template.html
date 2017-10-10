@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title><%= htmlWebpackPlugin.options.title %></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<link rel="manifest" href="/manifest.json">
+		<% if (htmlWebpackPlugin.options.manifest.theme_color) { %>
+			<meta name="theme-color" content="<%= htmlWebpackPlugin.options.manifest.theme_color %>">
+		<% } %>
+		<% for (var chunk of webpack.chunks) { %>
+		 <% if (chunk.names.length === 1 && chunk.names[0] === 'polyfills') continue; %>
+			<% for (var file of chunk.files) { %>
+				<% if (htmlWebpackPlugin.options.preload && file.match(/\.(js|css)$/)) { %>
+					<link rel="preload" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>">
+				<% } else if (file.match(/manifest\.json$/)) { %>
+					<link rel="manifest" href="<%= htmlWebpackPlugin.files.publicPath + file %>">
+				<% } %>
+			<% } %>
+		<% } %>
+	</head>
+	<body>
+		<%= htmlWebpackPlugin.options.ssr({
+			url: '/'
+		}) %>
+		<script defer src="<%= htmlWebpackPlugin.files.chunks['bundle'].entry %>"></script>
+		<script>window.fetch||document.write('<script src="<%= htmlWebpackPlugin.files.chunks["polyfills"].entry %>"><\/script>')</script>
+	</body>
+
+	<script type="text/javascript">
+		WebFontConfig = {
+			google: { families: ['Roboto:300,400,700', 'Material+Icons'] }
+		};
+		(function () {
+			var wf = document.createElement('script');
+			wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+				'://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+			wf.type = 'text/javascript';
+			wf.async = 'true';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(wf, s);
+		})(); </script>
+</html>

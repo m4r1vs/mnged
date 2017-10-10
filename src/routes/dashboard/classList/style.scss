@@ -1,0 +1,60 @@
+@import '../../../style/vars.scss';
+
+.classList {
+
+  width: 100%;
+  background-color: #fff;
+  box-shadow: $card-box-shadow;
+  margin-bottom: 10px;
+  height: 92px;
+  padding: 25px 20px 25px 27px;
+  cursor: pointer;
+
+  &:active {
+    filter: brightness(.87);
+  }
+
+  @media (min-width: 500px) {
+    border-radius: 3px;
+  }
+
+  div.colorIndicator {
+    height: 92px;
+    width: 7px;
+    margin-left: -27px;
+    margin-top: -25px;
+    position: absolute;
+
+    @media (min-width: 500px) {
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+  }
+
+  h3 {
+    color: $primary-text-color;
+    margin: 0;
+    font-weight: 400;
+  }
+
+  span.room {
+    color: $secondary-text-color;
+  }
+
+  span.teacher {
+    color: $secondary-text-color;
+    font-size: 14px;
+    float: right;
+    vertical-align: bottom;
+
+    i {
+      color: $secondary-text-color;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      margin-left: -20px;
+      margin-top: -1px;
+    }
+  }
+}

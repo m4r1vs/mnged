@@ -1,0 +1,133 @@
+@import '../../../style/vars.scss';
+
+.wrapper {
+  background-color: #fff;
+  width: 100%;
+  padding: 16px;
+
+  input[type=submit] {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    min-width: 120px;
+    max-width: 140px;
+    padding: 6px;
+    margin: 6px 6px 0 0;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 16px;
+    text-decoration: none;
+    border: none;
+    background-color: $primary-color;
+    color: #fff;
+    outline: none;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.2s;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  }
+}
+
+.inputGroup {
+  font-size: 21px;
+  margin-top: 32px;
+  margin-bottom: 16px;
+
+  h4.title {
+    margin: 2px 0 12px 0;
+    font-weight: 400;
+  }
+}
+
+.input {
+
+  position: relative;
+  max-width: 280px;
+  margin-bottom: 20px;
+
+  input[type=text] {
+    font-size: 18px;
+    padding: 10px 0 5px 3px;
+    display: block;
+    width: 100%;
+    width: calc(100% - 3px);
+    border: none;
+    border-bottom: 1px solid #757575;
+    appearance: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus ~ label, &:valid ~ label {
+      top: -11px;
+      font-size: 14px;
+      color: $secondary-color-dark;
+    }
+
+    &:focus ~ span.bar:before, &:focus ~ span.bar:after {
+      width: 50%;
+    }
+  }
+
+  input[type=radio] {
+    appearance: none;
+    height: 26px;
+    width: 26px;
+    background: #ff5555;
+    border-radius: 50%;
+    margin-bottom: 4px;
+
+    &:checked {
+      height: 34px;
+      width: 34px;
+      margin-bottom: 0px;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  span.bar {
+    position: relative;
+    display: block;
+    width: 100%;
+
+    &:before, &:after {
+      content: '';
+      height: 2px;
+      width: 0;
+      bottom: 0px;
+      position: absolute;
+      background: $secondary-color-dark;
+      transition: 0.2s ease all;
+    }
+
+    &:after {
+      left: 50%;
+    }
+
+    &:before {
+      right: 50%;
+    }
+  }
+  span.highlight {
+    position: absolute;
+    height: 26px;
+    width: 100px;
+    top: 8px;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  label {
+    color: #999;
+    font-size: 18px;
+    position: absolute;
+    pointer-events: none;
+    left: 3px;
+    top: 10px;
+    transition: 0.2s ease all;
+  }
+
+}

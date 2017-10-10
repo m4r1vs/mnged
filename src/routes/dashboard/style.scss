@@ -1,0 +1,24 @@
+@import '../../style/vars.scss';
+
+.home {
+	padding: 64px 0px 0px;
+	min-height: 100%;
+	width: 100%;
+	transition: opacity .22s;
+
+	@media (min-width: 500px) {
+		width: 450px;
+		margin: 0 auto;
+	}
+
+	span.date {
+		color: $primary-text-color;
+		margin: 0 27px;
+		line-height: 42px;
+		font-size: 16px;
+	}
+
+	div.noSchedule {
+		color: red;
+	}
+}

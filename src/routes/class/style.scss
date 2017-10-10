@@ -1,0 +1,103 @@
+@import '../../style/vars.scss';
+
+.class {
+  padding: 132px 0 8px 0;
+  background: #fff;
+  height: 100vh;
+
+  div.listElement {
+    padding: 12px 16px;
+    height: 56px;
+    i {
+      font-size: 32px;
+    }
+    span {
+      position: relative;
+      top: -10px;
+      left: 16px;
+    }
+  }
+
+  hr {
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .13);
+  }
+
+  h4 {
+    margin: 0;
+    margin: 8px 16px;
+    color: $secondary-text-color;
+  }
+
+  div.taskListElement {
+
+    cursor: pointer;
+    height: 58px;
+    padding: 8px 16px;
+    margin-bottom: 12px;
+    background: #fff;
+
+    h5 {
+      color: $primary-text-color;
+      margin: 0 0 4px 0;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    span.taskDescription {
+      font-size: 14px;
+      line-height: 16px;
+      color: $secondary-text-color;
+    }
+
+    span.taskTimeLeft {
+      font-size: 14px;
+      line-height: 16px;
+      color: $secondary-text-color;
+      float: right;
+    }
+
+    div.colorIndicator {
+      height: 58px;
+      width: 4px;
+      margin-left: -16px;
+      margin-top: -50px;
+      position: absolute;
+    }
+
+    &:active {
+      filter: brightness(.87);
+    }
+  }
+}
+
+@media (min-width: 1025px) {
+  .class {
+    
+    padding: 0 0 8px 0;
+    height: auto !important;
+    border-radius: 3px;
+    box-shadow: $card-box-shadow;
+    min-height: 400px;
+    width: 450px;
+    margin: 0 auto;
+    position: relative;
+    top: 106px;
+    background: #fff;
+
+    div.listElement {
+      padding: 12px 16px;
+      height: 56px;
+      border-bottom: 1px solid rgba(0, 0, 0, .13);
+      i {
+        font-size: 32px;
+      }
+      span {
+        position: relative;
+        top: -10px;
+        left: 16px;
+      }
+    }
+  }
+}

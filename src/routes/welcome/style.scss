@@ -1,0 +1,19 @@
+@import '../../style/vars.scss';
+
+.welcome {
+  padding: 72px 20px;
+  min-height: 100%;
+  width: 100%;
+
+  a {
+    color: $secondary-color-dark;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 7px 11px;
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(0,0,0,.07);
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@import '../../style/vars.scss';
+
+.errorpage {
+  padding: 56px 20px;
+  height: 100vh;
+  max-width: 100vw;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  background-image: url('/assets/imgs/404.svg');
+  max-width: 500px;
+  margin: 0 25px;
+
+  @media (min-width: 500px) {
+    margin: 0 auto;
+  }
+
+}

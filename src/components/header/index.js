@@ -1,18 +1,46 @@
-import { h, Component } from 'preact';
-import { Link } from 'preact-router/match';
+import { h } from 'preact';
+
 import style from './style';
 
-export default class Header extends Component {
-	render() {
-		return (
-			<header class={style.header}>
-				<h1>Preact App</h1>
-				<nav>
-					<Link activeClassName={style.active} href="/">Home</Link>
-					<Link activeClassName={style.active} href="/profile">Me</Link>
-					<Link activeClassName={style.active} href="/profile/john">John</Link>
-				</nav>
-			</header>
-		);
-	}
-}
+const Header = props => {
+
+	const openDrawer = e => {
+		if (typeof window === 'object') {
+			if (e.path[0].id === 'navbtn-arrow' || e.path[1].id === 'navbtn-arrow') window.history.back();
+			else {
+				document.body.style.overflow = 'hidden';
+
+				const drawer = document.getElementById('drawer');
+				const greyback = document.getElementById('drawerback');
+
+				greyback.style.display = 'block';
+
+				drawer.style.transition = 'margin-left .16s cubic-bezier(0.0, 0.0, 0.2, 1)';
+				greyback.style.transition = 'opacity .16s linear';
+
+				drawer.style.opacity = '1';
+				greyback.style.opacity = '1';
+
+				drawer.style.marginLeft = '0px';
+			}
+		}
+	};
+
+	return (
+		<header class={style.header} id="header">
+
+			<div class={style.navbtn} id="navbtn" onClick={openDrawer}>
+				<span id="navbtn-span1" />
+				<span id="navbtn-span2" />
+				<span id="navbtn-span3" />
+			</div>
+
+			<h1>{props.title}</h1>
+				
+			<i class="material-icons">&#xE3C9;</i>
+
+		</header>
+	);
+};
+
+export default Header;

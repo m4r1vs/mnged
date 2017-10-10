@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "if-env NODE_ENV=production && yarn run -s serve || yarn run -s dev",
-    "build": "preact build",
-    "serve": "preact build && preact serve",
-    "dev": "preact watch",
+    "build": "preact build --template src/template.html",
+    "serve": "preact build --template src/template.html && preact serve",
+    "dev": "preact watch -p 8888 --template src/template.html",
     "test": "eslint src && preact test"
   },
   "eslintConfig": {
@@ -22,8 +22,12 @@
     "sass-loader": "^6.0.6"
   },
   "dependencies": {
+    "firebase": "^4.5.0",
+    "mobx": "^3.3.1",
+    "mobx-logger": "^0.6.0",
     "preact": "^8.2.5",
     "preact-compat": "^3.17.0",
+    "preact-mobx": "^0.1.4",
     "preact-router": "^2.5.7"
   }
 }
