@@ -1,4 +1,4 @@
-# My API
+# MNGED.me
 > MNGED is a PWA which helps you to keep track of your study life
 ## Getting started
 To try it on your own run the following commands after you installed [yarn](https://yarnpkg.com/lang/en/):
