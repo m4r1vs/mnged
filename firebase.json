@@ -1,0 +1,147 @@
+{
+  "hosting": {
+    "rewrites": [
+      {
+        "source": "/firebase-messaging-sw.js",
+        "destination": "/assets/src/firebase-messaging-sw.js"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600, no-cache"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Access-Control-Max-Age",
+            "value": "600"
+          }
+        ]
+      },
+      {
+        "source": "/sw.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "private, no-cache"
+          }
+        ]
+      },
+      {
+        "source": "**/*.chunk.*.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000"
+          }
+        ]
+      },
+      {
+        "source": "/",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</bundle.792ae.js>; rel=preload; as=script, </style.26d83.css>; rel=preload; as=style"
+          }
+        ]
+      },
+      {
+        "source": "/index",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</bundle.792ae.js>; rel=preload; as=script, </style.26d83.css>; rel=preload; as=style, </route-index.chunk.dc408.js>; rel=preload; as=script"
+          }
+        ]
+      },
+      {
+        "source": "/dashboard",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</bundle.792ae.js>; rel=preload; as=script, </style.26d83.css>; rel=preload; as=style, </route-dashboard.chunk.b9cc5.js>; rel=preload; as=script"
+          }
+        ]
+      },
+      {
+        "source": "/tasks",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</bundle.792ae.js>; rel=preload; as=script, </style.26d83.css>; rel=preload; as=style, </route-tasks.chunk.7e805.js>; rel=preload; as=script"
+          }
+        ]
+      },
+      {
+        "source": "/welcome",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</bundle.792ae.js>; rel=preload; as=script, </style.26d83.css>; rel=preload; as=style, </route-welcome.chunk.606b3.js>; rel=preload; as=script"
+          }
+        ]
+      },
+      {
+        "source": "/task",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</bundle.792ae.js>; rel=preload; as=script, </style.26d83.css>; rel=preload; as=style, </route-task.chunk.f8182.js>; rel=preload; as=script"
+          }
+        ]
+      },
+      {
+        "source": "/signin",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</bundle.792ae.js>; rel=preload; as=script, </style.26d83.css>; rel=preload; as=style, </route-signin.chunk.9c823.js>; rel=preload; as=script"
+          }
+        ]
+      },
+      {
+        "source": "/errorpage",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</bundle.792ae.js>; rel=preload; as=script, </style.26d83.css>; rel=preload; as=style, </route-errorpage.chunk.7e33b.js>; rel=preload; as=script"
+          }
+        ]
+      },
+      {
+        "source": "/class",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</bundle.792ae.js>; rel=preload; as=script, </style.26d83.css>; rel=preload; as=style, </route-class.chunk.da29d.js>; rel=preload; as=script"
+          }
+        ]
+      },
+      {
+        "source": "/about",
+        "headers": [
+          {
+            "key": "Link",
+            "value": "</bundle.792ae.js>; rel=preload; as=script, </style.26d83.css>; rel=preload; as=style, </route-about.chunk.e581f.js>; rel=preload; as=script"
+          }
+        ]
+      }
+    ],
+    "public": "build"
+  }
+}

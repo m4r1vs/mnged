@@ -5,28 +5,50 @@ import { firestore } from '../../../lib/firebase';
 import style from './style';
 
 import TextInput from '../../../components/textInput';
+import SelectInput from '../../../components/selectInput';
+import DefaultButton from '../../../components/button';
 
 @observer
 export default class AddTask extends Component {
 
 	addTask() {
-		firestore
-			.collection('users')
-			.doc('aqCB6Pw5QZSgNuxzueuR')
-			.collection('tasks')
-			.add({
-				body: this.taskBody.value || 'No body',
-				due: this.taskDue.value ? new Date(this.taskDue.value) : new Date(),
-				subject: this.taskSubject.value || null,
-				title: this.taskTitle.value || 'not given'
-			})
-			.then((doc) => {
-				this.props.store.showSnackbar('Task created', 'SHOW', 5000, () => {
-					route('/task/'+doc.id, true);
-				});
-				route('/tasks/', true);
-			})
-			.catch((err) => this.props.store.throwError('#003'));
+
+		this.taskTitle.setAttribute('incomplete', 'false');
+		this.taskBody.setAttribute('incomplete', 'false');
+		this.taskDue.setAttribute('incomplete', 'false');
+		this.taskSubject.setAttribute('incomplete', 'false');
+
+		if (!this.taskTitle.value) this.taskTitle.setAttribute('incomplete', 'true');
+		if (!this.taskBody.value) this.taskBody.setAttribute('incomplete', 'true');
+		if (!this.taskDue.value) this.taskDue.setAttribute('incomplete', 'true');
+		if (!this.taskSubject.value) this.taskSubject.setAttribute('incomplete', 'true');
+
+		if (this.taskTitle.value && this.taskBody.value && this.taskDue.value && this.taskSubject.value) {
+			firestore
+				.collection('users')
+				.doc('aqCB6Pw5QZSgNuxzueuR')
+				.collection('tasks')
+				.add({
+					body: this.taskBody.value || 'No body',
+					due: this.taskDue.value ? new Date(this.taskDue.value) : new Date(),
+					subject: this.taskSubject.value || null,
+					title: this.taskTitle.value || 'not given'
+				})
+				.then((doc) => {
+					this.taskTitle.value = '';
+					this.taskBody.value = '';
+					this.taskDue.value = '';
+					this.taskSubject.value = '';
+					this.props.store.showSnackbar('Task created', 'SHOW', 5000, () => {
+						route('/task/'+doc.id, true);
+					});
+					route('/tasks/', true);
+				})
+				.catch((err) => this.props.store.throwError('#003'));
+		}
+		else {
+			this.props.store.showSnackbar('Please fill all inputs', null, 4000);
+		}
 	}
   
 	render() {
@@ -35,18 +57,24 @@ export default class AddTask extends Component {
 
 		return (
 			<div class={style.addTask + ' fadeIn'}>
-				<div>
-					<TextInput name="title" inputRef={(input) => this.taskTitle = input} required />
-					<TextInput name="note" inputRef={(input) => this.taskBody = input} required />
-					<select ref={(input) => this.taskSubject = input}>
+				<div class={style.wrapper}>
+					<h2>Add a Task</h2>
+					<TextInput name="Title" inputRef={(input) => this.taskTitle = input} required />
+					<TextInput name="Description" inputRef={(input) => this.taskBody = input} required />
+					<SelectInput inputRef={(input) => this.taskSubject = input}>
 
+						<option value="" disabled selected>Choose a class</option>
 						{classes.map((subject) => (
 							<option value={subject.id}>{subject.name}</option>
 						))}
 
-					</select>
-					<input placeholder="due date" type="date" ref={(input) => this.taskDue = input} />
-					<button onClick={this.addTask.bind(this)}>Add Task</button>
+					</SelectInput>
+					<input placeholder="due date" type="date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" ref={(input) => this.taskDue = input} />
+					<DefaultButton onClick={this.addTask.bind(this)} name="Add Task" style={{
+						float: 'right',
+						margin: '16px 0 8px 0'
+					}}
+					/>
 				</div>
 			</div>
 		);

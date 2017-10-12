@@ -5,10 +5,9 @@
 
   input[type=text] {
     font-size: 18px;
-    padding: 20px 0 5px 3px;
+    padding: 28px 0 2px 3px;
     display: block;
     width: 100%;
-    width: calc(100% - 3px);
     border: none;
     border-bottom: 1px solid #757575;
     appearance: none;
@@ -28,6 +27,16 @@
     &:focus~span.bar:after {
       width: 50%;
     }
+
+    &[incomplete=true]~span.bar:before,
+    &[incomplete=true]~span.bar:after {
+      background: #ff1945 !important;
+      width: 50%;
+    }
+  }
+
+  input[incomplete=true]~label {
+    color: #ff1945 !important;
   }
 
   span.bar {

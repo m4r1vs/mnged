@@ -37,7 +37,7 @@ const Header = props => {
 
 			<h1>{props.title}</h1>
 				
-			<i class="material-icons">&#xE3C9;</i>
+			{props.action && <i onClick={() => props.action()} class="material-icons">{props.actionIcon}</i>}
 
 		</header>
 	);

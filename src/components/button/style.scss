@@ -1,0 +1,22 @@
+@import '../../style/vars.scss';
+
+.button {
+  min-width: 120px;
+  max-width: 140px;
+  padding: 6px;
+  border-radius: 2px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  background-color: $secondary-color-dark;
+  color: #fff;
+  outline: none;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+
+  &:active, &:hover {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+  }
+}

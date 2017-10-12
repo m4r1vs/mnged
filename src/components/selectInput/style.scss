@@ -1,0 +1,48 @@
+@import '../../style/vars.scss';
+
+.select {
+
+  position: relative;
+
+  select {
+    appearance: none;
+    font-family: inherit;
+    background-color: transparent;
+    width: 100%;
+    padding: 4px 0 2px 3px;
+    margin-top: 24px;
+    font-size: 18px;
+    color: $primary-text-color;
+    border: none;
+    border-bottom: 1px solid #757575;
+
+    &:focus {
+      padding: 4px 0 1px 3px;
+      border-bottom: 2px solid $secondary-color-dark;
+      outline: none
+    }
+  }
+
+  select[incomplete=true] {
+    padding: 4px 0 1px 3px;
+    border-bottom: 2px solid #ff1945 !important;
+  }
+
+  label {
+    display: none;
+  }
+
+  &:after {
+    position: absolute;
+    bottom: 0.75em;
+    right: 0.5em;
+    width: 0;
+    height: 0;
+    padding: 0;
+    content: '';
+    border-left: .25em solid transparent;
+    border-right: .25em solid transparent;
+    border-top: .375em solid #999;
+    pointer-events: none;
+  }
+}

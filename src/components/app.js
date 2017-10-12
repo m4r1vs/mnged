@@ -24,7 +24,7 @@ export default class App extends Component {
 			<div id="app">
 
 				<SnackBar store={this.props.store} />
-				<Header title={general.headerTitle ? general.headerTitle : 'Managed me!'} />
+				<Header action={general.headerAction} actionIcon={general.headerActionIcon} title={general.headerTitle ? general.headerTitle : 'Managed me!'} />
 				<Nav store={this.props.store} />
 				{/* <SnackBar store={this.props.store} /> */}
 

@@ -5,14 +5,58 @@
   min-height: 100%;
   width: 100%;
   background: #fff;
+  min-height: 100vh;
 
   @media (min-width: 500px) {
     background: transparent;
     width: 450px;
     margin: 0 auto;
+
+    div.wrapper {
+      margin-top: 56px;
+      border-radius: 3px;
+      box-shadow: $card-box-shadow;
+    }
   }
 
-  div {
+  div.wrapper {
+    padding: 8px 16px;
     background: #fff;
+    display: inline-block;
+    width: 100%;
+
+    h2 {
+      display: none;
+    }
+
+    @media (min-width: 500px) {
+      h2 {
+        padding: 15px 0;
+        display: block;
+        line-height: 28px;
+        font-size: 20px;
+        color: $secondary-text-color;
+        font-weight: 700;
+        margin: 0;
+      }
+    }
+
+    input[type=date] {
+      appearance: none;
+      width: 100%;
+      border: none;
+      font-size: 18px;
+      border-bottom: solid 1px #757575;
+      padding: 21px 0 3px 3px;
+
+      &:focus {
+        outline: none;
+      }
+
+      &[incomplete=true] {
+        padding: 21px 0 2px 3px;
+        border-bottom: 2px solid #ff1945 !important;
+      }
+    }
   }
 }
