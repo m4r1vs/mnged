@@ -2,6 +2,27 @@ import { firestore } from '../firebase';
 
 const initializeState = store => {
 
+	firestore.enablePersistence()
+		.then(() => {
+			console.log('Offline usage of database is now activated!');
+		})
+		.catch((err) => {
+			if (err.code === 'failed-precondition') {
+				store.showSnackbar(
+					'Wasn\'t able to enable offline database. Maybe you have multible tabs of MNGED opened?',
+					'OKAY',
+					10000
+				);
+			}
+			else if (err.code === 'unimplemented') {
+				store.showSnackbar(
+					'Your browser doesn\'t support offline databases. To enjoy the full experience, try another one',
+					'OKAY',
+					10000
+				);
+			}
+		});
+
 	firestore
 		.collection('users')
 		.doc('aqCB6Pw5QZSgNuxzueuR')

@@ -37,14 +37,14 @@ class Task {
 	@observable id
 	@observable body
 	@observable due
-	@observable subjectName
+	@observable subjectRef
 	@observable title
 
 	constructor(id, task) {
 		this.id = id;
 		this.body = task.body;
 		this.due = task.due;
-		this.subjectName = task.subject;
+		this.subjectRef = task.subject;
 		this.title = task.title;
 	}
 
@@ -114,6 +114,33 @@ export class Store {
 		if (typeof info === 'string') this.error = info + ' (Errorcode ' + code + ')';
 		else this.error = 'Something went wrong. Error ' + code + '. Please look up the code under https://github.com/m4r1vs/mnged/errorcodes.md';
 		console.error(this.error);
+	}
+
+	showSnackbar(text, actionText, time, action) {
+		console.log(text);
+		this.notification && this.notification.timeout && clearTimeout(this.notification.timeout);
+		if (this.notification) {
+			this.notification = null;
+			this.notification = {
+				timeout: setTimeout(() => {
+					this.notification = {
+						text,
+						action,
+						actionText,
+						...this.notification
+					};
+					this.notification.timeout = setTimeout(() => this.notification = null, time);
+				}, 500)
+			};
+		}
+		else {
+			this.notification = {
+				text,
+				action,
+				actionText
+			};
+			this.notification.timeout = setTimeout(() => this.notification = null, time);
+		}
 	}
 
 }

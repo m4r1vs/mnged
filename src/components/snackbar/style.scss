@@ -10,7 +10,7 @@
   font-size: 16px;
   user-select: none;
   width: 100vw;
-  transition: bottom .22s;
+  transition: transform .22s;
 
   @media only screen and (min-width: 700px) {
     min-width: 288px;
@@ -42,6 +42,10 @@
 
     &:hover, &:active {
       background: rgba(255,255,255,.13);
-    } 
+    }
+
+    &:empty {
+      display: none;
+    }
   }
 }

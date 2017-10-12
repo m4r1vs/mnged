@@ -1,15 +1,14 @@
 import { h, Component } from 'preact';
 import { observer } from 'preact-mobx';
 
-import { firestore } from '../lib/firebase';
-
 import Header from './header';
 import Nav from './nav';
-//import SnackBar from './snackbar';
+import SnackBar from './snackbar';
 import Loader from './loader';
 import Routes from 'async!../routes';
 
 import initializeState from '../lib/state/initializeState';
+
 @observer
 export default class App extends Component {
 
@@ -24,6 +23,7 @@ export default class App extends Component {
 		return (
 			<div id="app">
 
+				<SnackBar store={this.props.store} />
 				<Header title={general.headerTitle ? general.headerTitle : 'Managed me!'} />
 				<Nav store={this.props.store} />
 				{/* <SnackBar store={this.props.store} /> */}

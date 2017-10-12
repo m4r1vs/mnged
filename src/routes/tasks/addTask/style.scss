@@ -1,0 +1,18 @@
+@import '../../../style/vars.scss';
+
+.addTask {
+  padding: 64px 0px 0px;
+  min-height: 100%;
+  width: 100%;
+  background: #fff;
+
+  @media (min-width: 500px) {
+    background: transparent;
+    width: 450px;
+    margin: 0 auto;
+  }
+
+  div {
+    background: #fff;
+  }
+}

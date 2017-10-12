@@ -80,7 +80,7 @@ export default class Class extends Component {
 					<h4>Tasks due for this class</h4>
 
 					{taskList.map((task) => {
-						if (task.subjectName === currentSubject.name) {
+						if (task.subjectRef === currentSubject.id) {
 							return (
 								<div class={style.taskListElement} onClick={() => route('/task/' + task.id, false)}>
 									<span class={style.taskTimeLeft}>{task.timeLeft} left</span>

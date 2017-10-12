@@ -1,0 +1,23 @@
+@import '../../style/vars.scss';
+
+.fab {
+  background-color: $secondary-color;
+  position: fixed;
+  height: 56px;
+  cursor: pointer;
+  width: 56px;
+  border-radius: 50%;
+  bottom: 22px;
+  right: 22px;
+  z-index: 10;
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .3);
+
+  i {
+    font-size: 24px;
+    color: $primary-text-color;
+    position: relative;
+    top: 16px;
+    left: 16px;
+  }
+}
