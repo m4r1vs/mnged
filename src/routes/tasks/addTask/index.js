@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { route } from 'preact-router';
 import { observer } from 'preact-mobx';
-import { firestore } from '../../../lib/firebase';
+import { firestore, auth } from '../../../lib/firebase';
 import style from './style';
 
 import TextInput from '../../../components/textInput';
@@ -26,7 +26,7 @@ export default class AddTask extends Component {
 		if (this.taskTitle.value && this.taskBody.value && this.taskDue.value && this.taskSubject.value) {
 			firestore
 				.collection('users')
-				.doc('aqCB6Pw5QZSgNuxzueuR')
+				.doc(auth.currentUser.uid)
 				.collection('tasks')
 				.add({
 					body: this.taskBody.value || 'No body',
@@ -39,21 +39,21 @@ export default class AddTask extends Component {
 					this.taskBody.value = '';
 					this.taskDue.value = '';
 					this.taskSubject.value = '';
-					this.props.store.showSnackbar('Task created', 'SHOW', 5000, () => {
+					this.props.stores.uiStore.showSnackbar('Task created', 'SHOW', 5000, () => {
 						route('/task/'+doc.id, true);
 					});
 					route('/tasks/', true);
 				})
-				.catch((err) => this.props.store.throwError('#003'));
+				.catch((err) => console.error(err));
 		}
 		else {
-			this.props.store.showSnackbar('Please fill all inputs', null, 4000);
+			this.props.stores.uiStore.showSnackbar('Please fill all inputs', null, 4000);
 		}
 	}
   
 	render() {
     
-		const { classes } = this.props.store;
+		const { classes } = this.props.stores.classesStore;
 
 		return (
 			<div class={style.addTask + ' fadeIn'}>

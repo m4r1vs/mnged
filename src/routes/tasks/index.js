@@ -10,7 +10,8 @@ export default class Task extends Component {
   
 	render() {
 
-		const { taskList, classes } = this.props.store;
+		const { taskList } = this.props.stores.taskStore;
+		const { classes } = this.props.stores.classesStore;
 		
 		const subjectColor = task => {
 			let color = '#555555';

@@ -1,5 +1,31 @@
+@import '../../style/vars.scss';
+
 .settings {
-  padding: 56px 20px;
-  min-height: 100%;
+  padding: 64px 0px 0px;
+  min-height: 100vh;
   width: 100%;
+  background: #fff;
+
+  @media (min-width: 500px) {
+    width: 450px;
+    margin: 0 auto;
+    background: transparent !important;
+
+    .card {
+      margin-top: 56px;
+      border-radius: 3px;
+      background: #fff;
+      box-shadow: $card-box-shadow;
+    }
+  }
+}
+
+body[class=nightmode] {
+  .settings {
+    background: #424242;
+
+    .card {
+      background: #424242;
+    }
+  }
 }

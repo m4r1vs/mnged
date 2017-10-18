@@ -1,0 +1,26 @@
+@import '../../style/vars.scss';
+
+.card {
+  padding: 0 16px;
+  background: #fff;
+
+  @media (min-width: 500px) {
+    margin: 0 auto;
+    margin-top: 56px;
+    border-radius: 3px;
+    box-shadow: $card-box-shadow;
+    max-width: 450px;
+  }
+
+  hr {
+    border: none;
+    margin: 0;
+    margin-top: 15px;
+  }
+}
+
+body[class=nightmode] {
+  .card {
+    background: #424242;
+  }
+}

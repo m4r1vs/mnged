@@ -14,8 +14,8 @@ export default class Class extends Component {
 	}
   
 	componentWillMount() {
-		if (this.props.store.classes) {
-			this.props.store.classes.forEach((subject) => {
+		if (this.props.stores.classesStore.classes) {
+			this.props.stores.classesStore.classes.forEach((subject) => {
 				if (subject.name === this.props.class) this.setState({ subject });
 			});
 		}
@@ -23,14 +23,14 @@ export default class Class extends Component {
 	
 	componentDidMount() {
 		if (this.state.subject) {
-			this.props.store.general = {
-				...this.props.store.general,
+			this.props.stores.uiStore = {
+				...this.props.stores.uiStore,
 				headerTitle: this.state.subject.name + ' class'
 			};
 		}
 		else {
-			this.props.store.general = {
-				...this.props.store.general,
+			this.props.stores.uiStore = {
+				...this.props.stores.uiStore,
 				headerTitle: 'class not found: ' + this.props.class
 			};
 		}
@@ -41,8 +41,8 @@ export default class Class extends Component {
 	}
 
 	componentWillUnmount() {
-		this.props.store.general = {
-			...this.props.store.general,
+		this.props.stores.uiStore = {
+			...this.props.stores.uiStore,
 			headerTitle: null
 		};
 		const navbtn = document.getElementById('navbtn-arrow');
@@ -53,7 +53,8 @@ export default class Class extends Component {
 
 	render() {
 
-		const { classes, taskList } = this.props.store;
+		const { classes } = this.props.stores.classesStore;
+		const { taskList } = this.props.stores.taskStore;
 		let currentSubject = null;
 
 		classes.forEach((subject) => {
@@ -83,7 +84,7 @@ export default class Class extends Component {
 						if (task.subjectRef === currentSubject.id) {
 							return (
 								<div class={style.taskListElement} onClick={() => route('/task/' + task.id, false)}>
-									<span class={style.taskTimeLeft}>{task.timeLeft} left</span>
+									<span class={style.taskTimeLeft}>{task.timeLeft}</span>
 									<h5>{task.title}</h5>
 									<span class={style.taskDescription}>{task.body}</span>
 									<div class={style.colorIndicator} style={{ backgroundColor: currentSubject.color }} />

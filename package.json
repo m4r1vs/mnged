@@ -7,7 +7,7 @@
     "start": "if-env NODE_ENV=production && yarn run -s serve || yarn run -s dev",
     "build": "preact build --template src/template.html",
     "serve": "preact build --template src/template.html && preact serve",
-    "dev": "preact watch -p 8888 --template src/template.html",
+    "dev": "preact watch --template src/template.html",
     "test": "eslint src && preact test"
   },
   "eslintConfig": {
@@ -19,15 +19,18 @@
     "if-env": "^1.0.0",
     "node-sass": "^4.5.3",
     "preact-cli": "^1.4.1",
-    "sass-loader": "^6.0.6"
+    "preact-cli-sw-precache": "^1.0.3",
+    "sass-loader": "^6.0.6",
+    "webpack-bundle-analyzer": "^2.9.0"
   },
   "dependencies": {
-    "firebase": "^4.5.0",
+    "firebase": "^4.5.1",
     "mobx": "^3.3.1",
     "mobx-logger": "^0.6.0",
     "preact": "^8.2.5",
     "preact-compat": "^3.17.0",
     "preact-mobx": "^0.1.4",
-    "preact-router": "^2.5.7"
+    "preact-router": "^2.5.7",
+    "xmlhttprequest": "^1.8.0"
   }
 }

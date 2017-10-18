@@ -5,6 +5,7 @@ import { observer } from 'preact-mobx';
 import Dashboard from './dashboard';
 import Tasks from './tasks';
 import AddTask from './tasks/addTask';
+import Settings from './settings';
 import About from './about';
 import Class from './class';
 import Task from './task';
@@ -22,16 +23,17 @@ export default class Routes extends Component {
 
 		render() {
 
-			const { user } = this.props.store;
+			const { user } = this.props.stores.userStore;
 
 			if (user.loggedIn) {
 				return (
 					<Router onChange={this.handleRoute}>
-						<Dashboard path="/" store={this.props.store} />
-						<Class store={this.props.store} path="/class/:class" />
-						<Task store={this.props.store} path="/task/:task" />
-						<Tasks store={this.props.store} path="/tasks/" />
-						<AddTask store={this.props.store} path="/tasks/add" />
+						<Dashboard path="/" stores={this.props.stores} />
+						<Class stores={this.props.stores} path="/class/:class" />
+						<Task stores={this.props.stores} path="/task/:task" />
+						<Tasks stores={this.props.stores} path="/tasks/" />
+						<AddTask stores={this.props.stores} path="/tasks/add" />
+						<Settings path="/settings" />
 						<About path="/about/" />
 						<div path="/signin/"><br /><br /><br />redirecting...</div>
 						<ErrorPage default />
@@ -42,7 +44,8 @@ export default class Routes extends Component {
 			return (
 				<Router onChange={this.handleRoute}>
 					<Welcome path="/" />
-					<SignIn path="/signin/" />
+					<SignIn path="/signin/" stores={this.props.stores} />
+					<About path="/about/" />
 					<ErrorPage default />
 				</Router>
 			);

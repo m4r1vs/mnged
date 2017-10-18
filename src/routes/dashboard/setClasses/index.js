@@ -1,6 +1,8 @@
 import { h, Component } from 'preact';
 
-import { firestore } from '../../../lib/firebase';
+import { firestore, auth } from '../../../lib/firebase';
+import TextInput from '../../../components/textInput';
+import DefaultButton from '../../../components/button';
 import style from './style';
 
 const template = [
@@ -24,30 +26,49 @@ let myState = {
 	block_f: {},
 	block_g: {},
 	block_h: {},
-	flex: {}
+	flex: {
+		class: 'Flex'
+	}
 };
+
+const colors = [
+	'#ff1744',
+	'#d500f9',
+	'#2979ff',
+	'#1de9b6',
+	'#ffea00',
+	'#8d6e63',
+	'#ff9100',
+	'#78909c'
+]
 
 export default class SetClass extends Component {
 	
 	handleChange(evt) {
 		myState[evt.target.name.split('-')[0]][evt.target.name.split('-')[1]] = evt.target.value;
-		console.log(myState);
 	}
 
 	proccessForm(evt) {
 		evt.preventDefault();
-		const fireRef = firestore
-			.collection('users')
-			.doc(this.props.state.user.uid)
-			.collection('schedule');
-		
-		fireRef.doc('classes').set(myState);
+		console.log(auth.currentUser.uid);
 
-		const date = new Date();
-		fireRef.doc('info').set({
-			schedule: true,
-			lastEdit: date.getTime()
-		}).then(() => location.reload());
+		const batch = firestore.batch();
+
+		const classesRef = firestore
+			.collection('users')
+			.doc(auth.currentUser.uid)
+			.collection('classes');
+
+		for (let key in myState) {
+
+			if (!myState.hasOwnProperty(key)) continue;
+			
+			batch.set(classesRef.doc(key), myState[key]);
+		}
+
+		batch.commit().then(() => {
+			console.log('done');
+		});
 
 	}
 	
@@ -56,103 +77,29 @@ export default class SetClass extends Component {
 		this.state = null;
 	}
 
+	renderColorInput(color, item) {
+		return (
+			<input
+				onChange={this.handleChange.bind(this)}
+				style={{ backgroundColor: color }}
+				required
+				type="radio"
+				value={color}
+				name={item[0] + '-color'}
+			/>
+		)
+	}
+
 	renderInput(item) {
 		return (
 			<div class={style.inputGroup}>
 				<h4 class={style.title}>{item[1]}:</h4>
-				{item[0] !== 'flex' && <div class={style.input}>
-					<input onChange={this.handleChange.bind(this)}
-						type="text" name={item[0]+'-class'}
-						required
-					/>
-					<span class={style.highlight} />
-					<span class={style.bar} />
-					<label for={item[0] + '-class'}>Class</label>
-				</div>}
-				<div class={style.input}>
-					<input onChange={this.handleChange.bind(this)}
-						type="text" name={item[0] + '-room'}
-						required
-					/>
-					<span class={style.highlight} />
-					<span class={style.bar} />
-					<label for={item[0] + '-room'}>Room</label>
-				</div>
-				<div class={style.input}>
-					<input onChange={this.handleChange.bind(this)}
-						type="text" name={item[0] + '-teacher'}
-						required
-					/>
-					<span class={style.highlight} />
-					<span class={style.bar} />
-					<label for={item[0] + '-teacher'}>Teacher</label>
-				</div>
+				{item[0] !== 'flex' && <TextInput displayName="Class" name={item[0] + '-class'} eventHandler={this.handleChange.bind(this)} />}
+				<TextInput displayName="Room" name={item[0] + '-room'} eventHandler={this.handleChange.bind(this)} />
+				<TextInput displayName="Teacher" name={item[0] + '-teacher'} eventHandler={this.handleChange.bind(this)} />
 				<div class={style.input}>
 					<center>
-						<input
-							onChange={this.handleChange.bind(this)}
-							style={{ backgroundColor: '#ff1744' }}
-							required
-							type="radio"
-							value="#ff1744"
-							name={item[0] + '-color'}
-						/>
-						<input
-							onChange={this.handleChange.bind(this)}
-							style={{ backgroundColor: '#d500f9' }}
-							required
-							type="radio"
-							value="#d500f9"
-							name={item[0] + '-color'}
-						/>
-						<input
-							onChange={this.handleChange.bind(this)}
-							style={{ backgroundColor: '#2979ff' }}
-							required
-							type="radio"
-							value="#2979ff"
-							name={item[0] + '-color'}
-						/>
-						<input
-							onChange={this.handleChange.bind(this)}
-							style={{ backgroundColor: '#1de9b6' }}
-							required
-							type="radio"
-							value="#1de9b6"
-							name={item[0] + '-color'}
-						/>
-						<input
-							onChange={this.handleChange.bind(this)}
-							style={{ backgroundColor: '#ffea00' }}
-							required
-							type="radio"
-							value="#ffea00"
-							name={item[0] + '-color'}
-						/>
-						<input
-							onChange={this.handleChange.bind(this)}
-							style={{ backgroundColor: '#ff9100' }}
-							required
-							type="radio"
-							value="#ff9100"
-							name={item[0] + '-color'}
-						/>
-						<input
-							onChange={this.handleChange.bind(this)}
-							style={{ backgroundColor: '#8d6e63' }}
-							required
-							type="radio"
-							value="#8d6e63"
-							name={item[0] + '-color'}
-						/>
-						<input
-							onChange={this.handleChange.bind(this)}
-							style={{ backgroundColor: '#78909c' }}
-							required
-							type="radio"
-							value="#78909c"
-							name={item[0] + '-color'}
-						/>
+						{colors.map((color, i) => this.renderColorInput(color, item))}
 					</center>
 				</div>
 			</div>);
@@ -161,7 +108,8 @@ export default class SetClass extends Component {
 	render() {
 		return (
 			<div class={style.wrapper}>
-				<span>Before you can start using mnged, we need your schedule. Please insert your class, room and teacher for the corresponding block:</span>
+				<h3>Set classes</h3>	
+				<p>Before you can start using mnged, we need your schedule. Please insert your class, room and teacher for the corresponding block. You are also able to select a color assosiated with that class:</p>
 				<form onSubmit={this.proccessForm.bind(this)}>
 					{template.map((item, i) => (
 						<div>{this.renderInput(item)}</div>

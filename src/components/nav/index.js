@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { Link } from 'preact-router/match';
+import { route } from 'preact-router';
 import { auth } from '../../lib/firebase';
 
 import { observer } from 'preact-mobx';
@@ -195,7 +196,7 @@ export default class Nav extends Component {
 	
 	render() {
 		
-		const { user } = this.props.store;
+		const { user } = this.props.stores.userStore;
 		const profilePic = user.photoURL ? user.photoURL : '/assets/imgs/default_header.jpg';
     
 		const moreOpened = this.state.moreOpened;
@@ -205,7 +206,21 @@ export default class Nav extends Component {
     
 		const signOut = () => {
 			this.closeDrawer();
-			auth.signOut();
+			auth.signOut().then(() => {
+				this.props.stores.uiStore.showSnackbar(
+					'Signed out successfully',
+					null,
+					5000
+				);
+			}).catch((e) => {
+				console.error(e);
+				this.props.stores.uiStore.showSnackbar(
+					'An error occured during sign out',
+					'REPORT',
+					10000,
+					() => route('/feedback')
+				);
+			});
 		};
     
 		const styles = {

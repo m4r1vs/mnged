@@ -2,6 +2,23 @@ import { h } from 'preact';
 
 import style from './style';
 
+const toggleDarkMode = () => {
+	document.body.classList.toggle('nightmode');
+};
+
+let showMoreMenuSetUp = false;
+const showMoreMenu = () => {
+	if (!showMoreMenuSetUp) {
+		document.getElementById('main_component').addEventListener('click', (e) => {
+			if (document.getElementById('moreMenu').classList[1] === style.moreMenuOpened) {
+				document.getElementById('moreMenu').classList.toggle(style.moreMenuOpened);
+			}
+		});
+		showMoreMenuSetUp = true;
+	}
+	document.getElementById('moreMenu').classList.toggle(style.moreMenuOpened);
+};
+
 const Header = props => {
 
 	const openDrawer = e => {
@@ -36,8 +53,17 @@ const Header = props => {
 			</div>
 
 			<h1>{props.title}</h1>
-				
+
+			{!props.action && <i style={{ display: 'block', cursor: 'pointer' }} onClick={showMoreMenu} class="material-icons">&#xE5D4;</i>}
 			{props.action && <i onClick={() => props.action()} class="material-icons">{props.actionIcon}</i>}
+
+			<div class={style.moreMenu} id="moreMenu">
+				<ul>
+					<li onClick={toggleDarkMode}>Toggle darkmode</li>
+					<li>option 2</li>
+					<li>option 3</li>
+				</ul>
+			</div>
 
 		</header>
 	);

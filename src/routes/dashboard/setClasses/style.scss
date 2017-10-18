@@ -1,13 +1,49 @@
 @import '../../../style/vars.scss';
 
 .wrapper {
-  background-color: #fff;
-  width: 100%;
-  padding: 16px;
+  margin-bottom: 56px;
+  padding: 0 16px 8px 16px;
+  background: #fff;
+  display: inline-block;
+
+  @media (min-width: 500px) {
+    margin-top: 56px;
+    border-radius: 3px;
+    box-shadow: $card-box-shadow;
+  }
+
+  h3, h4 {
+    padding: 15px 0 0 0;
+    line-height: 28px;
+    font-size: 20px;
+    color: $secondary-text-color;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  h3 {
+    padding: 15px 0;
+    font-size: 24px;
+  }
+
+  p {
+    padding: 0 0 15px 0;
+    line-height: 24px;
+    margin: 0;
+    font-size: 14px;
+    color: $primary-text-color;
+    border-bottom: 1px solid rgba(0,0,0,.13);
+
+    a {
+      color: $secondary-color-dark;
+      text-decoration: none;
+    }
+  }
 
   input[type=submit] {
     cursor: pointer;
     display: inline-block;
+    float: right;
     position: relative;
     min-width: 120px;
     max-width: 140px;
@@ -18,7 +54,7 @@
     font-size: 16px;
     text-decoration: none;
     border: none;
-    background-color: $primary-color;
+    background-color: $secondary-color-dark;
     color: #fff;
     outline: none;
     transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -27,55 +63,20 @@
   }
 }
 
-.inputGroup {
-  font-size: 21px;
-  margin-top: 32px;
-  margin-bottom: 16px;
-
-  h4.title {
-    margin: 2px 0 12px 0;
-    font-weight: 400;
-  }
-}
-
 .input {
 
-  position: relative;
-  max-width: 280px;
-  margin-bottom: 20px;
-
-  input[type=text] {
-    font-size: 18px;
-    padding: 10px 0 5px 3px;
-    display: block;
-    width: 100%;
-    width: calc(100% - 3px);
-    border: none;
-    border-bottom: 1px solid #757575;
-    appearance: none;
-
-    &:focus {
-      outline: none;
-    }
-
-    &:focus ~ label, &:valid ~ label {
-      top: -11px;
-      font-size: 14px;
-      color: $secondary-color-dark;
-    }
-
-    &:focus ~ span.bar:before, &:focus ~ span.bar:after {
-      width: 50%;
-    }
-  }
+  margin: 10px;
 
   input[type=radio] {
     appearance: none;
     height: 26px;
+    cursor: pointer;
     width: 26px;
-    background: #ff5555;
+    background: transparent;
     border-radius: 50%;
     margin-bottom: 4px;
+    transition-property: width, height, margin;
+    transition-duration: .22s;
 
     &:checked {
       height: 34px;
@@ -87,47 +88,4 @@
       outline: none;
     }
   }
-
-  span.bar {
-    position: relative;
-    display: block;
-    width: 100%;
-
-    &:before, &:after {
-      content: '';
-      height: 2px;
-      width: 0;
-      bottom: 0px;
-      position: absolute;
-      background: $secondary-color-dark;
-      transition: 0.2s ease all;
-    }
-
-    &:after {
-      left: 50%;
-    }
-
-    &:before {
-      right: 50%;
-    }
-  }
-  span.highlight {
-    position: absolute;
-    height: 26px;
-    width: 100px;
-    top: 8px;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5;
-  }
-  label {
-    color: #999;
-    font-size: 18px;
-    position: absolute;
-    pointer-events: none;
-    left: 3px;
-    top: 10px;
-    transition: 0.2s ease all;
-  }
-
 }

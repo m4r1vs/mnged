@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { route } from 'preact-router';
 import { observer } from 'preact-mobx';
-import { firestore } from '../../lib/firebase';
+import { firestore, auth } from '../../lib/firebase';
 import style from './style';
 
 @observer
@@ -18,23 +18,23 @@ export default class Task extends Component {
 
 		firestore
 			.collection('users')
-			.doc('aqCB6Pw5QZSgNuxzueuR')
+			.doc(auth.currentUser.uid)
 			.collection('tasks')
 			.doc(task.id)
 			.delete()
 			.then(() => {
 				route('/tasks');
-				this.props.store.showSnackbar('Task deleted', 'UNDO', 7000, () => {
+				this.props.stores.uiStore.showSnackbar('Task deleted', 'UNDO', 7000, () => {
 					firestore.collection('users')
-						.doc('aqCB6Pw5QZSgNuxzueuR')
+						.doc(auth.currentUser.uid)
 						.collection('tasks')
 						.doc(task.id)
 						.set(oldTask)
-						.then(() => this.props.store.showSnackbar('Task restored', null, 2500))
-						.catch((e) => this.props.store.throwError('#005', 'Error restoring task'));
+						.then(() => this.props.stores.uiStore.showSnackbar('Task restored', null, 2500))
+						.catch((e) => this.props.stores.uiStore.throwError('#005', 'Error restoring task'));
 				});
 			})
-			.catch((e) => this.props.store.throwError('#003', 'Error deleting task'));
+			.catch((e) => this.props.stores.uiStore.throwError('#003', 'Error deleting task'));
 	}
 
 	constructor() {
@@ -45,28 +45,29 @@ export default class Task extends Component {
 	}
   
 	componentDidMount() {
-		if (this.props.store.tasks) {
-			this.props.store.tasks.forEach((task) => {
+		if (this.props.stores.taskStore.tasks) {
+			this.props.stores.taskStore.tasks.forEach((task) => {
 				if (task.id === this.props.task) this.setState({ task });
 			});
 		}
 		
 		if (this.state.task) {
-			this.props.store.general = {
-				...this.props.store.general,
+			this.props.stores.uiStore = {
+				...this.props.stores.uiStore,
 				headerTitle: this.state.task.title,
 				headerAction: () => this.removeTask(this.state.task).bind(this),
 				headerActionIcon: 'delete'
 			};
 		}
 		else {
-			this.props.store.general = {
-				...this.props.store.general,
+			this.props.stores.uiStore = {
+				...this.props.stores.uiStore,
 				headerTitle: 'class not found: ' + this.props.task,
 				headerAction: null,
 				headerActionIcon: null
 			};
 		}
+		
 		const navbtn = document.getElementById('navbtn');
 		const header = document.getElementById('header');
 		if (navbtn) navbtn.setAttribute('id', 'navbtn-arrow');
@@ -74,8 +75,8 @@ export default class Task extends Component {
 	}
   
 	componentWillUnmount() {
-		this.props.store.general = {
-			...this.props.store.general,
+		this.props.stores.uiStore = {
+			...this.props.stores.uiStore,
 			headerTitle: null,
 			headerAction: null,
 			headerActionIcon: null
@@ -88,7 +89,7 @@ export default class Task extends Component {
 
 	render() {
 
-		const { tasks } = this.props.store;
+		const { tasks } = this.props.stores.taskStore;
 		let currentTask = null;
 
 		tasks.forEach((task) => {

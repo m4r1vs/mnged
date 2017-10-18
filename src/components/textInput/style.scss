@@ -3,7 +3,7 @@
 .inputGroup {
   position: relative;
 
-  input[type=text] {
+  input[type=text], input[type=password] {
     font-size: 18px;
     padding: 28px 0 2px 3px;
     display: block;

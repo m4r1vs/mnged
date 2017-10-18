@@ -116,7 +116,7 @@ nav {
         color: inherit !important;
         
         &.active div {
-          color: $primary-color !important;
+          color: $primary-color;
           background: #F5F5F5;
 
           @media (min-width: 1025px) {
@@ -124,7 +124,7 @@ nav {
           }
   
           span i {
-            color: $primary-color !important;
+            color: $primary-color;
           }
         }
   
@@ -174,5 +174,41 @@ div.drawerBack {
 
   @media (min-width: 1025px) {
     display: none !important;
+  }
+}
+
+body[class=nightmode] {
+  nav {
+    background: #424242;
+
+    a.active div {
+      background: rgba(255, 255, 255, .05) !important;
+      color: rgba(255,255,255,.87) !important;
+
+      @media (min-width: 1025px) {
+        background: rgba(255, 255, 255, .05) !important;
+      }
+
+      span i {
+        color: rgba(255, 255, 255, .87) !important;
+      }
+    }
+
+    div {
+      color: rgba(255, 255, 255, .57) !important;
+
+      &:hover {
+        background: rgba(255, 255, 255, .05) !important;
+        color: rgba(255, 255, 255, .87) !important;
+
+        @media (min-width: 1025px) {
+          background: rgba(255, 255, 255, .05) !important;
+        }
+      }
+
+      span i {
+        color: rgba(255,255,255,.57) !important;
+      }
+    }
   }
 }

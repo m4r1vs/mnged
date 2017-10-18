@@ -1,7 +1,7 @@
 import './style';
 import App from './components/app';
-import store from './lib/state/store';
+import Stores from './lib/state/stores';
 
-const Mnged = () => <App store={store} />;
+const Mnged = () => <App stores={Stores} />;
 
 export default Mnged;

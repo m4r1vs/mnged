@@ -2,6 +2,7 @@
 
 .classList {
 
+  position: relative;
   width: 100%;
   background-color: #fff;
   box-shadow: $card-box-shadow;
@@ -19,10 +20,10 @@
   }
 
   div.colorIndicator {
-    height: 92px;
+    top: 0;
+    bottom: 0;
     width: 7px;
     margin-left: -27px;
-    margin-top: -25px;
     position: absolute;
 
     @media (min-width: 500px) {
@@ -55,6 +56,24 @@
       position: absolute;
       margin-left: -20px;
       margin-top: -1px;
+    }
+  }
+}
+
+body[class=nightmode] {
+  .classList {
+    background: #424242;
+
+    &:active {
+      filter: brightness(1.13);
+    }
+
+    h3 {
+      color: rgba(255,255,255,.87);
+    }
+
+    span, i {
+      color: rgba(255,255,255,.57);
     }
   }
 }

@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { observer } from 'preact-mobx';
+import { auth } from '../lib/firebase';
 
 import Header from './header';
 import Nav from './nav';
@@ -13,25 +14,31 @@ import initializeState from '../lib/state/initializeState';
 export default class App extends Component {
 
 	componentWillMount() {
-		initializeState(this.props.store);
+
+		auth.onAuthStateChanged((user) => {
+			initializeState(this.props.stores, user);
+			this.props.stores.userStore.setUser(user, true);
+			this.props.stores.uiStore.initUi(!!user);
+			if (user && /signin/.test(document.location.pathname)) document.location.href = '/';
+		});
+
 	}
 
 	render() {
 
-		const { error, general } = this.props.store;
+		const stores = this.props.stores;
 
 		return (
 			<div id="app">
 
-				<SnackBar store={this.props.store} />
-				<Header action={general.headerAction} actionIcon={general.headerActionIcon} title={general.headerTitle ? general.headerTitle : 'Managed me!'} />
-				<Nav store={this.props.store} />
-				{/* <SnackBar store={this.props.store} /> */}
+				<SnackBar stores={stores} />
+				<Header action={stores.uiStore.headerAction} actionIcon={stores.uiStore.headerActionIcon} title={stores.uiStore.headerTitle || 'Managed me!'} />
+				<Nav stores={stores} />
 
-				{error && <div class="error_div">{error}</div>}
+				{stores.uiStore.error && <div class="error_div">{stores.uiStore.error}</div>}
 
 				<div id="main_component" style={{ minHeight: '100vh', minWidth: '100vw' }}>
-					{ general.loaded ? <Routes store={this.props.store} /> : <Loader /> }
+					{ stores.uiStore.appState ? (stores.uiStore.appState.appLoaded ? <Routes stores={stores} /> : <Loader />) : <Loader /> }
 				</div>
 
 			</div>

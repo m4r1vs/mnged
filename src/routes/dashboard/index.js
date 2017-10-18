@@ -32,12 +32,6 @@ export default class Dashboard extends Component {
 		return true;
 	}
 
-	noSchedule() {
-		return (
-			<SetClasses state={this.props.state} />
-		);
-	}
-
 	constructor() {
 		super();
 		this.state = null;
@@ -49,14 +43,15 @@ export default class Dashboard extends Component {
 
 	render() {
 
-		const { classes } = this.props.store;
+		const { classes } = this.props.stores.classesStore;
+		const { newUser } = this.props.stores.uiStore;
 
 		return (
 			<div class={style.home + ' fadeIn'}>
 
-				{classes.map((subject) => (
+				{!newUser ? classes.map((subject) => (
 					<ClassList key={subject.id} block={subject} />
-				))}
+				)) : <SetClasses />}
 
 			</div>
 		);
