@@ -24,12 +24,15 @@ html, body {
 }
 
 h2, h3, h4 {
-	border-top: 1px solid rgba(0, 0, 0, .12);
 	padding: 15px 0;
 	line-height: 28px;
 	color: $secondary-text-color;
 	font-weight: 700;
 	margin: 0;
+
+	&.border {
+		border-top: 1px solid rgba(0, 0, 0, .12);
+	}
 }
 
 h2 {
@@ -95,4 +98,44 @@ body[class=nightmode] {
 
 body[class=nightmode] {
 	background: #303030;
+}
+
+.errorDiv {
+	z-index: 10000;
+	top: 0;
+	left: 0;
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	background: #f8f8f8;
+	text-align: center;
+	padding: 0 8px;
+
+	h1 {
+		padding: 8px 16px;
+		border-radius: 3px;
+		background: #e7acac;
+		color: #000;
+		margin: 56px auto 16px auto;
+		word-break: break-word;
+		word-wrap: break-word;
+		max-width: 720px;
+		font-size: 1.5rem;
+		box-shadow: $card-box-shadow;
+	}
+
+	button {
+		border: none;
+		border-radius: 3px;
+		background: transparent;
+		font-size: 1.2rem;
+		appearance: none;
+		padding: 8px 16px;
+		transition: background .13s;
+		cursor: pointer;
+
+		&:hover {
+			background: #e7acac;
+		}
+	}
 }

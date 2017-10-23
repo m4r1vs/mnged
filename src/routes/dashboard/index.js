@@ -8,15 +8,13 @@ import SetClasses from './setClasses';
 @observer
 export default class Dashboard extends Component {
 
-	getDate(bool) {
+	getDate(date) {
 
 		const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
 			'July', 'August', 'September', 'October', 'November', 'December'
 		];
 
-		let d = new Date();
-
-		if (bool) d.setDate(d.getDate() + 1);
+		let d = new Date(date);
 
 		const month = monthNames[d.getMonth()];
 
@@ -43,15 +41,76 @@ export default class Dashboard extends Component {
 
 	render() {
 
-		const { classes } = this.props.stores.classesStore;
+		const { classes, schedule } = this.props.stores.classesStore;
 		const { newUser } = this.props.stores.uiStore;
+
+		const renderSchedule = input => {
+			let day = 0;
+			let notes = this.props.stores.classesStore.schedule.getEntryByDate(input);
+			if (notes) {
+				notes = notes.notes;
+				if (/^day 1/.test(notes.toLowerCase())) day = 1;
+				if (/^day 2/.test(notes.toLowerCase())) day = 2;
+			}
+			else notes = 'No data provided';
+
+			if (day === 1) {
+				return {
+					notes,
+					classes: [
+						classes[0],
+						classes[8],
+						classes[1],
+						classes[2],
+						classes[3]
+					]
+				};
+			}
+
+			else if (day === 2) {
+				return {
+					notes,
+					classes: [
+						classes[4],
+						classes[8],
+						classes[5],
+						classes[6],
+						classes[7]
+					]
+				};
+			}
+			return {
+				notes,
+				classes: null
+			};
+		};
+
+		const now = new Date().getTime();
+		const renderClasses = () => (
+			<div>
+				<h3>{this.getDate(now)}: {schedule && renderSchedule(now).notes}</h3>
+				{schedule && renderSchedule(now).classes && renderSchedule(now).classes.map((subject) => (
+					<ClassList key={subject.id} block={subject} />
+				))}
+				<h3 class="border">{this.getDate(now + 86400000)}: {schedule && renderSchedule(now + 86400000).notes}</h3>
+				{schedule && renderSchedule(now + 86400000).classes && renderSchedule(now + 86400000).classes.map((subject) => (
+					<ClassList key={subject.id} block={subject} />
+				))}
+				<h3 class="border">{this.getDate(now + 86400000 + 86400000)}: {schedule && renderSchedule(now + 86400000 + 86400000).notes}</h3>
+				{schedule && renderSchedule(now + 86400000 + 86400000).classes && renderSchedule(now + 86400000 + 86400000).classes.map((subject) => (
+					<ClassList key={subject.id} block={subject} />
+				))}
+			</div>
+		);
 
 		return (
 			<div class={style.home + ' fadeIn'}>
 
-				{!newUser ? classes.map((subject) => (
+				{classes.map((subject) => (
 					<ClassList key={subject.id} block={subject} />
-				)) : <SetClasses />}
+				))}
+
+				{!newUser ? renderClasses() : <SetClasses />}
 
 			</div>
 		);

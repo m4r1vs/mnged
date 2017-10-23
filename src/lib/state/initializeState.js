@@ -35,6 +35,21 @@ const initializeState = (stores, user) => {
 				if (!doc.exists) stores.uiStore.newUser = true;
 			});
 		
+		const fetchSchedule = () => {
+			fetch('https://maniyt.de/api/caf-menu/get-menu')
+				.then((res) => res.json())
+				.then((res) => stores.classesStore.initSchedule(res.menu))
+				.catch((err) => {
+					stores.uiStore.showSnackbar(
+						'Wasn\'t able to connect to https://maniyt.de/api/caf-menu/get-menu for time info!',
+						'RETRY',
+						10000,
+						() => fetchSchedule()
+					);
+				});
+		};
+
+		fetchSchedule();
 		
 		// firestore
 		// 	.collection('users')
@@ -56,7 +71,9 @@ const initializeState = (stores, user) => {
 								stores.classesStore.addClass(docChanges.doc.id, docChanges.doc.data());
 								break;
 							case 'modified':
+								console.log(docChanges.doc.data());
 								stores.classesStore.editClass(docChanges.doc.id, docChanges.doc.data());
+								console.log(stores.classesStore);
 								break;
 							case 'removed':
 								stores.uiStore.throwError('#001');

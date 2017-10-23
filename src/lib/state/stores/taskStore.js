@@ -1,4 +1,4 @@
-import { observable, computed } from 'mobx';
+import { observable, computed, action } from 'mobx';
 
 class Task {
 	@observable id
@@ -44,17 +44,17 @@ export default class TaskStore {
 		return taskList;
 	}
         
-	addTask(id, task) {
+	@action addTask(id, task) {
 		this.tasks.push(new Task(id, task));
 	}
         
-	editTask(id, taskNew) {
+	@action editTask(id, taskNew) {
 		for (let i = 0; i < this.tasks.length; i++) {
-			if (this.tasks[i].id === id) this.tasks[i] = { ...taskNew, id };
+			if (this.tasks[i].id === id) this.tasks[i] = new Task(id, taskNew);
 		}
 	}
 
-	removeTask(id) {
+	@action removeTask(id) {
 		for (let i = 0; i < this.tasks.length; i++) {
 			if (this.tasks[i].id === id) this.tasks.splice(i, 1);
 		}

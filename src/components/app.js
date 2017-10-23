@@ -13,6 +13,13 @@ import initializeState from '../lib/state/initializeState';
 @observer
 export default class App extends Component {
 
+	nightmode() {
+		if (typeof window !== 'undefined') {
+			if (localStorage.getItem('nightmode') === 'true') return true;
+			return false;
+		}
+	}
+
 	componentWillMount() {
 
 		auth.onAuthStateChanged((user) => {
@@ -32,10 +39,13 @@ export default class App extends Component {
 			<div id="app">
 
 				<SnackBar stores={stores} />
-				<Header action={stores.uiStore.headerAction} actionIcon={stores.uiStore.headerActionIcon} title={stores.uiStore.headerTitle || 'Managed me!'} />
+				<Header nightmode={this.nightmode()} action={stores.uiStore.headerAction} actionIcon={stores.uiStore.headerActionIcon} title={stores.uiStore.headerTitle || 'Managed me!'} />
 				<Nav stores={stores} />
 
-				{stores.uiStore.error && <div class="error_div">{stores.uiStore.error}</div>}
+				{stores.uiStore.error && (<div class="errorDiv">
+					<h1>{stores.uiStore.error}</h1>
+					<button onClick={() => location.reload()}>RELOAD</button>
+				</div>)}
 
 				<div id="main_component" style={{ minHeight: '100vh', minWidth: '100vw' }}>
 					{ stores.uiStore.appState ? (stores.uiStore.appState.appLoaded ? <Routes stores={stores} /> : <Loader />) : <Loader /> }

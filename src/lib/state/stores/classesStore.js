@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 
 class Class {
 	@observable id
@@ -16,24 +16,49 @@ class Class {
 	}
 }
 
+class Schedule {
+	@observable menu
+
+	constructor(menu) {
+		this.menu = menu;
+	}
+
+	getEntryByDate(ms) {
+		let result = null;
+
+		this.menu.forEach((obj, i) => {
+			const date = new Date(obj.date);
+			const now = new Date(ms);
+			if (date.getMonth() === now.getMonth() && date.getDate()+1 === now.getDate()) result = obj;
+		});
+
+		return result;
+	}
+}
+
 export default class ClassesStore {
 
 	@observable classes = []
+	@observable schedule = null
     
-	addClass(id, subject) {
+	@action addClass(id, subject) {
 		this.classes.push(new Class(id, subject));
 	}
 
-	editClass(id, subjectNew) {
+	@action editClass(id, subjectNew) {
 		for (let i = 0; i < this.classes.length; i++) {
-			if (this.classes[i].id === id) this.classes[i] = { ...subjectNew, id };
+			if (this.classes[i].id === id) this.classes[i] = new Class(id, subjectNew);
 		}
 	}
 
-	getClassFromName(name) {
+	@action getClassFromName(name) {
 		this.classes.forEach((subject) => {
 			if (subject.name === name) return subject;
 		});
+	}
+
+	@action initSchedule(result) {
+		this.schedule = new Schedule(result);
 	}
 
 }

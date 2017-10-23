@@ -4,19 +4,8 @@ import style from './style';
 
 const toggleDarkMode = () => {
 	document.body.classList.toggle('nightmode');
-};
-
-let showMoreMenuSetUp = false;
-const showMoreMenu = () => {
-	if (!showMoreMenuSetUp) {
-		document.getElementById('main_component').addEventListener('click', (e) => {
-			if (document.getElementById('moreMenu').classList[1] === style.moreMenuOpened) {
-				document.getElementById('moreMenu').classList.toggle(style.moreMenuOpened);
-			}
-		});
-		showMoreMenuSetUp = true;
-	}
-	document.getElementById('moreMenu').classList.toggle(style.moreMenuOpened);
+	if (localStorage.getItem('nightmode') === 'true') localStorage.setItem('nightmode', 'false');
+	else localStorage.setItem('nightmode', 'true');
 };
 
 const Header = props => {
@@ -43,6 +32,8 @@ const Header = props => {
 		}
 	};
 
+	if (props.nightmode === true) document.body.classList.add('nightmode');
+
 	return (
 		<header class={style.header} id="header">
 
@@ -54,7 +45,7 @@ const Header = props => {
 
 			<h1>{props.title}</h1>
 
-			{!props.action && <i style={{ display: 'block', cursor: 'pointer' }} onClick={showMoreMenu} class="material-icons">&#xE5D4;</i>}
+			{!props.action && <i style={{ display: 'block', cursor: 'pointer' }} class={style.moreMenuIcon + ' material-icons'}>&#xE5D4;</i>}
 			{props.action && <i onClick={() => props.action()} class="material-icons">{props.actionIcon}</i>}
 
 			<div class={style.moreMenu} id="moreMenu">

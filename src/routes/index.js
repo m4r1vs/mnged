@@ -23,9 +23,9 @@ export default class Routes extends Component {
 
 		render() {
 
-			const { user } = this.props.stores.userStore;
+			const { appState } = this.props.stores.uiStore;
 
-			if (user.loggedIn) {
+			if (appState.userLoggedIn) {
 				return (
 					<Router onChange={this.handleRoute}>
 						<Dashboard path="/" stores={this.props.stores} />
