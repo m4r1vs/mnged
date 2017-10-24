@@ -30,7 +30,7 @@ export default class AddTask extends Component {
 				.collection('tasks')
 				.add({
 					body: this.taskBody.value || 'No body',
-					due: this.taskDue.value ? new Date(this.taskDue.value) : new Date(),
+					due: this.taskDue.value ? new Date(this.taskDue.value) : this.props.stores.uiStore.currentTime,
 					subject: this.taskSubject.value || null,
 					title: this.taskTitle.value || 'not given'
 				})

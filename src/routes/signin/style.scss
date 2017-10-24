@@ -19,20 +19,8 @@
   }
 
   .card {
-    
     display: inline-block;
     width: 100%;
-    padding: 0 16px;
-    background: #fff;
-
-    h2 {
-      padding: 15px 0;
-      line-height: 28px;
-      font-size: 20px;
-      color: $secondary-text-color;
-      font-weight: 700;
-      margin: 0;
-    }
 
     button.continueWith {
 
@@ -42,9 +30,9 @@
       min-width: 261px;
       padding: 0;
       transition: box-shadow .13s; // box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .25);
-      background-color: #ffffff;
+      background-color: transparent;
       border: none;
-      border-radius: 1px;
+      border-radius: 2px;
 
       svg, i {
         margin: 12px;
@@ -73,7 +61,6 @@
       position: relative;
       outline: 0;
       border: 0;
-      color: $secondary-text-color;
       text-align: center;
       height: 1.5em;
 
@@ -97,18 +84,30 @@
         background-color: #fff;
       }
     }
+  }
+}
 
-    p {
-
-      padding: 0 0 15px 0;
-      line-height: 24px;
-      margin: 0;
-      font-size: 14px;
-      color: $primary-text-color;
-
-      a {
-        color: $secondary-color-dark;
-        text-decoration: none;
+body[class=nightmode] {
+  .signin {
+    background: #424242 !important;
+    @media (min-width: 500px) {
+      background: #303030 !important;
+    }
+    hr {
+      &:before {
+        background: rgba(255,255,255,.13) !important;
+      }
+      &:after {
+        color: rgba(255,255,255,.57) !important;
+        background-color: #424242 !important;
+      }
+    }
+    button {
+      span, i {
+        color: rgba(255,255,255,.87) !important;
+      }
+      svg {
+        fill: rgba(255, 255, 255, .87) !important;
       }
     }
   }

@@ -2,15 +2,22 @@
 
 .class {
   padding: 132px 0 8px 0;
-  background: #fff;
   height: 100vh;
+  background: #fff;
+
+  .card {
+    padding: 0;
+  }
 
   div.listElement {
+    position: relative;
     padding: 12px 16px;
-    height: 56px;
+    min-height: 56px;
+
     i {
       font-size: 32px;
     }
+
     span {
       position: relative;
       top: -10px;
@@ -18,30 +25,24 @@
     }
   }
 
-  hr {
-    margin: 0;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, .13);
-  }
-
   h4 {
+    padding: 0;
     margin: 0;
     margin: 8px 16px;
-    color: $secondary-text-color;
   }
 
   div.taskListElement {
 
     cursor: pointer;
-    height: 58px;
+    min-height: 58px;
     padding: 8px 16px;
+    position: relative;
     margin-bottom: 12px;
-    background: #fff;
 
     h5 {
-      color: $primary-text-color;
       margin: 0 0 4px 0;
       font-size: 16px;
+      padding: 0;
       font-weight: 400;
     }
 
@@ -59,10 +60,10 @@
     }
 
     div.colorIndicator {
-      height: 58px;
       width: 4px;
       margin-left: -16px;
-      margin-top: -50px;
+      top: 0;
+      bottom: 0;
       position: absolute;
     }
 
@@ -77,14 +78,12 @@
     
     padding: 0 0 8px 0;
     height: auto !important;
-    border-radius: 3px;
-    box-shadow: $card-box-shadow;
     min-height: 400px;
     width: 450px;
     margin: 0 auto;
     position: relative;
     top: 106px;
-    background: #fff;
+    background: transparent !important;
 
     div.listElement {
       padding: 12px 16px;
@@ -99,5 +98,14 @@
         left: 16px;
       }
     }
+  }
+}
+
+body[class=nightmode] {
+  .class {
+    background: #424242;
+    h5 { color: rgba(255, 255, 255, 0.87); }
+    i, span { color: rgba(255, 255, 255, 0.87); }
+    span.taskDescription, span.taskTimeLeft { color: rgba(255, 255, 255, 0.87) !important; }
   }
 }

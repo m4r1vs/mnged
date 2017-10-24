@@ -4,6 +4,7 @@
   position: relative;
 
   input[type=text], input[type=password] {
+    background: transparent;
     font-size: 18px;
     padding: 28px 0 2px 3px;
     display: block;
@@ -72,5 +73,12 @@
     left: 3px;
     bottom: 5px;
     transition: 0.2s ease all;
+  }
+}
+
+body[class=nightmode] {
+  input[type=text], input[type=password] {
+    color: rgba(255,255,255,.87);
+    border-bottom-color: rgba(255,255,255,.57);
   }
 }

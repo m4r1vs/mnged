@@ -1,0 +1,72 @@
+@import '../../style/vars.scss';
+
+.dayNavigator {
+  background: #fff;
+  width: 100%;
+  height: 56px;
+  border-radius: 0;
+  box-shadow: $bottom-nav-box-shadow;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+
+  @media only screen and (min-width: 700px) {
+    box-shadow: $card-box-shadow;
+    background: $secondary-color-light;
+    position: relative;
+    border-radius: 3px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    top: 0;
+    bottom: auto;
+  }
+
+  button {
+    outline: none;
+    background: none;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+
+    &.left {
+      float: left;
+    }
+
+    &.right {
+      float: right;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, .05);
+    }
+
+    i {
+      line-height: 56px;
+      font-size: 2rem;
+    }
+  }
+
+  h2 {
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    font-size: 1.2rem;
+    width: calc(100% - 88px);
+  }
+}
+
+div[class=top] {
+  display: none;
+}
+
+body[class=nightmode] {
+  .dayNavigator {
+    background: $secondary-color-dark;
+
+    h2, i {
+      color: #fff;
+    }
+  }
+}

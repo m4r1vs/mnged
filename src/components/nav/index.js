@@ -257,6 +257,7 @@ export default class Nav extends Component {
 							<Link activeClassName={style.active} href="/exams" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE3C9;</i>Exams</span></div></Link>
 							<Link activeClassName={style.active} href="/classes" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE54B;</i>Classes</span></div></Link>
 							<Link activeClassName={style.active} href="/notes" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE86E;</i>Notes</span></div></Link>
+							<Link activeClassName={style.active} href="/cafeteria-menu" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE561;</i>Cafeteria Menu</span></div></Link>
 
 						</div>
 						

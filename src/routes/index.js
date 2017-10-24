@@ -3,6 +3,7 @@ import { Router } from 'preact-router';
 import { observer } from 'preact-mobx';
 
 import Dashboard from './dashboard';
+import CafeteriaMenu from './cafeteriaMenu';
 import Tasks from './tasks';
 import AddTask from './tasks/addTask';
 import Settings from './settings';
@@ -33,6 +34,7 @@ export default class Routes extends Component {
 						<Task stores={this.props.stores} path="/task/:task" />
 						<Tasks stores={this.props.stores} path="/tasks/" />
 						<AddTask stores={this.props.stores} path="/tasks/add" />
+						<CafeteriaMenu stores={this.props.stores} path="/cafeteria-menu/" />
 						<Settings path="/settings" />
 						<About path="/about/" />
 						<div path="/signin/"><br /><br /><br />redirecting...</div>

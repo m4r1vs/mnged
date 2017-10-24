@@ -40,6 +40,7 @@ const initializeState = (stores, user) => {
 				.then((res) => res.json())
 				.then((res) => stores.classesStore.initSchedule(res.menu))
 				.catch((err) => {
+					console.log(err);
 					stores.uiStore.showSnackbar(
 						'Wasn\'t able to connect to https://maniyt.de/api/caf-menu/get-menu for time info!',
 						'RETRY',

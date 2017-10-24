@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import { observer } from 'preact-mobx';
 import style from './style';
 
+import DayNavigator from '../../components/dayNavigator';
 import ClassList from './classList';
 import SetClasses from './setClasses';
 
@@ -10,94 +11,67 @@ export default class Dashboard extends Component {
 
 	getDate(date) {
 
-		const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-			'July', 'August', 'September', 'October', 'November', 'December'
+		const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+			'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 		];
 
+		const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 		let d = new Date(date);
+		const now = this.props.stores.uiStore.currentTime;
+
+		if (d.getMonth() === now.getMonth() && d.getDate() === now.getDate()) return 'Today';
 
 		const month = monthNames[d.getMonth()];
+		const dayName = dayNames[d.getDay()];
 
 		let day = d.getDate();
 
 		if (day <= 1) day = day + 'st';
 		else day = day + 'th';
 
-		return month + ' the ' + day;
+		return dayName + ', ' + month + ' ' + day;
 	}
 
-	isItDayOne() {
-		return true;
+	nextDay() {
+		const currentState = this.state.displayedDate;
+		this.props.stores.classesStore.changeDisplayedClasses(currentState + 86400000);
+		this.setState({ displayedDate: currentState + 86400000 });
 	}
 
-	constructor() {
-		super();
-		this.state = null;
+	previosDay() {
+		const currentState = this.state.displayedDate;
+		this.props.stores.classesStore.changeDisplayedClasses(currentState - 86400000);
+		this.setState({ displayedDate: currentState - 86400000 });
 	}
 
-	componentWillMount() {
-		this.setState({ classes: JSON.parse(localStorage.getItem('classes')) });
+	constructor(props) {
+		super(props);
+		this.state = {
+			displayedDate: props.stores.uiStore.currentTime.getTime()
+		};
+	}
+
+	componentDidMount() {
+		const currentState = this.state.displayedDate;
+		this.props.stores.classesStore.changeDisplayedClasses(currentState);
 	}
 
 	render() {
 
-		const { classes, schedule } = this.props.stores.classesStore;
 		const { newUser } = this.props.stores.uiStore;
 
-		const renderSchedule = input => {
-			let day = 0;
-			let notes = this.props.stores.classesStore.schedule.getEntryByDate(input);
-			if (notes) {
-				notes = notes.notes;
-				if (/^day 1/.test(notes.toLowerCase())) day = 1;
-				if (/^day 2/.test(notes.toLowerCase())) day = 2;
-			}
-			else notes = 'No data provided';
+		const classes = this.props.stores.classesStore.filteredClasses;
 
-			if (day === 1) {
-				return {
-					notes,
-					classes: [
-						classes[0],
-						classes[8],
-						classes[1],
-						classes[2],
-						classes[3]
-					]
-				};
-			}
-
-			else if (day === 2) {
-				return {
-					notes,
-					classes: [
-						classes[4],
-						classes[8],
-						classes[5],
-						classes[6],
-						classes[7]
-					]
-				};
-			}
-			return {
-				notes,
-				classes: null
-			};
-		};
-
-		const now = new Date().getTime();
-		const renderClasses = () => (
+		const renderClasses = ms => (
 			<div>
-				<h3>{this.getDate(now)}: {schedule && renderSchedule(now).notes}</h3>
-				{schedule && renderSchedule(now).classes && renderSchedule(now).classes.map((subject) => (
-					<ClassList key={subject.id} block={subject} />
-				))}
-				<h3 class="border">{this.getDate(now + 86400000)}: {schedule && renderSchedule(now + 86400000).notes}</h3>
-				{schedule && renderSchedule(now + 86400000).classes && renderSchedule(now + 86400000).classes.map((subject) => (
-					<ClassList key={subject.id} block={subject} />
-				))}
-				<h3 class="border">{this.getDate(now + 86400000 + 86400000)}: {schedule && renderSchedule(now + 86400000 + 86400000).notes}</h3>
-				{schedule && renderSchedule(now + 86400000 + 86400000).classes && renderSchedule(now + 86400000 + 86400000).classes.map((subject) => (
+				<DayNavigator
+					leftAction={this.previosDay.bind(this)}
+					rightAction={this.nextDay.bind(this)}
+					title={classes && this.getDate(this.state.displayedDate)}
+				/>
+				<h4 class={style.notes}>{classes.notes}</h4>
+				{classes && classes.classes && classes.classes.map((subject) => (
 					<ClassList key={subject.id} block={subject} />
 				))}
 			</div>
@@ -105,10 +79,6 @@ export default class Dashboard extends Component {
 
 		return (
 			<div class={style.home + ' fadeIn'}>
-
-				{classes.map((subject) => (
-					<ClassList key={subject.id} block={subject} />
-				))}
 
 				{!newUser ? renderClasses() : <SetClasses />}
 

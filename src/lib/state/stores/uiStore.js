@@ -5,8 +5,10 @@ export default class UiStore {
 	@observable error = null
 	@observable appState = null
 	@observable newUser = false
+	@observable currentTime = new Date()
   
 	initUi(user) {
+		// setInterval(() => this.currentTime = new Date(), 30000);
 		if (user) {
 			this.appState = {
 				userLoggedIn: true,

@@ -6,6 +6,8 @@ import style from './style';
 
 import TextInput from '../../components/textInput';
 import { DefaultButton, CancelButton } from '../../components/button';
+import Card from '../../components/card';
+
 @observer
 export default class SignIn extends Component {
 
@@ -118,7 +120,7 @@ export default class SignIn extends Component {
 
 		return (
 			<section class={style.signin}>
-				{(this.state.signInMethod === 'chooseMethod') && <div class={style.card + ' fadeIn'}>
+				{(this.state.signInMethod === 'chooseMethod') && <Card class={style.card + ' fadeIn'}>
 					<h2>Get started</h2>
 					<p>
 					Please select one of the following methods to continue and to register or sign in. If you have any problems, please <a href="/feedback">contact us</a>.
@@ -158,8 +160,8 @@ export default class SignIn extends Component {
 							<span>Continue with GitHub</span>
 						</button>
 					</center>
-				</div>}
-				{(this.state.signInMethod === 'emailSignUp') && <div class={style.card + ' fadeIn'}>
+				</Card>}
+				{(this.state.signInMethod === 'emailSignUp') && <Card class={style.card + ' fadeIn'}>
 					<h2>Welcome</h2>
 					<form onSubmit={this.signInWithEmail.bind(this)}>
 						<TextInput name="Your E-Mail" inputRef={(input) => this.signUpEmail = input} required />
@@ -176,8 +178,8 @@ export default class SignIn extends Component {
 						}}
 						/>
 					</form>
-				</div>}
-				{(this.state.signInMethod === 'emailSignIn') && <div class={style.card + ' fadeIn'}>
+				</Card>}
+				{(this.state.signInMethod === 'emailSignIn') && <Card class={style.card + ' fadeIn'}>
 					<h2>Sign In</h2>
 					<form onSubmit={this.signInWithEmail.bind(this)}>
 						<TextInput name="E-Mail" inputRef={(input) => this.signInEmail = input} required />
@@ -193,7 +195,7 @@ export default class SignIn extends Component {
 						}}
 						/>
 					</form>
-				</div>}
+				</Card>}
 			</section>
 		);
 	}

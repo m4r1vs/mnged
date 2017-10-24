@@ -137,7 +137,7 @@ nav {
     
           &:hover {
             background: #F5F5F5;
-            color: $primary-color !important;
+            color: $primary-color;
             cursor: pointer;
 
             @media (min-width: 1025px) {
@@ -179,7 +179,7 @@ div.drawerBack {
 
 body[class=nightmode] {
   nav {
-    background: #424242;
+    background: #303030 !important;
 
     a.active div {
       background: rgba(255, 255, 255, .05) !important;
@@ -194,16 +194,21 @@ body[class=nightmode] {
       }
     }
 
+    hr {
+      @media (min-width: 1025px) {
+        border-top: 1px solid rgba(255, 255, 255, .12) !important;
+      }
+    }
+
+    a:hover div {
+      background-color: rgba(255, 255, 255, .05) !important;
+    }
+
     div {
       color: rgba(255, 255, 255, .57) !important;
 
       &:hover {
-        background: rgba(255, 255, 255, .05) !important;
         color: rgba(255, 255, 255, .87) !important;
-
-        @media (min-width: 1025px) {
-          background: rgba(255, 255, 255, .05) !important;
-        }
       }
 
       span i {

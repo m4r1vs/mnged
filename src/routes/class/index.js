@@ -3,6 +3,7 @@ import { observer } from 'preact-mobx';
 import { route } from 'preact-router';
 import style from './style';
 
+import Card from '../../components/card';
 @observer
 export default class Class extends Component {
 
@@ -64,38 +65,41 @@ export default class Class extends Component {
 		return (
 			<div class={style.class + ' fadeIn'}>
 
-				{currentSubject ? <div>
-					<div class={style.listElement}>
-						<i class="material-icons">&#xE878;</i>
-						<span>10:30 - 11:40 AM Today</span>
-					</div>
-					<div class={style.listElement}>
-						<i class="material-icons">&#xE80C;</i>
-						<span>{currentSubject.teacher}</span>
-					</div>
-					<div class={style.listElement}>
-						<i class="material-icons">&#xEB3F;</i>
-						<span>{currentSubject.room}</span>
-					</div>
-					<hr />
-					<h4>Tasks due for this class</h4>
+				<Card class={style.card}>
 
-					{taskList.map((task) => {
-						if (task.subjectRef === currentSubject.id) {
-							return (
-								<div class={style.taskListElement} onClick={() => route('/task/' + task.id, false)}>
-									<span class={style.taskTimeLeft}>{task.timeLeft}</span>
-									<h5>{task.title}</h5>
-									<span class={style.taskDescription}>{task.body}</span>
-									<div class={style.colorIndicator} style={{ backgroundColor: currentSubject.color }} />
-								</div>
-							);
-						}
-					})}
+					{currentSubject ? <div style={{ display: 'inline-block', width: '100%' }}>
+						<div class={style.listElement}>
+							<i class="material-icons">&#xE878;</i>
+							<span>10:30 - 11:40 AM Today</span>
+						</div>
+						<div class={style.listElement}>
+							<i class="material-icons">&#xE80C;</i>
+							<span>{currentSubject.teacher}</span>
+						</div>
+						<div class={style.listElement}>
+							<i class="material-icons">&#xEB3F;</i>
+							<span>{currentSubject.room}</span>
+						</div>
+						<h4>Tasks due for this class</h4>
 
-				</div> : <div>
+						{taskList.map((task) => {
+							if (task.subjectRef === currentSubject.id) {
+								return (
+									<div class={style.taskListElement} onClick={() => route('/task/' + task.id, false)}>
+										<div class={style.colorIndicator} style={{ backgroundColor: currentSubject.color }} />
+										<span class={style.taskTimeLeft}>{task.timeLeft}</span>
+										<h5>{task.title}</h5>
+										<span class={style.taskDescription}>{task.body}</span>
+									</div>
+								);
+							}
+						})}
+
+					</div> : <div style={{ display: 'inline-block', width: '100%' }}>
 						Class not found: {this.props.class}
-				</div>}
+					</div>}
+
+				</Card>
 			</div>
 		);
 	}

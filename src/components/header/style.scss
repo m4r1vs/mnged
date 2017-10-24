@@ -10,11 +10,12 @@
 	background: $primary-color;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 	z-index: 50;
-	transition: height .22s;
+	transition: height .22s, top .05s ease-in-out;
 
 	@media (max-width: 1024px) {
 		&[id=header-big] {
 			height: 132px;
+			top: 0 !important;
 			h1 {
 				margin-left: 0;
 				padding-left: 0;
@@ -26,6 +27,10 @@
 				display: block;
 			}
 		}
+	}
+
+	&.hidden {
+		top: -56px;
 	}
 
 	i {

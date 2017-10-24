@@ -1,10 +1,10 @@
 @import '../../style/vars.scss';
 
 .home {
-	padding: 64px 0px 0px;
+	padding: 64px 0 64px 0;
 	min-height: 100vh;
 	width: 100%;
-	background: #fff;
+	background: transparent;
 
 	@media (min-width: 500px) {
 		width: 450px;
@@ -14,6 +14,10 @@
 
 	div.noSchedule {
 		color: red;
+	}
+
+	h4.notes {
+		padding: 8px 20px 8px 27px;
 	}
 }
 
