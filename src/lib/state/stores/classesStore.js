@@ -51,6 +51,7 @@ export default class ClassesStore {
 	@observable schedule = null
 	@observable day = 0
 	@observable notes = 'loading...'
+	@observable displayedClass = null
     
 	@action addClass(id, subject) {
 		this.classes.push(new Class(id, subject));
@@ -62,14 +63,22 @@ export default class ClassesStore {
 		}
 	}
 
-	@action getClassFromName(name) {
-		this.classes.forEach((subject) => {
-			if (subject.name === name) return subject;
-		});
-	}
-
 	@action initSchedule(result) {
 		this.schedule = new Schedule(result);
+	}
+
+	@action setDisplayedClass(name) {
+		this.displayedClass = name;
+	}
+
+	@computed get getDisplayedClass() {
+		let returnClass = null;
+		if (this.displayedClass) {
+			this.classes.forEach((subject) => {
+				if (subject.name === this.displayedClass) returnClass = subject;
+			});
+		}
+		return returnClass;
 	}
 
 	@action changeDisplayedClasses(ms) {

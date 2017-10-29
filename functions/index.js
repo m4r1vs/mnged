@@ -8,31 +8,31 @@ const firestore = admin.firestore();
 exports.setUpNewUser = functions.auth.user().onCreate(event => {
 	
 	const user = event.data;
-	const date = new Date();
-	const batch = firestore.batch();
 
-	const docRefUserInfo = firestore
-		.collection('users')
-		.doc(user.uid);
-
-	const docRefScheduleInfo = firestore
+	firestore
 		.collection('users')
 		.doc(user.uid)
-		.collection('schedule')
-		.doc('info');
-	
-	batch.set(docRefUserInfo, {
-		email: user.email,
-		name: user.displayName
-	});
-		
-	batch.set(docRefScheduleInfo, {
-		schedule: false,
-		lastEdit: date.getTime()
-	});
-
-	batch.commit().then(() => {
-		console.log('Created new FireStore entry for user: ', user);
-	});
+		.collection('tasks')
+		.doc()
+		.set({
+			body: 'Hi '+ (user.displayName ? user.displayName : user.email) +', this is your first task. Feel free to explore all the features and capabilities of MNGED!',
+			title: 'Your first task!',
+			due: new Date(new Date().getTime() + 604800000),
+			subject: null
+		})
+		.then(() => console.log('Created new FireStore entry for user: ', user))
+		.catch((err) => console.error('Something went wrong creating FireStore entry for user: ', err));
   
+});
+
+exports.onUserDelete = functions.auth.user().onDelete(event => {
+	
+	const user = event.data;
+
+	firestore
+		.collection('users')
+		.doc(user.uid)
+		.delete()
+		.then(() => console.log('deleted FireStore entry for user: ', user))
+		.catch((err) => console.log('Something went wrong deleting FireStore entry for user: ', err));
 });

@@ -38,10 +38,25 @@ class Task {
 
 export default class TaskStore {
 	@observable tasks = []
+	@observable displayedTask = null
 
 	@computed get taskList() {
 		const taskList = this.tasks.sort((a, b) => a.due.getTime() - b.due.getTime());
 		return taskList;
+	}
+
+	@action setDisplayedTask(id) {
+		this.displayedTask = id;
+	}
+
+	@computed get getDisplayedTask() {
+		let returnTask = null;
+		if (this.displayedTask) {
+			this.tasks.forEach((task) => {
+				if (task.id === this.displayedTask) returnTask = task;
+			});
+		}
+		return returnTask;
 	}
         
 	@action addTask(id, task) {

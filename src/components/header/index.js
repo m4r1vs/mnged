@@ -1,17 +1,20 @@
-import { h } from 'preact';
-
+import { h, Component } from 'preact';
+import { observer } from 'preact-mobx';
 import style from './style';
 
-const toggleDarkMode = () => {
-	document.body.classList.toggle('nightmode');
-	if (localStorage.getItem('nightmode') === 'true') localStorage.setItem('nightmode', 'false');
-	else localStorage.setItem('nightmode', 'true');
-};
+@observer
+export default class Header extends Component {
 
-const Header = props => {
+	toggleDarkMode() {
+		if (typeof window !== 'undefined') {
+			document.body.classList.toggle('nightmode');
+			if (localStorage.getItem('nightmode') === 'true') localStorage.setItem('nightmode', 'false');
+			else localStorage.setItem('nightmode', 'true');
+		}
+	}
 
-	const openDrawer = e => {
-		if (typeof window === 'object') {
+	openDrawer(e) {
+		if (typeof window !== 'undefined') {
 			if (e.path[0].id === 'navbtn-arrow' || e.path[1].id === 'navbtn-arrow') window.history.back();
 			else {
 				document.body.style.overflow = 'hidden';
@@ -30,34 +33,39 @@ const Header = props => {
 				drawer.style.marginLeft = '0px';
 			}
 		}
-	};
+	}
 
-	if (props.nightmode === true) document.body.classList.add('nightmode');
+	componentDidMount() {
+		if (this.props.nightmode === true) document.body.classList.add('nightmode');
+	}
 
-	return (
-		<header class={style.header} id="header">
+	render({ stores }) {
 
-			<div class={style.navbtn} id="navbtn" onClick={openDrawer}>
-				<span id="navbtn-span1" />
-				<span id="navbtn-span2" />
-				<span id="navbtn-span3" />
-			</div>
+		const { subPage } = stores.uiStore;
+		
+		return (
+			<header class={style.header} id={subPage ? 'header-big' : 'header'} style={{ backgroundColor: subPage ? (subPage.headerColor || '') : '' }}>
 
-			<h1>{props.title}</h1>
+				<div class={style.navbtn} id={subPage ? 'navbtn-arrow' : 'navbtn'} onClick={this.openDrawer}>
+					<span id="navbtn-span1" />
+					<span id="navbtn-span2" />
+					<span id="navbtn-span3" />
+				</div>
 
-			{!props.action && <i style={{ display: 'block', cursor: 'pointer' }} class={style.moreMenuIcon + ' material-icons'}>&#xE5D4;</i>}
-			{props.action && <i onClick={() => props.action()} class="material-icons">{props.actionIcon}</i>}
+				<h1>{subPage ? subPage.headerTitle : 'Managed Me!'}</h1>
 
-			<div class={style.moreMenu} id="moreMenu">
-				<ul>
-					<li onClick={toggleDarkMode}>Toggle darkmode</li>
-					<li>option 2</li>
-					<li>option 3</li>
-				</ul>
-			</div>
+				{!subPage && <i style={{ display: 'block', cursor: 'pointer' }} class={style.moreMenuIcon + ' material-icons'}>&#xE5D4;</i>}
+				{subPage && <i onClick={() => subPage.headerAction()} class="material-icons">{subPage.headerActionIcon}</i>}
 
-		</header>
-	);
-};
+				<div class={style.moreMenu} id="moreMenu">
+					<ul>
+						<li onClick={this.toggleDarkMode}>Toggle darkmode</li>
+						<li>option 2</li>
+						<li>option 3</li>
+					</ul>
+				</div>
 
-export default Header;
+			</header>
+		);
+	}
+}

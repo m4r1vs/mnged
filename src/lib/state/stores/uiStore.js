@@ -1,4 +1,18 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
+
+class SubPage {
+	@observable headerTitle
+	@observable headerColor
+	@observable headerAction
+	@observable headerActionIcon
+	
+	constructor(details) {
+		this.headerTitle = details.headerTitle;
+		this.headerColor = details.headerColor;
+		this.headerAction = details.headerAction;
+		this.headerActionIcon = details.headerActionIcon;
+	}
+}
 
 export default class UiStore {
 	@observable notification = null
@@ -6,30 +20,23 @@ export default class UiStore {
 	@observable appState = null
 	@observable newUser = false
 	@observable currentTime = new Date()
+	@observable subPage = false
   
-	initUi(user) {
+	@action initUi(user) {
 		// setInterval(() => this.currentTime = new Date(), 30000);
-		if (user) {
-			this.appState = {
-				userLoggedIn: true,
-				appLoaded: true
-			};
-		}
-		else {
-			this.appState = {
-				userLoggedIn: false,
-				appLoaded: true
-			};
-		}
+		this.appState = {
+			userLoggedIn: !!user,
+			appLoaded: true
+		};
 	}
 
-	throwError(code, info) {
+	@action throwError(code, info) {
 		if (typeof info === 'string') this.error = info + ' (Errorcode ' + code + ')';
 		else this.error = 'Something went wrong. Error ' + code + '. Please look up the code under https://github.com/m4r1vs/mnged/errorcodes.md';
 		console.error(this.error);
 	}
 
-	showSnackbar(text, actionText, time, action) {
+	@action showSnackbar(text, actionText, time, action) {
 		this.notification && this.notification.timeout && clearTimeout(this.notification.timeout);
 		if (this.notification) {
 			this.notification = null;
@@ -52,6 +59,18 @@ export default class UiStore {
 				actionText
 			};
 			this.notification.timeout = setTimeout(() => this.notification = null, time);
+		}
+	}
+
+	@action setSubPage(details) {
+		if (details) {
+			this.subPage = new SubPage(details);
+		}
+		else this.subPage = false;
+
+		if (typeof window !== 'undefined') {
+			const themeColor = document.querySelector('meta[name=theme-color]') || null;
+			if (themeColor) themeColor.setAttribute('content', details ? (details.headerColor || '#282d8c') : '#282d8c');
 		}
 	}
 }

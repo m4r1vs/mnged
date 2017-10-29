@@ -3,6 +3,7 @@ import { h, Component } from 'preact';
 import { firestore, auth } from '../../../lib/firebase';
 import TextInput from '../../../components/textInput';
 import DefaultButton from '../../../components/button';
+import Card from '../../../components/card';
 import style from './style';
 
 const template = [
@@ -32,14 +33,14 @@ let myState = {
 };
 
 const colors = [
-	'#ff1744',
-	'#d500f9',
-	'#2979ff',
-	'#1de9b6',
-	'#ffea00',
-	'#8d6e63',
-	'#ff9100',
-	'#78909c'
+	'#d32f2f',
+	'#7b1fa2',
+	'#1976d2',
+	'#00897b',
+	'#7cb342',
+	'#ff8f00',
+	'#795548',
+	'#546e7a'
 ]
 
 export default class SetClass extends Component {
@@ -108,14 +109,16 @@ export default class SetClass extends Component {
 	render() {
 		return (
 			<div class={style.wrapper}>
-				<h3>Set classes</h3>	
-				<p>Before you can start using mnged, we need your schedule. Please insert your class, room and teacher for the corresponding block. You are also able to select a color assosiated with that class:</p>
-				<form onSubmit={this.proccessForm.bind(this)}>
-					{template.map((item, i) => (
-						<div>{this.renderInput(item)}</div>
-					))}
-					<input type="submit" value="Set classes" />
-				</form>
+				<Card class={style.card}>
+					<h3>Set classes</h3>	
+					<p>Before you can start using mnged, we need your schedule. Please insert your class, room and teacher for the corresponding block. You are also able to select a color assosiated with that class:</p>
+					<form onSubmit={this.proccessForm.bind(this)}>
+						{template.map((item, i) => (
+							<div>{this.renderInput(item)}</div>
+						))}
+						<input type="submit" value="Set classes" />
+					</form>
+				</Card>
 			</div>
 		);
 	}

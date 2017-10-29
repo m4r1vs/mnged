@@ -77,11 +77,10 @@ export default class Dashboard extends Component {
 			</div>
 		);
 
+		if (newUser) return <SetClasses />;
 		return (
 			<div class={style.home + ' fadeIn'}>
-
-				{!newUser ? renderClasses() : <SetClasses />}
-
+				{renderClasses()}
 			</div>
 		);
 	}

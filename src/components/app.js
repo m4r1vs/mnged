@@ -23,10 +23,15 @@ export default class App extends Component {
 	componentWillMount() {
 
 		auth.onAuthStateChanged((user) => {
-			initializeState(this.props.stores, user);
+			if (!this.props.stores.uiStore.appState) initializeState(this.props.stores, user);
 			this.props.stores.userStore.setUser(user, true);
 			this.props.stores.uiStore.initUi(!!user);
 			if (user && /signin/.test(document.location.pathname)) document.location.href = '/';
+			if (user) this.props.stores.uiStore.showSnackbar(
+				'Signed in as ' + user.email,
+				null,
+				3500
+			);
 		});
 
 	}
@@ -39,7 +44,7 @@ export default class App extends Component {
 			<div id="app">
 
 				<SnackBar stores={stores} />
-				<Header nightmode={this.nightmode()} action={stores.uiStore.headerAction} actionIcon={stores.uiStore.headerActionIcon} title={stores.uiStore.headerTitle || 'Managed me!'} />
+				<Header stores={stores} nightmode={this.nightmode()} />
 				<Nav stores={stores} />
 
 				{stores.uiStore.error && (<div class="errorDiv">

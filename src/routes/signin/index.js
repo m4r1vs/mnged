@@ -14,9 +14,9 @@ export default class SignIn extends Component {
 	signIn(provider) {
 		auth.signInWithPopup(provider).then((result) => {
 			this.props.stores.uiStore.showSnackbar(
-				'Signed in as '+result.user.displayName,
+				'Signed in as ' + result.user.email,
 				null,
-				5000
+				3500
 			);
 		}, (error) => {
 			if (error.code === 'auth/account-exists-with-different-credential') {

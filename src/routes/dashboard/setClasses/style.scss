@@ -1,15 +1,19 @@
 @import '../../../style/vars.scss';
 
 .wrapper {
-  margin-bottom: 56px;
-  padding: 0 16px 8px 16px;
+  margin-top: 56px;
+  width: 100%;
   background: #fff;
-  display: inline-block;
-
+  
   @media (min-width: 500px) {
-    margin-top: 56px;
+    width: 450px;
+    margin: 56px auto;
+    background: transparent;
     border-radius: 3px;
-    box-shadow: $card-box-shadow;
+  }
+
+  .card {
+    padding-bottom: 18px;
   }
 
   h3, h4 {

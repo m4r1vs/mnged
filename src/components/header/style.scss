@@ -10,7 +10,7 @@
 	background: $primary-color;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 	z-index: 50;
-	transition: height .22s, top .05s ease-in-out;
+	transition: height .22s, top .05s ease-in-out, background-color .22s;
 
 	@media (max-width: 1024px) {
 		&[id=header-big] {
