@@ -68,6 +68,7 @@ export default class Dashboard extends Component {
 				<DayNavigator
 					leftAction={this.previosDay.bind(this)}
 					rightAction={this.nextDay.bind(this)}
+					stores={this.props.stores}
 					title={classes && this.getDate(this.state.displayedDate)}
 				/>
 				<h4 class={style.notes}>{classes.notes}</h4>

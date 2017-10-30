@@ -21,6 +21,7 @@ export default class UiStore {
 	@observable newUser = false
 	@observable currentTime = new Date()
 	@observable subPage = false
+	@observable dayNavOpened = false
   
 	@action initUi(user) {
 		// setInterval(() => this.currentTime = new Date(), 30000);
@@ -72,5 +73,9 @@ export default class UiStore {
 			const themeColor = document.querySelector('meta[name=theme-color]') || null;
 			if (themeColor) themeColor.setAttribute('content', details ? (details.headerColor || '#282d8c') : '#282d8c');
 		}
+	}
+
+	@action toggleDayNav() {
+		this.dayNavOpened = !this.dayNavOpened;
 	}
 }

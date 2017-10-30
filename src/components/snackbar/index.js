@@ -5,7 +5,7 @@ import style from './style';
 
 @observer
 export default class SnackBar extends Component {
-  
+
 	render() {
 
 		const { notification } = this.props.stores.uiStore;
