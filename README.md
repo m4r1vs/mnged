@@ -8,3 +8,5 @@ yarn start
 ```
 If you don't have [yarn](https://yarnpkg.com/lang/en/) installed, go ahead and do it. It's definitely worth it ;)
 If you have [nvm](https://github.com/creationix/nvm), you also should run `nvm use v8` to use node version 8.X.X
+## Contributers
+Huge thanks to [Jason Miller](https://github.com/developit/) forbuilding Preact and the Preact CLI. And also thanks to him to help gaining some popularity with his [Twitter Quote](https://twitter.com/_developit/status/923555370219470848)!
