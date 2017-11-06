@@ -25,7 +25,7 @@ If you don't have [yarn](https://yarnpkg.com/lang/en/) installed, go ahead and d
 If you have [nvm](https://github.com/creationix/nvm), you also should run `nvm use v8` to use node version 8.X.X
 ## Live Demo 🎉
 If you want to see how it currently looks like, you can go ahead and give it a visit via [https://mnged.me](https://mnged.me). This page is hosted on Firebase Hosting and should be updated. But please don't get driven crazy if something does not work. Everything is still under construction!
-## About ℹ
+## About
 MNGED is a so called Progressive Web App (PWA). PWA's stand out because they are fast 🚀 and always work, even with no connection to the internet.
 ![Screenshot of the dashboard and a detailed view of a class](https://raw.githubusercontent.com/m4r1vs/mnged/master/src/assets/imgs/mnged_dashboard_and_class_screenshot_big.png)
 MNGED uses [Firebase 🔥](https://firebase.google.com) for authentication and as a database. Firebase is developed and maintained by Google. The authentication is build by the same team that also build the Google Sign In and is responsible for other security at Google. But that also means that Google has access to our database which you may or may not care about.
