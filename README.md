@@ -6,11 +6,11 @@
   <strong>MNGED is a PWA which helps you to keep track of your daily study life 🎓</strong>
 </div>
 <div align="center">
-  <sub>&lt;coded/&gt; with ❤︎ and ☕ by <a href="https://github.com/m4r1vs">Marius Niveri</a><br />
-  <img src="https://david-dm.org/m4r1vs/mnged.svg?style=flat">
-  <img src="https://raw.githubusercontent.com/m4r1vs/mnged/master/src/assets/lighthouse/lighthouse_progressive_web_app.svg">
-  <img src="https://raw.githubusercontent.com/m4r1vs/mnged/master/src/assets/lighthouse/lighthouse_accessibility.svg">
-  <img src="https://raw.githubusercontent.com/m4r1vs/mnged/master/src/assets/lighthouse/lighthouse_performance.svg">
+  <sub>&lt;coded/&gt; with ❤︎ and ☕ by <a href="https://github.com/m4r1vs">Marius Niveri</a><br /><br />
+  <a href="https://david-dm.org/m4r1vs/"><img src="https://david-dm.org/m4r1vs/mnged.svg?style=flat"></a>
+  <a href="https://mnged.me/assets/lighthouse/mnged_me.html"><img src="https://mnged.me/assets/lighthouse/lighthouse_progressive_web_app.svg"></a>
+  <a href="https://mnged.me/assets/lighthouse/mnged_me.html"><img src="https://mnged.me/assets/lighthouse/lighthouse_accessibility.svg"></a>
+  <a href="https://mnged.me/assets/lighthouse/mnged_me.html"><img src="https://mnged.me/assets/lighthouse/lighthouse_performance.svg"></a>
 </div>
 <br />
 <br />
