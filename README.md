@@ -6,12 +6,11 @@
 <div align="center">
   ⚠ Attention: MNGED is not finished yet and there're many bugs present! ⚠
 </div>
-
 <br />
-
 <div align="center">
-  <sub>&lt;coded/&gt; with ❤︎ by <a href="https://github.com/m4r1vs">Marius Niveri</a>
+  <sub>&lt;coded/&gt; with ❤︎ and ☕ by <a href="https://github.com/m4r1vs">Marius Niveri</a>
 </div>
+<br />
 
 ## Getting started
 To try it on your own run the following commands after you installed [yarn](https://yarnpkg.com/lang/en/):
