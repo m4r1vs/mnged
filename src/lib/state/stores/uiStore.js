@@ -21,6 +21,7 @@ export default class UiStore {
 	@observable newUser = false
 	@observable currentTime = new Date()
 	@observable subPage = false
+	@observable jobQueue = 'init'
 	@observable dayNavOpened = false
   
 	@action initUi(user) {
@@ -35,6 +36,16 @@ export default class UiStore {
 		if (typeof info === 'string') this.error = info + ' (Errorcode ' + code + ')';
 		else this.error = 'Something went wrong. Error ' + code + '. Please look up the code under https://github.com/m4r1vs/mnged/errorcodes.md';
 		console.error(this.error);
+	}
+
+	@action increaseJobs() {
+		if (isNaN(this.jobQueue)) this.jobQueue = 1;
+		else this.jobQueue++;
+	}
+
+	@action decreaseJobs() {
+		if (isNaN(this.jobQueue)) this.jobQueue = 0;
+		else this.jobQueue--;
 	}
 
 	@action showSnackbar(text, actionText, time, action) {

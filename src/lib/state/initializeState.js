@@ -35,10 +35,23 @@ const initializeState = (stores, user) => {
 				if (!doc.exists) stores.uiStore.newUser = true;
 			});
 		
+		const getCachedSchedule = () => {
+			if (typeof localStorage === 'undefined') return false;
+			stores.uiStore.increaseJobs();
+			if (localStorage.getItem('menu')) {
+				stores.classesStore.initSchedule(JSON.parse(localStorage.getItem('menu')));
+			}
+			stores.uiStore.decreaseJobs();
+		};
+		
 		const fetchSchedule = () => {
 			fetch('https://maniyt.de/api/caf-menu/get-menu')
 				.then((res) => res.json())
-				.then((res) => stores.classesStore.initSchedule(res.menu))
+				.then((res) => {
+					stores.classesStore.initSchedule(res.menu);
+					localStorage.setItem('menu', JSON.stringify(res.menu));
+					if (!stores.classesStore.schedule) stores.uiStore.decreaseJobs();
+				})
 				.catch((err) => {
 					console.log(err);
 					stores.uiStore.showSnackbar(
@@ -47,9 +60,11 @@ const initializeState = (stores, user) => {
 						10000,
 						() => fetchSchedule()
 					);
+					if (!stores.classesStore.schedule) stores.uiStore.decreaseJobs();
 				});
 		};
 
+		getCachedSchedule();
 		fetchSchedule();
 		
 		// firestore

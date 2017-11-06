@@ -3,9 +3,9 @@ import style from './style';
 
 const TextInput = props => (
 	<div class={style.inputGroup}>
-		<input onChange={props.eventHandler && props.eventHandler} name={props.name} type={props.inputType || 'text'} ref={props.inputRef} required />
-		<span class={style.bar} />
-		<label for={props.name}>{props.displayName || props.name}</label>
+		<input style={{ borderBottomColor: props.color, color: props.color }} incomplete={props.incomplete} onChange={props.eventHandler && props.eventHandler} name={props.name} type={props.inputType || 'text'} ref={props.inputRef} required />
+		<span style={{ background: props.color }} class={style.bar} />
+		<label style={{ color: props.color }} for={props.name}>{props.displayName || props.name}</label>
 	</div>
 );
 

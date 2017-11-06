@@ -234,7 +234,7 @@ export default class Nav extends Component {
 
 		return (
 			<div>
-				<nav ref={(nav) => { this.drawer = nav; }} id="drawer" >
+				<nav class={style.nav} ref={(nav) => { this.drawer = nav; }} id="drawer" >
 
 					<div class={style.drawerHeader} style={styles.headerPic} >
             

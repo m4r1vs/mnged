@@ -10,6 +10,7 @@ import Settings from './settings';
 import About from './about';
 import Class from './class';
 import Task from './task';
+import Register from './register';
 import SignIn from './signin';
 import Welcome from './welcome';
 import ErrorPage from './errorpage';
@@ -45,7 +46,8 @@ export default class Routes extends Component {
 
 			return (
 				<Router onChange={this.handleRoute}>
-					<Welcome path="/" />
+					<Welcome path="/" stores={this.props.stores} />
+					<Register path="/register/"  />
 					<SignIn path="/signin/" stores={this.props.stores} />
 					<About path="/about/" />
 					<ErrorPage default />

@@ -35,9 +35,10 @@ class Schedule {
 
 		if (this.menu && ms) {
 			this.menu.forEach((obj, i) => {
-				const date = new Date(obj.date);
+				const date = obj.date;
 				const now = new Date(ms);
-				if (date.getMonth() === now.getMonth() && date.getDate() + 1 === now.getDate()) result = obj;
+				const nowString = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + ((now.getDate() < 10) ? '0' + now.getDate() : now.getDate() );
+				if (date === nowString) result = obj;
 			});
 		}
 

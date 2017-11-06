@@ -1,6 +1,3 @@
-const firebase = require('firebase');
-require('firebase/firestore');
-
 const config = {
 	apiKey: 'AIzaSyCzGTQ9yO4va-NOlNpqI4VRrzURQu0PQdE',
 	authDomain: 'managed-me.firebaseapp.com',
@@ -10,14 +7,15 @@ const config = {
 	messagingSenderId: '303837844694'
 };
 
-firebase.initializeApp(config);
+const isBrowser = (typeof window !== 'undefined');
 
-export default firebase;
+if (isBrowser) firebase.initializeApp(config);
 
-export const firestore = firebase.firestore();
-export const auth = firebase.auth();
-export const messaging = (typeof window !== 'undefined') ? firebase.messaging() : null;
+export const firestore = (isBrowser) && firebase.firestore();
+export const auth = (isBrowser) && firebase.auth();
+export const messaging = (isBrowser) && firebase.messaging();
 
-export const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-export const githubAuthProvider = new firebase.auth.GithubAuthProvider();
-export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+export const facebookAuthProvider = (isBrowser) && new firebase.auth.FacebookAuthProvider();
+export const githubAuthProvider = (isBrowser) && new firebase.auth.GithubAuthProvider();
+export const twitterAuthProvider = (isBrowser) && new firebase.auth.TwitterAuthProvider();
+export const googleAuthProvider = (isBrowser) && new firebase.auth.GoogleAuthProvider();

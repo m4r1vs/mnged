@@ -1,6 +1,6 @@
 @import '../../style/vars.scss';
 
-nav {
+.nav {
   background: #fff;
   width: 95%; // Fallback
   width: calc(100vw - 56px);
@@ -178,7 +178,7 @@ div.drawerBack {
 }
 
 body[class=nightmode] {
-  nav {
+  .nav {
     background: #303030 !important;
 
     a.active div {
