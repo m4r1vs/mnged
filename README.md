@@ -2,7 +2,9 @@
   ⚠ Attention: MNGED is not finished yet and there're many bugs present! ⚠
 </div>
 
-<h1 align="center">MNGED</h1>
+<h1 align="center">
+  <img title="MNGED logo" alt="MANAGED Logo" src="https://raw.githubusercontent.com/m4r1vs/mnged/master/src/assets/imgs/mnged_logo_small.png">
+</h1>
 
 <div align="center">
   <strong>MNGED is a PWA which helps you to keep track of your daily study life 🎓</strong>
