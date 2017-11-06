@@ -4,10 +4,10 @@
 <div align="center">
   ⚠ Attention: MNGED is not finished yet and there're many bugs present! ⚠<br />
   <strong>MNGED is a PWA which helps you to keep track of your daily study life 🎓</strong>
-  [![Dependencies](https://david-dm.org/m4r1vs/mnged.svg?style=flat)](https://david-dm.org/m4r1vs/mnged)
-[![PWA Score](https://rawgit.com/m4r1vs/mnged/master/lighthouse_progressive_web_app.svg)](https://github.com/m4r1vs/mnged)
-  [![Accessibility Score](https://rawgit.com/m4r1vs/mnged/master/lighthouse_accessibility.svg)](https://github.com/m4r1vs/mnged)
-[![Performance Score](https://rawgit.com/m4r1vs/mnged/master/lighthouse_performance.svg)](https://github.com/m4r1vs/mnged)
+  <img src="https://david-dm.org/m4r1vs/mnged.svg?style=flat">
+  <img src="https://rawgit.com/m4r1vs/mnged/master/lighthouse_progressive_web_app.svg">
+  <img src="https://rawgit.com/m4r1vs/mnged/master/lighthouse_accessibility.svg">
+  <img src="https://rawgit.com/m4r1vs/mnged/master/lighthouse_performance.svg">
 </div>
 <br />
 <div align="center">
