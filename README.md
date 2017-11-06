@@ -2,17 +2,17 @@
   <img title="MNGED logo" alt="MANAGED Logo" src="https://raw.githubusercontent.com/m4r1vs/mnged/master/src/assets/imgs/mnged_logo_small.png">
 </h1>
 <div align="center">
-  <img src="https://david-dm.org/m4r1vs/mnged.svg?style=flat">
-  <img src="https://rawgit.com/m4r1vs/mnged/master/lighthouse_progressive_web_app.svg">
-  <img src="https://rawgit.com/m4r1vs/mnged/master/lighthouse_accessibility.svg">
-  <img src="https://rawgit.com/m4r1vs/mnged/master/lighthouse_performance.svg"><br />
   ⚠ Attention: MNGED is not finished yet and there're many bugs present! ⚠<br />
   <strong>MNGED is a PWA which helps you to keep track of your daily study life 🎓</strong>
 </div>
-<br />
 <div align="center">
-  <sub>&lt;coded/&gt; with ❤︎ and ☕ by <a href="https://github.com/m4r1vs">Marius Niveri</a>
+  <sub>&lt;coded/&gt; with ❤︎ and ☕ by <a href="https://github.com/m4r1vs">Marius Niveri</a><br />
+  <img src="https://david-dm.org/m4r1vs/mnged.svg?style=flat">
+  <img src="https://raw.githubusercontent.com/m4r1vs/mnged/master/src/assets/lighthouse/lighthouse_progressive_web_app.svg">
+  <img src="https://raw.githubusercontent.com/m4r1vs/mnged/master/src/assets/lighthouse/lighthouse_accessibility.svg">
+  <img src="https://raw.githubusercontent.com/m4r1vs/mnged/master/src/assets/lighthouse/lighthouse_performance.svg">
 </div>
+<br />
 <br />
 
 ## Getting started 🚀
