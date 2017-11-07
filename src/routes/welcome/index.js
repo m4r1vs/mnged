@@ -33,21 +33,46 @@ export default class Welcome extends Component {
 		});
 	}
 
+	signInWithEmail(e) {
+
+		e.preventDefault();
+
+		const email = this.emailInputElem.value;
+		const password = this.pwInputElem.value;
+
+		auth.signInWithEmailAndPassword(email, password).catch((error) => {
+
+			this.setState({ emailIncomplete: true, pwIncomplete: true });
+			const errorMessage = error.message;
+			this.props.stores.uiStore.showSnackbar(
+				'Error during sign in: ' + errorMessage,
+				null,
+				10000
+			);
+		});
+	}
+
+	inputFocused() {
+		this.setState({ emailIncomplete: false, pwIncomplete: false });
+	}
+
 	constructor() {
 		super();
 		this.state = {
 			emailIncomplete: false,
 			pwIncomplete: false
 		};
+		this.emailInputElem = null;
+		this.pwInputElem = null;
 	}
 
 	render() {
 		return (
 			<section class={style.welcome}>
 				<h1>MNGED</h1>
-				<form>
-					<TextInput incomplete={this.state.emailIncomplete} color="rgba(255,255,255,.87)" name="E-Mail" inputRef={(input) => this.emailInput = input} required />
-					<TextInput inputType="password" incomplete={this.state.pwIncomplete} color="rgba(255,255,255,.87)" name="Password" inputRef={(input) => this.pwInput = input} required />
+				<form onSubmit={this.signInWithEmail.bind(this)}>
+					<TextInput incomplete={this.state.emailIncomplete} color="rgba(255,255,255,.87)" name="E-Mail" inputOnFocus={this.inputFocused.bind(this)} inputRef={el => this.emailInputElem = el} required />
+					<TextInput inputType="password" incomplete={this.state.pwIncomplete} color="rgba(255,255,255,.87)" name="Password" inputOnFocus={this.inputFocused.bind(this)} inputRef={el => this.pwInputElem = el} required />
 					<SubmitButton name="Sign In" style={{
 						width: '100%',
 						maxWidth: '100%',

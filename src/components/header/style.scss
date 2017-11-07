@@ -94,10 +94,11 @@
 		position: absolute;
 		margin: 3px auto;
 		cursor: pointer;
-		transition: 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
 
 		@media (min-width: 1025px) {
-			display: none !important;
+			opacity: 0;
+			margin-left: 8px !important;
 		}
 
 		span {
@@ -124,6 +125,10 @@
 
 		&[id=navbtn-arrow] {
 			transform: rotate(180deg) !important;
+
+			@media (min-width: 1025px) {
+				opacity: 1 !important;
+			}
 			
 			span {
 
@@ -156,7 +161,7 @@
 
 		@media (min-width: 1025px) {
 			padding: 0 !important;
-			margin: 0 0 0 8px;
+			margin: 0 0 0 59px;
 		}
 	}
 }

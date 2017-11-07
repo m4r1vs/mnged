@@ -89,10 +89,12 @@ export default class ClassesStore {
 		if (this.schedule) schedule = this.schedule.getEntryByDate;
 
 		let notes = 'No data provided';
+		if (new Date(ms).getDay() == 0 || new Date(ms).getDay() == 6) notes = 'Happy Weekend :)';
 		if (schedule && this.classes.length >= 9) {
 			notes = schedule.notes;
 			if (/^day 1/.test(notes.toLowerCase())) day = (new Date(ms).getDay() === 3) ? 3 : 1;
-			if (/^day 2/.test(notes.toLowerCase())) day = (new Date(ms).getDay() === 3) ? 4 : 2;
+			else if (/^day 2/.test(notes.toLowerCase())) day = (new Date(ms).getDay() === 3) ? 4 : 2;
+			else day = 1;
 		}
 
 		this.day = day;
@@ -114,10 +116,13 @@ export default class ClassesStore {
 		if (this.schedule) schedule = this.schedule.getEntryByDate;
 
 		let notes = 'No data provided';
+		const dayNow = new Date(this.schedule.selectedTime).getDay();
+		if (dayNow === 0 || dayNow === 6) notes = 'Happy Weekend :)';
 		if (schedule && this.classes.length >= 9) {
 			notes = schedule.notes;
-			if (/^day 1/.test(notes.toLowerCase())) day = (new Date(this.schedule.selectedTime).getDay() === 3) ? 3 : 1;
-			if (/^day 2/.test(notes.toLowerCase())) day = (new Date(this.schedule.selectedTime).getDay() === 3) ? 4 : 2;
+			if (/^day 1/.test(notes.toLowerCase())) day = (dayNow === 3) ? 3 : 1;
+			else if (/^day 2/.test(notes.toLowerCase())) day = (dayNow === 3) ? 4 : 2;
+			else day = 1;
 		}
 
 		if (day === 1) return { notes, classes: [this.classes[0], this.classes[8], this.classes[1], this.classes[2], this.classes[3]] };

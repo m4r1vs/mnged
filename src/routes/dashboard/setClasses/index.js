@@ -95,9 +95,9 @@ export default class SetClass extends Component {
 		return (
 			<div class={style.inputGroup}>
 				<h4 class={style.title}>{item[1]}:</h4>
-				{item[0] !== 'flex' && <TextInput displayName="Class" name={item[0] + '-class'} eventHandler={this.handleChange.bind(this)} />}
-				<TextInput displayName="Room" name={item[0] + '-room'} eventHandler={this.handleChange.bind(this)} />
-				<TextInput displayName="Teacher" name={item[0] + '-teacher'} eventHandler={this.handleChange.bind(this)} />
+				{item[0] !== 'flex' && <TextInput displayName="Class" name={item[0] + '-class'} eventHandler={this.handleChange.bind(this)} required />}
+				<TextInput displayName="Room" name={item[0] + '-room'} eventHandler={this.handleChange.bind(this)} required />
+				<TextInput displayName="Teacher" name={item[0] + '-teacher'} eventHandler={this.handleChange.bind(this)} required />
 				<div class={style.input}>
 					<center>
 						{colors.map((color, i) => this.renderColorInput(color, item))}
