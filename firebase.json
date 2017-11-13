@@ -24,10 +24,6 @@
             "value": "public, max-age=3600, no-cache"
           },
           {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
-          },
-          {
             "key": "Access-Control-Max-Age",
             "value": "600"
           }
@@ -56,7 +52,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style"
           }
         ]
       },
@@ -65,7 +61,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style, </route-index.chunk.fbc2f.js>; rel=preload; as=script"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style, </route-index.chunk.cde66.js>; rel=preload; as=script"
           }
         ]
       },
@@ -74,7 +70,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style, </route-dashboard.chunk.71145.js>; rel=preload; as=script"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style, </route-dashboard.chunk.3c5d6.js>; rel=preload; as=script"
           }
         ]
       },
@@ -83,7 +79,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style, </route-tasks.chunk.9554c.js>; rel=preload; as=script"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style, </route-tasks.chunk.9554c.js>; rel=preload; as=script"
           }
         ]
       },
@@ -92,7 +88,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style, </route-welcome.chunk.2d79f.js>; rel=preload; as=script"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style, </route-welcome.chunk.b07ab.js>; rel=preload; as=script"
           }
         ]
       },
@@ -101,7 +97,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style, </route-task.chunk.41ec9.js>; rel=preload; as=script"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style, </route-task.chunk.41ec9.js>; rel=preload; as=script"
           }
         ]
       },
@@ -110,7 +106,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style, </route-signin.chunk.01e5c.js>; rel=preload; as=script"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style, </route-signin.chunk.01e5c.js>; rel=preload; as=script"
           }
         ]
       },
@@ -119,7 +115,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style, </route-settings.chunk.57a47.js>; rel=preload; as=script"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style, </route-settings.chunk.57a47.js>; rel=preload; as=script"
           }
         ]
       },
@@ -128,7 +124,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style, </route-register.chunk.a9907.js>; rel=preload; as=script"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style, </route-register.chunk.276a1.js>; rel=preload; as=script"
           }
         ]
       },
@@ -137,7 +133,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style, </route-errorpage.chunk.7e33b.js>; rel=preload; as=script"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style, </route-errorpage.chunk.7e33b.js>; rel=preload; as=script"
           }
         ]
       },
@@ -146,7 +142,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style, </route-class.chunk.0b587.js>; rel=preload; as=script"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style, </route-class.chunk.0b587.js>; rel=preload; as=script"
           }
         ]
       },
@@ -155,7 +151,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style, </route-cafeteriaMenu.chunk.51025.js>; rel=preload; as=script"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style, </route-cafeteriaMenu.chunk.51025.js>; rel=preload; as=script"
           }
         ]
       },
@@ -164,7 +160,7 @@
         "headers": [
           {
             "key": "Link",
-            "value": "</bundle.d0217.js>; rel=preload; as=script, </style.7a295.css>; rel=preload; as=style, </route-about.chunk.b0fb5.js>; rel=preload; as=script"
+            "value": "</bundle.4e422.js>; rel=preload; as=script, </style.b42f8.css>; rel=preload; as=style, </route-about.chunk.b0fb5.js>; rel=preload; as=script"
           }
         ]
       }

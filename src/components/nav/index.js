@@ -3,6 +3,8 @@ import { Link } from 'preact-router/match';
 import { route } from 'preact-router';
 import { auth } from '../../lib/firebase';
 
+import { DashboardIcon, TasksIcon, ExamsIcon, NotesIcon, CafeteriaIcon, ClassesIcon, SettingsIcon, FeedbackIcon, AboutIcon, LogoutIcon } from './icons';
+
 import { observer } from 'preact-mobx';
 import style from './style';
 
@@ -29,6 +31,13 @@ export default class Nav extends Component {
 
 	componentDidMount() {
 		if (typeof window === 'object') {
+
+			document.querySelectorAll('.applyHoverEffect').forEach((element) => {
+				const hoverColor = element.getAttribute('fill'); // get the fill color
+
+				// set it as a custom property inline
+				if (hoverColor) element.style.setProperty('--hover-color', hoverColor);
+			});
 			
 			const panel = document.getElementById('main_component');
 			const drawer = this.drawer;
@@ -251,13 +260,12 @@ export default class Nav extends Component {
 
 						<div class={style.drawerSubContent} style={{ display: this.state.moreOpened ? 'none' : 'block' }} >
 
-							<Link activeClassName={style.active} href="/" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE871;</i>Dashboard</span></div></Link>
-							<Link activeClassName={style.active} href="/calendar" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE878;</i>Calendar</span></div></Link>
-							<Link activeClassName={style.active} href="/tasks" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE877;</i>Tasks</span></div></Link>
-							<Link activeClassName={style.active} href="/exams" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE3C9;</i>Exams</span></div></Link>
-							<Link activeClassName={style.active} href="/classes" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE54B;</i>Classes</span></div></Link>
-							<Link activeClassName={style.active} href="/notes" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE86E;</i>Notes</span></div></Link>
-							<Link activeClassName={style.active} href="/cafeteria-menu" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE561;</i>Cafeteria Menu</span></div></Link>
+							<Link activeClassName="active" href="/" onClick={this.closeDrawer}><div><span> <DashboardIcon />Dashboard</span></div></Link>
+							<Link activeClassName="active" href="/tasks" onClick={this.closeDrawer}><div><span> <TasksIcon />Tasks</span></div></Link>
+							<Link activeClassName="active" href="/exams" onClick={this.closeDrawer}><div><span> <ExamsIcon />Exams</span></div></Link>
+							<Link activeClassName="active" href="/classes" onClick={this.closeDrawer}><div><span> <ClassesIcon />Classes</span></div></Link>
+							<Link activeClassName="active" href="/notes" onClick={this.closeDrawer}><div><span> <NotesIcon />Notes</span></div></Link>
+							<Link activeClassName="active" href="/cafeteria-menu" onClick={this.closeDrawer}><div><span> <CafeteriaIcon />Cafeteria Menu</span></div></Link>
 
 						</div>
 						
@@ -265,10 +273,10 @@ export default class Nav extends Component {
 
 						<div class={style.drawerSubContent} style={{ display: this.state.moreOpened ? 'block' : 'none' }} >
 
-							<Link activeClassName={style.active} href="/settings" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE8B8;</i>Settings</span></div></Link>
-							<Link activeClassName={style.active} href="/feedback" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE87F;</i>Feedback</span></div></Link>
-							<Link activeClassName={style.active} href="/about" onClick={this.closeDrawer}><div><span> <i className="material-icons">&#xE88F;</i>About</span></div></Link>
-							<Link href="/" onClick={signOut}><div><span> <i className="material-icons">&#xE8AC;</i>Log Out</span></div></Link>
+							<Link activeClassName="active" href="/settings" onClick={this.closeDrawer}><div><span> <SettingsIcon />Settings</span></div></Link>
+							<Link activeClassName="active" href="/feedback" onClick={this.closeDrawer}><div><span> <FeedbackIcon />Feedback</span></div></Link>
+							<Link activeClassName="active" href="/about" onClick={this.closeDrawer}><div><span> <AboutIcon />About</span></div></Link>
+							<Link href="/" onClick={signOut}><div><span> <LogoutIcon />Log Out</span></div></Link>
             
 						</div>
 

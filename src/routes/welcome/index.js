@@ -72,7 +72,9 @@ export default class Welcome extends Component {
 				<h1>MNGED</h1>
 				<form onSubmit={this.signInWithEmail.bind(this)}>
 					<TextInput incomplete={this.state.emailIncomplete} color="rgba(255,255,255,.87)" name="E-Mail" inputOnFocus={this.inputFocused.bind(this)} inputRef={el => this.emailInputElem = el} required />
-					<TextInput inputType="password" incomplete={this.state.pwIncomplete} color="rgba(255,255,255,.87)" name="Password" inputOnFocus={this.inputFocused.bind(this)} inputRef={el => this.pwInputElem = el} required />
+					<TextInput inputType="password" incomplete={this.state.pwIncomplete} color="rgba(255,255,255,.87)" name="Password" inputOnFocus={this.inputFocused.bind(this)} inputRef={el => this.pwInputElem = el}
+						required
+					/>
 					<SubmitButton name="Sign In" style={{
 						width: '100%',
 						maxWidth: '100%',
@@ -93,7 +95,9 @@ export default class Welcome extends Component {
 							</svg>
 						</DefaultButton>
 						<DefaultButton onClick={() => this.signIn(googleAuthProvider)} title="Sign In with Google" extraClass={style.thirdPartyButton} style={{ background: '#d62d20' }}>
-							<svg class={style.googleLogo} xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 24 24" height="24px" width="24px"><path d="M23.85,14.468c0.102,0.546,0.158,1.118,0.158,1.716c0,4.668-3.125,7.988-7.845,7.988c-4.515,0-8.172-3.657-8.172-8.172    s3.657-8.172,8.172-8.172c2.207,0,4.05,0.812,5.465,2.13l-2.304,2.304v-0.005c-0.858-0.817-1.946-1.236-3.161-1.236    c-2.697,0-4.888,2.278-4.888,4.975c0,2.696,2.191,4.98,4.888,4.98c2.446,0,4.111-1.4,4.454-3.32h-4.454v-3.187L23.85,14.468    L23.85,14.468z" /></svg>
+							<svg enable-background="new 0 0 1024 1024" height="24px" id="Layer_1" version="1.1" viewBox="0 0 1024 1024" width="24px"
+								space="preserve" xmlns="http://www.w3.org/2000/svg"
+							><g><path clip-rule="evenodd" d="M858.635,127.453c-49.299,49.546-97.781,98.267-146.936,147.663    c-11.119-6.811-22.859-14.209-34.797-21.273c-46.324-27.406-96.166-43.287-150.209-43.631    c-141.813-0.901-260.878,93.787-296.141,231.114c-44.047,171.536,77.662,347.985,249.249,369.973    c84.666,10.848,163.689-3.427,233.406-55.129c43.611-32.343,77.666-90.102,83.33-138.467c-90.164,0-180.213,0-270.984,0    c0-65.989,0-130.913,0-197.032c4.699-0.388,9.633-1.143,14.568-1.149c147.889-0.2,295.779-0.336,443.668-0.448    c15.037-0.012,17.688,1.946,20.238,19.312c22.609,153.943-8.84,294.913-107.959,416.283    c-76.135,93.228-177.279,147.09-296.195,163.61c-141.08,19.603-271.29-10.724-385.26-98.115    C99.733,832.082,33.317,714.739,16.522,570.923c-26.011-222.73,93.896-437.394,298.999-524.667    C508.525-35.869,689.516-7.785,853.74,123.708C855.578,125.179,857.479,126.569,858.635,127.453z" fill="#fff" /></g></svg>
 						</DefaultButton>
 						<DefaultButton onClick={() => this.signIn(twitterAuthProvider)} title="Sign In with Twitter" extraClass={style.thirdPartyButton} style={{ background: '#1da1f2' }}>
 							<svg rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300.00006 244.18703" height="24px" width="24px" version="1.1"

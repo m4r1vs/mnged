@@ -17,11 +17,14 @@
       outline: none;
     }
 
-    &:focus~label,
-    &:valid~label {
+    &:focus~label, &:valid~label {
       bottom: 26px;
       font-size: 14px;
-      color: $secondary-color-dark;
+      color: var(--secondary-color-dark);
+    }
+
+    &:focus~label.important, &:valid~label.important {
+      color: var(--secondary-color-dark) !important;
     }
 
     &:focus~span.bar:before,
@@ -44,7 +47,7 @@
     position: relative;
     display: block;
     width: 100%;
-    background: $secondary-color-dark;
+    background: var(--secondary-color-dark);
 
     &:before,
     &:after {

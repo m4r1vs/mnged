@@ -115,7 +115,7 @@
         text-decoration: none;
         color: inherit !important;
         
-        &.active div {
+        &[class=active] div {
           color: $primary-color;
           background: #F5F5F5;
 
@@ -181,7 +181,7 @@ body[class=nightmode] {
   .nav {
     background: #303030 !important;
 
-    a.active div {
+    a[class=active] div {
       background: rgba(255, 255, 255, .05) !important;
       color: rgba(255,255,255,.87) !important;
 

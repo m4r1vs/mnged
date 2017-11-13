@@ -86,6 +86,27 @@
         background-color: #fff;
       }
     }
+
+    .btnWrapper {
+      display: inline-block;
+      width: 100%;
+      margin-top: 16px;
+      margin-bottom: 16px;
+
+      button.thirdPartyButton {
+        margin-left: 8px;
+        height: 48px;
+        width: calc(25% - ((8px * 3) / 4));
+        min-width: 0;
+        padding: 0;
+        svg {
+          margin: 12px;
+        }
+        span {
+          line-height: 48px;
+        }
+      }
+    }
   }
 }
 

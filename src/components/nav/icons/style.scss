@@ -1,0 +1,25 @@
+svg.icon {
+  height: 24px;
+  position: relative;
+  top: 6px;
+  margin-right: 30px;
+
+  path[class=applyHoverEffect], circle[class=applyHoverEffect], rect[class=applyHoverEffect] {
+    fill: transparent;
+    transition: fill, .13s;
+  }
+
+  &:hover, &:focus {
+    path[class=applyHoverEffect], circle[class=applyHoverEffect], rect[class=applyHoverEffect] {
+      fill: var(--hover-color);
+    }
+  }
+}
+
+a:hover, a[class=active] {
+  svg.icon {
+    path[class=applyHoverEffect], circle[class=applyHoverEffect], rect[class=applyHoverEffect] {
+      fill: var(--hover-color);
+    }
+  }
+}
