@@ -2,21 +2,25 @@ import { observable, computed, action } from 'mobx';
 
 class Task {
 	@observable id
-	@observable body
-	@observable due
-	@observable subjectRef
 	@observable title
+	@observable attachments
+	@observable due
+	@observable created
+	@observable group
 
 	constructor(id, task) {
 		this.id = id;
-		this.body = task.body;
-		this.due = task.due;
-		this.subjectRef = task.subject;
-		this.title = task.title;
+		this.title = task.title || 'empty task';
+		this.attachments = task.attachments || null;
+		this.due = task.due || null;
+		this.created = task.created || new Date();
+		this.group = task.group || null;
 	}
 
+	/**
+	 * the time left in the task
+	 */
 	@computed get timeLeft() {
-
 		const millisToTime = (millisec) => {
 			if (millisec < 0) return 'overdue';
 			let seconds = (millisec / 1000).toFixed(0);
@@ -36,39 +40,42 @@ class Task {
 	}
 }
 
+
 export default class TaskStore {
 	@observable tasks = []
-	@observable displayedTask = null
 
-	@computed get taskList() {
+	/**
+	 * get the tasks ordered by date
+	 */
+	@computed get listTasksByDate() {
 		const taskList = this.tasks.sort((a, b) => a.due.getTime() - b.due.getTime());
 		return taskList;
 	}
-
-	@action setDisplayedTask(id) {
-		this.displayedTask = id;
-	}
-
-	@computed get getDisplayedTask() {
-		let returnTask = null;
-		if (this.displayedTask) {
-			this.tasks.forEach((task) => {
-				if (task.id === this.displayedTask) returnTask = task;
-			});
-		}
-		return returnTask;
-	}
-        
+	
+	/**
+	 * append the taskstore with a new task
+	 * @param {string} id the id of the new task
+	 * @param {object} task the task
+	 */
 	@action addTask(id, task) {
 		this.tasks.push(new Task(id, task));
 	}
-        
+	
+	/**
+	 * edit a task in the taskstore
+	 * @param {string} id the id of the new task
+	 * @param {object} taskNew the new task
+	 */
 	@action editTask(id, taskNew) {
 		for (let i = 0; i < this.tasks.length; i++) {
 			if (this.tasks[i].id === id) this.tasks[i] = new Task(id, taskNew);
 		}
 	}
 
+	/**
+	 * remove a task from the taskstore
+	 * @param {string} id the id of the task to be removed
+	 */
 	@action removeTask(id) {
 		for (let i = 0; i < this.tasks.length; i++) {
 			if (this.tasks[i].id === id) this.tasks.splice(i, 1);

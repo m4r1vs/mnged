@@ -15,6 +15,11 @@ html, body {
 	touch-action: pan-y;
 }
 
+#main_component {
+	padding-top: 56px;
+	min-height: calc(100vh - 56px);
+}
+
 * {
 	box-sizing: border-box;
 }

@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 
 class User {
 	@observable name
@@ -7,18 +7,23 @@ class User {
 	@observable headerURL
 
 	constructor(user) {
-		this.name = user.displayName;
-		this.email = user.email;
-		this.photoURL = user.photoURL;
-		this.headerURL = user.headerURL;
+		this.name = user.displayName || 'Unknown';
+		this.email = user.email || 'Unknown';
+		this.uid = user.uid || null;
+		this.photoURL = user.photoURL || null;
+		this.headerURL = user.headerURL || null;
 	}
 }
 
 export default class UserStore {
 	@observable user = {}
-    
-	setUser(user, loggedIn) {
+	
+	/**
+	 * sets up representation of user in mobx
+	 * @param {object} user user object
+	 */
+	@action setUser(user) {
 		if (user) this.user = new User(user);
-		this.user = { ...this.user, loggedIn };
+		else this.user = null;
 	}
 }

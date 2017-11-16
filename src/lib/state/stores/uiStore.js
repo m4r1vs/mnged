@@ -17,37 +17,61 @@ class SubPage {
 export default class UiStore {
 	@observable notification = null
 	@observable error = null
-	@observable appState = null
-	@observable newUser = false
-	@observable currentTime = new Date()
+	@observable appLoaded = false
+	@observable userLoggedIn = false
 	@observable subPage = false
-	@observable jobQueue = 'init'
-	@observable dayNavOpened = false
-  
-	@action initUi(user) {
-		// setInterval(() => this.currentTime = new Date(), 30000);
-		this.appState = {
-			userLoggedIn: !!user,
-			appLoaded: true
-		};
+	@observable wasFirestoreLoaded = false
+	@observable appMode = null
+
+	/**
+	 * set app loaded to true
+	 */
+	@action appIsLoaded() {
+		this.appLoaded = true;
 	}
 
+	/**
+	 * Set the mode of the app
+	 * @param {string} mode app or landing
+	 */
+	@action setAppMode(mode) {
+		switch (mode) {
+			case 'app':
+				this.appMode = 'app';
+				break;
+			case 'landing':
+				this.appMode = 'landing';
+				break;
+			default:
+				this.throwError('tried-to-assign-unknown-appmode');
+		}
+	}
+
+	/**
+	 * Throw a fatal error which causes the whole UI to freeze and display the error. For non-fatal error use snackbar
+	 * @param {string} code an errorcode looking like following: 'firestore-error-creating-task'
+	 * @param {string} [info] further information to display with the error
+ 	*/
 	@action throwError(code, info) {
-		if (typeof info === 'string') this.error = info + ' (Errorcode ' + code + ')';
-		else this.error = 'Something went wrong. Error ' + code + '. Please look up the code under https://github.com/m4r1vs/mnged/errorcodes.md';
+		if (info) this.error = info + ' (Error: ' + code + ')';
+		else this.error = 'Something went wrong. Error: ' + code + '. Please consider contacting us under feedback or via Twitter @MariusNiveri';
 		console.error(this.error);
 	}
 
-	@action increaseJobs() {
-		if (isNaN(this.jobQueue)) this.jobQueue = 1;
-		else this.jobQueue++;
+	/**
+	 * Set Firestore loaded to true, so offline persistance doesn't get activated twice
+	 */
+	@action firestoreLoaded() {
+		this.wasFirestoreLoaded = true;
 	}
 
-	@action decreaseJobs() {
-		if (isNaN(this.jobQueue)) this.jobQueue = 0;
-		else this.jobQueue--;
-	}
-
+	/**
+	 * Show a snackbar
+	 * @param {string} text A text to display in the snackbar
+	 * @param {string} [actionText] text of button
+	 * @param {number} time how many ms should the snackbar be displayed
+	 * @param {function} [action] a function to get executed when button clicked
+	 */
 	@action showSnackbar(text, actionText, time, action) {
 		this.notification && this.notification.timeout && clearTimeout(this.notification.timeout);
 		if (this.notification) {
@@ -74,6 +98,13 @@ export default class UiStore {
 		}
 	}
 
+	/**
+	 * Transition the header to a sub-page mode
+	 * @param {string} details.headerTitle Title of page displayed in header
+	 * @param {string} details.headerColor Color of header
+	 * @param {function} details.headerAction Gets executed when clicked on action
+	 * @param {string} details.headerActionIcon icon from MD-icons to show at top right
+	 */
 	@action setSubPage(details) {
 		if (details) {
 			this.subPage = new SubPage(details);
@@ -86,7 +117,11 @@ export default class UiStore {
 		}
 	}
 
-	@action toggleDayNav() {
-		this.dayNavOpened = !this.dayNavOpened;
+	/**
+	 * Function to set user state
+	 * @param {boolean} user if user is logged in or not
+	 */
+	@action setUserState(user) {
+		this.userLoggedIn = user;
 	}
 }

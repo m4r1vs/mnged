@@ -1,128 +1,94 @@
 import { firestore } from '../firebase';
 
+const initFirestore = uiStore => {
+
+	if (uiStore.wasFirestoreLoaded) return false;
+
+	// FireStore wasn't loaded before:
+	firestore.enablePersistence()
+		.then(() => {
+			console.log('Offline usage of database is now activated!');
+			uiStore.firestoreLoaded();
+		})
+		.catch((err) => {
+			if (err.code === 'failed-precondition') {
+				uiStore.showSnackbar(
+					'Wasn\'t able to enable offline database. Maybe you have multible tabs of MNGED opened?',
+					'OKAY',
+					10000
+				);
+			}
+			else if (err.code === 'unimplemented') {
+				uiStore.showSnackbar(
+					'Your browser doesn\'t support offline databases. To enjoy the full experience, try updating your browser or installing another one!',
+					'OKAY',
+					10000
+				);
+			}
+		});
+};
+
 const initializeState = (stores, user) => {
 
+	const { uiStore, taskStore, userStore } = stores;
+
+	// enable offline usage for database
+	initFirestore(uiStore);
+
+	// set user in mobx:
+	userStore.setUser(user);
+
+	// only perform when user logged in
 	if (user) {
+
+		// update uiStore so it knows user is logged in
+		uiStore.setUserState(true);
+
+		// set appmode to app to show header etc..
+		uiStore.setAppMode('app');
 		
-		firestore.enablePersistence()
-			.then(() => {
-				console.log('Offline usage of database is now activated!');
-			})
-			.catch((err) => {
-				if (err.code === 'failed-precondition') {
-					stores.uiStore.showSnackbar(
-						'Wasn\'t able to enable offline database. Maybe you have multible tabs of MNGED opened?',
-						'OKAY',
-						10000
-					);
-				}
-				else if (err.code === 'unimplemented') {
-					stores.uiStore.showSnackbar(
-						'Your browser doesn\'t support offline databases. To enjoy the full experience, try another one',
-						'OKAY',
-						10000
-					);
-				}
-			});
-			
+		// listen for changes in tasks
 		firestore
-			.collection('users')
+			.collection('user-data')
 			.doc(user.uid)
-			.collection('classes')
-			.doc('block_a')
-			.get()
-			.then((doc) => {
-				if (!doc.exists) stores.uiStore.newUser = true;
+			.collection('tasks')
+			.onSnapshot(snapshot => {
+				snapshot.docChanges.forEach(docChanges => {
+					switch (docChanges.type) {
+						case 'added':
+							taskStore.addTask(docChanges.doc.id, docChanges.doc.data());
+							break;
+						case 'modified':
+							taskStore.editTask(docChanges.doc.id, docChanges.doc.data());
+							break;
+						case 'removed':
+							taskStore.removeTask(docChanges.doc.id);
+							break;
+						default:
+							uiStore.throwError('firestore-unexpected-change-type');
+					}
+				});
 			});
-		
-		const getCachedSchedule = () => {
-			if (typeof localStorage === 'undefined') return false;
-			stores.uiStore.increaseJobs();
-			if (localStorage.getItem('menu')) {
-				stores.classesStore.initSchedule(JSON.parse(localStorage.getItem('menu')));
-			}
-			stores.uiStore.decreaseJobs();
-		};
-		
-		const fetchSchedule = () => {
-			fetch('https://maniyt.de/api/caf-menu/get-menu')
-				.then((res) => res.json())
-				.then((res) => {
-					stores.classesStore.initSchedule(res.menu);
-					localStorage.setItem('menu', JSON.stringify(res.menu));
-					if (!stores.classesStore.schedule) stores.uiStore.decreaseJobs();
-				})
-				.catch((err) => {
-					console.log(err);
-					stores.uiStore.showSnackbar(
-						'Wasn\'t able to connect to https://maniyt.de/api/caf-menu/get-menu for time info!',
-						'RETRY',
-						10000,
-						() => fetchSchedule()
-					);
-					if (!stores.classesStore.schedule) stores.uiStore.decreaseJobs();
-				});
-		};
-
-		getCachedSchedule();
-		fetchSchedule();
-		
-		// firestore
-		// 	.collection('users')
-		// 	.doc(user.uid)
-		// 	.onSnapshot((doc) => {
-		// 		stores.uiStore.initUi(true);
-		// 	});
-		
-		if (!stores.uiStore.newUser) {
-
-			firestore
-				.collection('users')
-				.doc(user.uid)
-				.collection('classes')
-				.onSnapshot((snapshot) => {
-					snapshot.docChanges.forEach((docChanges) => {
-						switch (docChanges.type) {
-							case 'added':
-								stores.classesStore.addClass(docChanges.doc.id, docChanges.doc.data());
-								break;
-							case 'modified':
-								console.log(docChanges.doc.data());
-								stores.classesStore.editClass(docChanges.doc.id, docChanges.doc.data());
-								console.log(stores.classesStore);
-								break;
-							case 'removed':
-								stores.uiStore.throwError('#001');
-								break;
-							default:
-								stores.uiStore.throwError('#002');
-						}
-					});
-				});
-				
-			firestore
-				.collection('users')
-				.doc(user.uid)
-				.collection('tasks')
-				.onSnapshot((snapshot) => {
-					snapshot.docChanges.forEach((docChanges) => {
-						switch (docChanges.type) {
-							case 'added':
-								stores.taskStore.addTask(docChanges.doc.id, docChanges.doc.data());
-								break;
-							case 'modified':
-								stores.taskStore.editTask(docChanges.doc.id, docChanges.doc.data());
-								break;
-							case 'removed':
-								stores.taskStore.removeTask(docChanges.doc.id);
-								break;
-							default:
-								stores.uiStore.throwError('#002');
-						}
-					});
-				});
-		}
 	}
+
+	// user not logged in now, but someone was logged in before
+	else if (uiStore.userLoggedIn) {
+
+		// set appmode to app to hide header etc..
+		uiStore.setAppMode('landing');
+
+		// reset all database-related stores
+		stores.reset();
+
+		// make sure uiStore knows that user not logged in and app updated
+		uiStore.setUserState(false);
+	}
+
+	// set appmode to app to hide header etc..
+	else uiStore.setAppMode('landing');
+
+	// init UI
+	uiStore.appIsLoaded();
 };
 
 export default initializeState;
