@@ -1,0 +1,131 @@
+div.wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.taskitem {
+  z-index: 1;
+  padding: 8px 16px;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-left: 42px;
+  transition: transform .13s ease-in-out;
+
+  @media (max-width: 600px) {
+    border-radius: 0;
+  }
+
+  div.colorIndicator {
+    position: absolute;
+    width: 5px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+
+    @media (max-width: 600px) {
+      border-radius: 0;
+    }
+  }
+
+  h2 {
+    user-select: all;
+    color: var(--primary-text-color);
+    padding: 0;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  h3 {
+    user-select: none;
+    color: var(--secondary-text-color);
+    padding: 0;
+    font-weight: 500;
+    font-size: 16px;
+
+    &.time {
+
+    }
+
+    &.attachments {
+
+    }
+  }
+
+  &.done {
+    text-decoration: line-through;
+    background: var(--inactive-color);
+
+    h2, h3 {
+      opacity: .87;
+    }
+
+    h3 {
+      display: none;
+    }
+  }
+}
+
+div.hoverRecievers {
+  z-index: 2;
+  user-select: none;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  bottom: 0;
+  cursor: pointer;
+
+  &.leftReciever {
+    left: 0;
+    right: 85%;
+
+    &:hover ~ .taskitem {
+      transform: translateX(72px);
+    }
+  }
+  
+  &.rightReciever {
+    right: 0;
+    left: 85%;
+
+    &:hover ~ .taskitem {
+      transform: translateX(-72px);
+    }
+  }
+}
+
+div.icons {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  
+  @media (max-width: 600px) {
+    background : linear-gradient(to right, rgba(16, 157, 89, 1) 0%, rgba(16, 157, 89, 1) 50%, rgba(237, 163, 2, 1) 50%, rgba(237, 163, 2, 1) 100%);
+  }
+
+  i {
+    position: absolute;
+    font-size: 32px;
+    top: calc(50% - (32px / 2));
+    color: var(--secondary-text-color);
+    
+    @media (max-width: 600px) {
+      color: rgba(255,255,255,.87);
+    }
+    
+    &:nth-child(1) {
+      left: calc((72px / 2) - (32px / 2));
+    }
+
+    &:nth-child(2) {
+      right: calc((72px / 2) - (32px / 2));
+    }
+  }
+}

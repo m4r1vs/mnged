@@ -36,6 +36,11 @@ $button-box-shadow-hovered: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
   --secondary-color-light: $secondary-color-light;
   --secondary-color-dark: $secondary-color-dark;
 
+  --inactive-color: rgba(0,0,0,.07);
+
+  --primary-text-color: rgba(0,0,0,.87);
+  --secondary-text-color: rgba(0,0,0,.57);
+
   --card-box-shadow: $card-box-shadow;
   --button-box-shadow: $button-box-shadow;
   --button-box-shadow-hovered: $button-box-shadow-hovered;

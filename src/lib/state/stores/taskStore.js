@@ -7,6 +7,7 @@ class Task {
 	@observable due
 	@observable created
 	@observable group
+	@observable done
 
 	constructor(id, task) {
 		this.id = id;
@@ -15,6 +16,22 @@ class Task {
 		this.due = task.due || null;
 		this.created = task.created || new Date();
 		this.group = task.group || null;
+		this.done = task.done || false;
+	}
+
+	/**
+	 * Return a color of group for task
+	 */
+	@computed get colorByGroup() {
+		// TODO: make it real
+		return '#f0f';
+	}
+
+	/**
+	 * Returns number of attachments, pretty self-explaning, eh?
+	 */
+	@computed get numberOfAttachments() {
+		return this.attachments && this.attachments.length;
 	}
 
 	/**

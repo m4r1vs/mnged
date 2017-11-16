@@ -3,6 +3,9 @@ import { observer } from 'preact-mobx';
 
 import style from './style';
 
+import TaskItem from './taskItem';
+import FloatingActionButton from '../../components/floatingActionButton';
+
 @observer
 export default class Home extends Component {
 
@@ -14,9 +17,9 @@ export default class Home extends Component {
 
 		return (
 			<div class={style.home} >
-        Hello {stores.userStore.user && stores.userStore.user.uid}!
+				<FloatingActionButton onClick={() => route('/tasks/add', false)}>&#xE145;</FloatingActionButton>
 				{stores.taskStore.listTasksByDate.map(task => (
-					<div key={task.id}>{task.title}</div>
+					<TaskItem key={task.id} task={task} />
 				))}
 			</div>
 		);
