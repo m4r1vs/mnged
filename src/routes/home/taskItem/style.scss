@@ -1,7 +1,16 @@
+@keyframes fadeIn {
+  from {height: 0px}
+  to {height: 92px}
+}
+
 div.wrapper {
   position: relative;
   width: 100%;
   margin-top: 8px;
+  transform: translateX(0);
+  height: 92px;
+  animation: fadeIn .13s forwards;
+  transition: transform .13s ease-out .07s, height .13s .22s;
 }
 
 .taskitem {
@@ -84,7 +93,7 @@ div.hoverRecievers {
     right: 85%;
 
     &:hover ~ .taskitem {
-      transform: translateX(72px);
+      transform: translateX(72px) !important;
     }
   }
   
@@ -93,7 +102,7 @@ div.hoverRecievers {
     left: 85%;
 
     &:hover ~ .taskitem {
-      transform: translateX(-72px);
+      transform: translateX(-72px) !important;
     }
   }
 }
