@@ -73,7 +73,7 @@ export default class UiStore {
 	 * @param {function} [action] a function to get executed when button clicked
 	 */
 	@action showSnackbar(text, actionText, time, action) {
-		this.notification && this.notification.timeout && clearTimeout(this.notification.timeout);
+		if (this.notification && this.notification.timeout) clearTimeout(this.notification.timeout);
 		if (this.notification) {
 			this.notification = null;
 			this.notification = {

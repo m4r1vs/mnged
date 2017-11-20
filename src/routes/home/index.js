@@ -31,6 +31,7 @@ export default class Home extends Component {
 		return (
 			<div class={style.home} >
 				<FloatingActionButton onClick={() => this.addTask()}>&#xE145;</FloatingActionButton>
+				<h2 class={style.title}>Up Next</h2>
 				{stores.taskStore.listTasksByDate.map(task => (
 					<TaskItem key={task.id} task={task} uiStore={stores.uiStore} />
 				))}

@@ -6,6 +6,13 @@ import style from './style';
 @observer
 export default class SnackBar extends Component {
 
+	componentDidUpdate() {
+		if (document.getElementById('floatingActionButton')) {
+			if (this.props.stores.uiStore.notification) document.getElementById('floatingActionButton').style.bottom = (this.snackbarElement.clientHeight + 22) + 'px';
+			else document.getElementById('floatingActionButton').style.bottom = '22px';
+		}
+	}
+
 	render() {
 
 		const { notification } = this.props.stores.uiStore;
@@ -16,7 +23,7 @@ export default class SnackBar extends Component {
 		};
 
 		return (
-			<div style={{ transform: (notification && notification.text) ? 'translateY(0%)' : 'translateY(200%)' }} class={style.snackbar}>
+			<div ref={el => this.snackbarElement = el} style={{ transform: (notification && notification.text) ? 'translateY(0%)' : 'translateY(200%)' }} class={style.snackbar}>
 				<span>{(notification && notification.text) ? notification.text : null}</span>
 				<button onClick={clickAction}>
 					{(notification && notification.actionText) ? notification.actionText : null}

@@ -63,9 +63,19 @@ class Task {
 		return (this.attachments.length > 0) && this.attachments.length;
 	}
 
+	/**
+	 * Returns a list of attachments ordered by created date
+	 */
 	@computed get listOfAttachments() {
-		const attachmentList = this.attachments.sort((a, b) => a.created.getTime() - b.created.getTime());
+		const attachmentList = this.attachments.sort((a, b) => b.created.getTime() - a.created.getTime());
 		return attachmentList;
+	}
+
+	/**
+	 * Returns the last two attachments
+	 */
+	@computed get firstTwoAttachments() {
+		return this.listOfAttachments.slice(0, 2);
 	}
 
 	/**
@@ -88,6 +98,44 @@ class Task {
 		const dueDate = this.due;
 		const newDate = new Date(dueDate - now);
 		return millisToTime(newDate);
+	}
+
+	/**
+	 * Returns the time left as a readable date
+	 */
+	@computed get timeReadable() {
+		if (!this.due) return null;
+		const dueDate = this.due;
+		const now = new Date();
+
+		const months = [
+			'Jan',
+			'Feb',
+			'Mar',
+			'Apr',
+			'May',
+			'Jun',
+			'Jul',
+			'Aug',
+			'Sep',
+			'Okt',
+			'Nov',
+			'Dec'
+		];
+		
+		const month = months[dueDate.getMonth()];
+		const day = dueDate.getDate();
+		const hours = dueDate.getHours();
+		const minutes = dueDate.getMinutes();
+
+		let date = month + ' ' + day;
+		if (now.getDate() === day && now.getMonth() === dueDate.getMonth() && now.getFullYear() === dueDate.getFullYear()) date = 'Today';
+		if (now.getDate() === day - 1 && now.getMonth() === dueDate.getMonth() && now.getFullYear() === dueDate.getFullYear()) date = 'Yesterday';
+		if (now.getDate() === day + 1 && now.getMonth() === dueDate.getMonth() && now.getFullYear() === dueDate.getFullYear()) date = 'Tomorrow';
+
+		const time = hours + ':' + minutes;
+
+		return date + ', ' + time;
 	}
 
 	/**

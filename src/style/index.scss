@@ -18,7 +18,8 @@ html, body {
 
 #main_component {
 	padding-top: 56px;
-	min-height: calc(100vh - 56px);
+	padding-bottom: 18px;
+	min-height: calc(100vh - 56px - 18px);
 }
 
 * {

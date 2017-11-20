@@ -5,4 +5,12 @@
   @media (max-width: 600px) {
     max-width: none;
   }
+
+  .title {
+    line-height: 1;
+    font-size: 14px;
+    color: var(--secondary-text-color);
+    padding: 16px 16px 6px 16px;
+    margin: 0;
+  }
 }

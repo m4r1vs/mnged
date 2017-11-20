@@ -43,7 +43,7 @@ export default class TaskItem extends Component {
 					});
 				})
 				.catch(err => {
-					this.wrapperElement.style.transform = 'translatex(0)';
+					this.wrapperElement.style.transform = 'translatex(0) scaley(100%)';
 					this.wrapperElement.style.maxHeight = '256px';
 					this.taskElement.style.transform = 'translatex(0)';
 					this.iconsElement.style.background = 'linear-gradient(to right, rgba(16, 157, 89, 1) 0%, rgba(16, 157, 89, 1) 50%, rgba(237, 163, 2, 1) 50%, rgba(237, 163, 2, 1) 100%)';
@@ -56,6 +56,7 @@ export default class TaskItem extends Component {
 		const element = this.taskElement;
 
 		let startx;
+		let starty;
 		let move = true;
 
 		const toggleTransition = bool => {
@@ -64,19 +65,31 @@ export default class TaskItem extends Component {
 
 		const touchstart = e => {
 			move = true;
-			if (e.path[0].classList.contains(style.attachments) || e.path[1].classList.contains(style.attachments) || e.path[2].classList.contains(style.attachments) || e.path[3].classList.contains(style.attachments)) move = false;
 			toggleTransition(false);
 			let touchobj = e.changedTouches[0];
 			startx = parseInt(touchobj.clientX, 10);
+			starty = parseInt(touchobj.clientY, 10);
 			if (startx <= 25) move = false;
 		};
 
 		const touchmove = e => {
 			if (move) {
 				let touchobj = e.changedTouches[0];
-				let dist = parseInt(touchobj.clientX, 10) - startx;
-				element.style.transform = 'translatex('+dist+'px)';
-				if (this.iconsElement) this.iconsElement.style.background = (dist > 0) ? 'rgba(16, 157, 89, 1)' : 'rgba(237, 163, 2, 1)';
+				const distxRaw = parseInt(touchobj.clientX, 10) - startx;
+				const distyRaw = parseInt(touchobj.clientY, 10) - starty;
+
+				let distx = distxRaw < 0 ? distxRaw * -1 : distxRaw;
+				let disty = distyRaw < 0 ? distyRaw * -1 : distyRaw;
+
+				if (disty > distx) {
+					toggleTransition(true);
+					element.style.transform = 'translatex(0)';
+					move = false;
+				}
+				else {
+					element.style.transform = 'translatex(' + distxRaw + 'px)';
+				}
+				if (this.iconsElement) this.iconsElement.style.background = (distxRaw > 0) ? 'rgba(16, 157, 89, 1)' : 'rgba(237, 163, 2, 1)';
 			}
 		};
 
@@ -117,8 +130,9 @@ export default class TaskItem extends Component {
 			title,
 			done,
 			timeLeft,
+			timeReadable,
+			firstTwoAttachments,
 			numberOfAttachments,
-			attachments,
 			colorByGroup
 		} = task;
 
@@ -136,14 +150,18 @@ export default class TaskItem extends Component {
 					/>
 	
 					<h2>{title}</h2>
-	
-					<h3>{timeLeft}</h3>
 
 					<div class={style.attachments}>
-						{numberOfAttachments && attachments.map(attachment => (
+						{firstTwoAttachments && firstTwoAttachments.map(attachment => (
 							<AttachmentItem key={attachment.id} attachment={attachment} color={colorByGroup} />
 						))}
+						{(numberOfAttachments > 2) && <div class={style.moreAttachmentsIndicator}><h4>+{numberOfAttachments - 2}<br />more</h4></div>}
 					</div>
+
+					<h3 class={(timeLeft === 'overdue') && style.overdue}>
+						<i class="material-icons">&#xE7F4;</i>
+						{' ' + timeReadable}
+					</h3>
 	
 				</div>
 	
