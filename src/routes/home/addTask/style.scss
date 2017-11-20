@@ -1,0 +1,28 @@
+.addTask {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-height: 56px;
+  margin-top: 32px;
+  padding: 8px 16px;
+
+  textarea {
+    display: inline-block;
+    width: 100%;
+    font-family: var(--roboto-font-stack);
+    max-width: 100%;
+    min-height: 26px;
+    height: 26px;
+    min-width: 480px;
+    margin-top: 6px;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--secondary-text-color);
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

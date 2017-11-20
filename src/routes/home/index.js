@@ -4,6 +4,7 @@ import { observer } from 'preact-mobx';
 
 import style from './style';
 
+import AddTask from './addTask';
 import TaskItem from './taskItem';
 import FloatingActionButton from '../../components/floatingActionButton';
 
@@ -31,6 +32,7 @@ export default class Home extends Component {
 		return (
 			<div class={style.home} >
 				<FloatingActionButton onClick={() => this.addTask()}>&#xE145;</FloatingActionButton>
+				<AddTask stores={stores} />
 				<h2 class={style.title}>Up Next</h2>
 				{stores.taskStore.listTasksByDate.map(task => (
 					<TaskItem key={task.id} task={task} uiStore={stores.uiStore} />
