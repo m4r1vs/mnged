@@ -3,7 +3,8 @@
   "description": "Cloud Functions for Firebase",
   "dependencies": {
     "firebase-admin": "^5.4.1",
-    "firebase-functions": "^0.6.2"
+    "firebase-functions": "^0.6.2",
+    "request": "^2.83.0"
   },
   "private": true
 }

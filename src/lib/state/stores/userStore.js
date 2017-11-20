@@ -6,12 +6,12 @@ class User {
 	@observable photoURL
 	@observable headerURL
 
-	constructor(user) {
-		this.name = user.displayName || 'Unknown';
-		this.email = user.email || 'Unknown';
+	constructor(user, databaseUser) {
+		this.name = user.displayName || 'Mnger';
+		this.email = user.email || 'Not provided';
 		this.uid = user.uid || null;
 		this.photoURL = user.photoURL || null;
-		this.headerURL = user.headerURL || null;
+		this.headerURL = databaseUser ? databaseUser.headerURL : null;
 	}
 }
 
@@ -22,8 +22,8 @@ export default class UserStore {
 	 * sets up representation of user in mobx
 	 * @param {object} user user object
 	 */
-	@action setUser(user) {
-		if (user) this.user = new User(user);
+	@action setUser(user, databaseUser) {
+		if (user) this.user = databaseUser ? new User(user, databaseUser) : new User(user);
 		else this.user = null;
 	}
 }

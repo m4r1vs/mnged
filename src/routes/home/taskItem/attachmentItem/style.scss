@@ -1,0 +1,32 @@
+.attachmentItem {
+  width: 112px;
+  height: 72px;
+  background: rgba(0,0,0,.13);
+  border-radius: 5px;
+  margin: 8px 8px 0 0;
+  padding: 2px 8px;
+  display: inline-block;
+  background-size: cover;
+  cursor: pointer;
+  position: relative;
+
+  h4, p {
+    position: absolute;
+    width: calc(112px - 16px);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--primary-text-color);
+    line-height: 20px;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  p {
+    color: var(--secondary-text-color);
+    font-weight: 300;
+    margin-top: 18px;
+  }
+}

@@ -191,22 +191,11 @@ export default class Nav extends Component {
 		}
 	}
 	
-	componentWillUpdate() {
-		// if (this.props.store.user.loggedIn && !this.state.coverPhoto) {
-		// 	console.log('user:', this.props.user);
-		// 	if (this.props.user.providerData[0].providerId === 'google.com') {
-		// 		const googleUid = this.props.user.providerData[0].uid;
-		// 		fetch('https://www.googleapis.com/plus/v1/people/' + googleUid + '?fields=cover%2FcoverPhoto%2Furl&key=AIzaSyBBuZrztM5uYu1b0pLZiRI2J60XoDZZvVo').then((response) => response.json()).then((data) => {
-		// 			if (typeof data.cover.coverPhoto.url === 'string') this.setState({ coverPhoto: data.cover.coverPhoto.url });
-		// 		});
-		// 	}
-		// }
-	}
-	
 	render() {
 		
 		const { user } = this.props.stores.userStore;
-		const profilePic = user.photoURL ? user.photoURL : '/assets/imgs/default_header.jpg';
+		const profilePic = user ? user.photoURL : '/assets/imgs/default_profile_picture.png';
+		const headerURL = user ? user.headerURL : '/assets/imgs/default_header.jpg';
     
 		const moreOpened = this.state.moreOpened;
 		const toggleMoreVar = {
@@ -237,7 +226,7 @@ export default class Nav extends Component {
 				backgroundImage: 'url(' + profilePic + ')'
 			},
 			headerPic: {
-				backgroundImage: 'url(' + (this.state.coverPhoto ? this.state.coverPhoto : '/assets/imgs/default_header.jpg') + ')'
+				backgroundImage: 'url(' + headerURL + ')'
 			}
 		};
 
@@ -249,8 +238,8 @@ export default class Nav extends Component {
             
 						<div>
 							<div class={style.drawerHeaderProfilePic} style={styles.profilePic} onClick={this.toggleMore.bind(this)} />
-							<span class={style.drawerHeaderName} onClick={this.toggleMore.bind(this)}>{user.loggedIn ? user.name : 'Not logged in'}</span><br />
-							<span class={style.drawerHeaderMail} onClick={this.toggleMore.bind(this)}>{user.loggedIn ? user.email : 'Not logged in'}</span>
+							<span class={style.drawerHeaderName} onClick={this.toggleMore.bind(this)}>{user ? user.name : 'Not logged in'}</span><br />
+							<span class={style.drawerHeaderMail} onClick={this.toggleMore.bind(this)}>{user ? user.email : 'Not logged in'}</span>
 							<i class={'material-icons ' + toggleMoreVar.className} onClick={this.toggleMore.bind(this)}>&#xE5C5;</i>
 						</div>
             

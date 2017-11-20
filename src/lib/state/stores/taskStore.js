@@ -1,5 +1,21 @@
 import { observable, computed, action } from 'mobx';
 
+class Attachment {
+	@observable id
+	@observable type
+	@observable title
+	@observable content
+	@observable created
+
+	constructor (id, attachment) {
+		this.id = id;
+		this.type = attachment.type;
+		this.title = attachment.title;
+		this.content = attachment.content;
+		this.created = attachment.created;
+	}
+}
+
 class Task {
 	@observable id
 	@observable title
@@ -12,7 +28,7 @@ class Task {
 	constructor(id, task) {
 		this.id = id;
 		this.title = task.title || 'empty task';
-		this.attachments = task.attachments || null;
+		this.attachments = [];
 		this.due = task.due || null;
 		this.created = task.created || new Date();
 		this.group = task.group || null;
@@ -24,14 +40,32 @@ class Task {
 	 */
 	@computed get colorByGroup() {
 		// TODO: make it real
-		return '#f0f';
+		switch (this.group) {
+			case 'red':
+				return '#ef5350';
+			case 'blue':
+				return '#42a5f5';
+			case 'purple':
+				return '#ab47bc';
+			case 'orange':
+				return '#ffa726';
+			case 'green':
+				return '#66bb6a';
+			default:
+				return '#78909c';
+		}
 	}
 
 	/**
 	 * Returns number of attachments, pretty self-explaning, eh?
 	 */
 	@computed get numberOfAttachments() {
-		return this.attachments && this.attachments.length;
+		return (this.attachments.length > 0) && this.attachments.length;
+	}
+
+	@computed get listOfAttachments() {
+		const attachmentList = this.attachments.sort((a, b) => a.created.getTime() - b.created.getTime());
+		return attachmentList;
 	}
 
 	/**
@@ -54,6 +88,17 @@ class Task {
 		const dueDate = this.due;
 		const newDate = new Date(dueDate - now);
 		return millisToTime(newDate);
+	}
+
+	/**
+	 * Edit an attachment
+	 * @param {string} id the id of the attachment
+	 * @param {object} attachment the attachment
+	 */
+	@action editAttachment(id, attachment) {
+		for (let i = 0; i < this.attachments.length; i++) {
+			if (this.attachments[i].id === id) this.attachments[i] = new Attachment(id, attachment);
+		}
 	}
 }
 
@@ -96,6 +141,30 @@ export default class TaskStore {
 	@action removeTask(id) {
 		for (let i = 0; i < this.tasks.length; i++) {
 			if (this.tasks[i].id === id) this.tasks.splice(i, 1);
+		}
+	}
+
+	/**
+	 * add an attachment to a task
+	 * @param {string} taskId the id of the task the attachment should be added to
+	 * @param {string} attachmentId the id of the new attachment
+	 * @param {object} attachment the attachment itself
+	 */
+	@action addAttachment(taskId, attachmentId, attachment) {
+		for (let i = 0; i < this.tasks.length; i++) {
+			if (this.tasks[i].id === taskId) this.tasks[i].attachments.push(new Attachment(attachmentId, attachment));
+		}
+	}
+
+	/**
+	 * edit an attachment
+	 * @param {string} taskId the id of the task which the edited attachment belongs t
+	 * @param {string} attachmentId the id of the edited attachment
+	 * @param {object} attachment the attachment itself
+	 */
+	@action editAttachment(taskId, attachmentId, attachment) {
+		for (let i = 0; i < this.tasks.length; i++) {
+			if (this.tasks[i].id === taskId) this.tasks[i].editAttachment(attachmentId, attachment);
 		}
 	}
 }

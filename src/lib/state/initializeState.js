@@ -35,7 +35,7 @@ const initializeState = (stores, user) => {
 	// enable offline usage for database
 	initFirestore(uiStore);
 
-	// set user in mobx:
+	// set user in MobX
 	userStore.setUser(user);
 
 	// only perform when user logged in
@@ -46,6 +46,12 @@ const initializeState = (stores, user) => {
 
 		// set appmode to app to show header etc..
 		uiStore.setAppMode('app');
+
+		firestore
+			.collection('user-data')
+			.doc(user.uid)
+			.get()
+			.then(doc => userStore.setUser(user, doc.data()));
 		
 		// listen for changes in tasks
 		firestore
@@ -57,6 +63,30 @@ const initializeState = (stores, user) => {
 					switch (docChanges.type) {
 						case 'added':
 							taskStore.addTask(docChanges.doc.id, docChanges.doc.data());
+
+							firestore.collection('user-data')
+								.doc(user.uid)
+								.collection('tasks')
+								.doc(docChanges.doc.id)
+								.collection('attachments')
+								.onSnapshot(snapshotAttachment => {
+									snapshotAttachment.docChanges.forEach(docChangesAttachment => {
+										switch (docChangesAttachment.type) {
+											case 'added':
+												taskStore.addAttachment(docChanges.doc.id, docChangesAttachment.doc.id, docChangesAttachment.doc.data());
+												break;
+											case 'modified':
+												taskStore.editAttachment(docChanges.doc.id, docChangesAttachment.doc.id, docChangesAttachment.doc.data());
+												break;
+											case 'removed':
+												taskStore.removeAttachment(docChangesAttachment.doc.id);
+												break;
+											default:
+												uiStore.throwError('firestore-unexpected-change-type-in-attachment');
+										}
+									});
+								});
+
 							break;
 						case 'modified':
 							taskStore.editTask(docChanges.doc.id, docChanges.doc.data());
@@ -65,7 +95,7 @@ const initializeState = (stores, user) => {
 							taskStore.removeTask(docChanges.doc.id);
 							break;
 						default:
-							uiStore.throwError('firestore-unexpected-change-type');
+							uiStore.throwError('firestore-unexpected-change-type-in-task');
 					}
 				});
 			});

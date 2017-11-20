@@ -1,16 +1,16 @@
 @keyframes fadeIn {
-  from {height: 0px}
-  to {height: 92px}
+  from {max-height: 0px}
+  to {max-height: 256px}
 }
 
 div.wrapper {
   position: relative;
-  width: 100%;
+  height: 100%;
+  max-height: 256px;
   margin-top: 8px;
   transform: translateX(0);
-  height: 92px;
-  animation: fadeIn .13s forwards;
-  transition: transform .13s ease-out .07s, height .13s .22s;
+  animation: fadeIn .32s;
+  transition: transform .13s ease-out .07s, max-height .53s .22s, height .13s;
 }
 
 .taskitem {
@@ -45,24 +45,32 @@ div.wrapper {
     user-select: all;
     color: var(--primary-text-color);
     padding: 0;
+    margin: 0;
     font-size: 20px;
     font-weight: 500;
+    line-height: 1.2;
+    @media (max-width: 600px) {
+      font-size: 18px;
+    }
   }
 
   h3 {
+    position: absolute;
+    right: 8px;
+    top: 16px;
     user-select: none;
     color: var(--secondary-text-color);
     padding: 0;
+    margin: 0;
+    line-height: 1.2;
     font-weight: 500;
     font-size: 16px;
+  }
 
-    &.time {
-
-    }
-
-    &.attachments {
-
-    }
+  div.attachments {
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
 
   &.done {
@@ -87,6 +95,10 @@ div.hoverRecievers {
   top: 0;
   bottom: 0;
   cursor: pointer;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 
   &.leftReciever {
     left: 0;
