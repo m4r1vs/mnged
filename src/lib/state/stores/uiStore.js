@@ -16,6 +16,7 @@ class SubPage {
 
 export default class UiStore {
 	@observable notification = null
+	@observable dialog = null
 	@observable error = null
 	@observable appLoaded = false
 	@observable userLoggedIn = false
@@ -96,6 +97,27 @@ export default class UiStore {
 			};
 			this.notification.timeout = setTimeout(() => this.notification = null, time);
 		}
+	}
+
+	/**
+	 * Opens a new dialog window
+	 * @param {string} title the title of the dialog
+	 * @param {jsx} content the html inside the dialog
+	 */
+	@action openDialog(title, content, details) {
+		this.dialog = {
+			title,
+			content,
+			details,
+			opened: true
+		};
+	}
+
+	/**
+	 * Closes an opened dialog or does nothing if already closed
+	 */
+	@action closeDialog() {
+		if (this.dialog) this.dialog.opened = false;
 	}
 
 	/**

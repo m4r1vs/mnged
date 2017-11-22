@@ -1,0 +1,71 @@
+@keyframes ripple {
+  0% {
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.0);
+  }
+  50% { 
+    box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0.13);
+  }
+  100% {
+    box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0);
+  }
+}
+
+.radio {
+  margin: 16px 0;
+
+  input[type=radio] {
+    display: none;
+
+    &:checked+label:before {
+      border-color: var(--primary-color);
+      animation: ripple 0.2s linear forwards;
+    }
+
+    &:checked+label:after {
+      transform: scale(1) !important;
+    }
+  }
+
+  label {
+    display: inline-block;
+    height: 20px;
+    position: relative;
+    padding: 0 (20px + 10px);
+    margin-bottom: 0;
+    cursor: pointer;
+    vertical-align: bottom;
+
+    &:focus {
+      outline: none;
+
+      &:before {
+        box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0.13) !important;
+      }
+    }
+
+    &:before, &:after {
+      position: absolute;
+      content: '';
+      border-radius: 50%;
+      transition: all .22s ease-in-out;
+      transition-property: transform, border-color, box-shadow;
+    }
+
+    &:before {
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--secondary-text-color);
+    }
+
+    &:after {
+      top: 5px;
+      left: 5px;
+      width: 10px;
+      height: 10px;
+      transform: scale(0);
+      background: var(--primary-color);
+    }
+  }
+}

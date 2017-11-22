@@ -11,6 +11,11 @@ export default class SnackBar extends Component {
 			if (this.props.stores.uiStore.notification) document.getElementById('floatingActionButton').style.bottom = (this.snackbarElement.clientHeight + 22) + 'px';
 			else document.getElementById('floatingActionButton').style.bottom = '22px';
 		}
+
+		if (document.getElementById('taskInputForm')) {
+			if (this.props.stores.uiStore.notification) document.getElementById('taskInputForm').style.bottom = (this.snackbarElement.clientHeight) + 'px';
+			else document.getElementById('taskInputForm').style.bottom = '0';
+		}
 	}
 
 	render() {

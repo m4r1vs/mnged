@@ -5,6 +5,8 @@ import { auth } from '../lib/firebase';
 import Header from 'async!./header';
 import Nav from 'async!./nav';
 import SnackBar from './snackbar';
+import Dialog from './dialog';
+import DatePicker from './datePicker';
 import Loader from './loader';
 import Routes from 'async!../routes';
 
@@ -51,6 +53,8 @@ export default class App extends Component {
 			<div id="app">
 
 				<SnackBar stores={stores} />
+				<Dialog uiStore={stores.uiStore} />
+				<DatePicker uiStore={stores.uiStore} />
 				
 				{/* only show the header and nav drawer if in app mode */}
 				{stores.userStore.user && (

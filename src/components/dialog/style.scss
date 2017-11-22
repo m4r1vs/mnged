@@ -1,0 +1,94 @@
+.dialog {
+  z-index: 200;
+  position: fixed;
+  height: auto;
+  max-height: 512px;
+  width: 90vw;
+  max-width: 600px;
+  transform-origin: bottom left;
+  transition: transform .22s ease-in-out, opacity .22s ease-in-out;
+  top: 40%;
+  left: 50%;
+  opacity: 0;
+  transform: scale(0) translate(-50%, -50%);
+
+  &.opened {
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
+  }
+
+  p, ul, ol {
+    color: var(--primary-text-color);
+  }
+  
+  h2 {
+    color: var(--primary-text-color);
+    line-height: 1;
+    padding: 24px;
+  }
+
+  p {
+  }
+
+  ul, ol {
+
+    li {
+
+    }
+  }
+
+  form {
+    margin: 0 24px 24px 24px;
+  }
+
+  div.actions {
+    height: 52px;
+    width: 100%;
+    padding: 8px;
+    text-align: right;
+
+    button {
+      cursor: pointer;
+      color: var(--primary-color);
+      border: none;
+      margin-left: 8px;
+      min-width: 64px;
+      line-height: 36px;
+      background-color: transparent;
+      appearance: none;
+      padding: 0 16px;
+      border-radius: 3px;
+      transition: background-color .13s;
+
+      &:hover {
+        outline: none;
+        background-color: rgba(0,0,0,.07);
+      }
+
+      &:focus {
+        outline: none;
+        background-color: rgba(0,0,0,.13);
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.background {
+  z-index: 199;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,.52);
+  animation: fadeIn .22s forwards;
+}

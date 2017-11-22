@@ -25,7 +25,7 @@ export default class TaskItem extends Component {
 				.doc(this.props.task.id)
 				.delete()
 				.then(() => {
-					this.props.uiStore.showSnackbar('Task deleted', 'UNDO', 2500, () => {
+					this.props.uiStore.showSnackbar('Done with task!', 'UNDO', 2500, () => {
 						firestore
 							.collection('user-data')
 							.doc(auth.currentUser.uid)
