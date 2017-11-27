@@ -35,6 +35,24 @@ export default class Header extends Component {
 		}
 	}
 
+	scrollToTop() {
+		let scrollDuration = 512,
+			cosParameter = document.body.scrollTop / 2,
+			scrollCount = 0,
+			oldTimestamp = performance.now();
+
+		const step = newTimestamp => {
+			scrollCount += Math.PI / (scrollDuration / (newTimestamp - oldTimestamp));
+			if (scrollCount >= Math.PI) document.body.scrollTo(0, 0);
+			if (document.body.scrollTop === 0) return;
+			document.body.scrollTo(0, Math.round(cosParameter + cosParameter * Math.cos(scrollCount)));
+			oldTimestamp = newTimestamp;
+			window.requestAnimationFrame(step);
+		};
+
+		window.requestAnimationFrame(step);
+	}
+
 	componentDidMount() {
 		if (this.props.nightmode === true) document.body.classList.add('nightmode');
 	}
@@ -52,7 +70,7 @@ export default class Header extends Component {
 					<span id="navbtn-span3" />
 				</div>
 
-				<h1>{subPage ? subPage.headerTitle : 'Managed Me!'}</h1>
+				<h1 onClick={this.scrollToTop}>{subPage ? subPage.headerTitle : 'Managed Me!'}</h1>
 
 				{!subPage && <i style={{ display: 'block', cursor: 'pointer' }} class={style.moreMenuIcon + ' material-icons'}>&#xE5D4;</i>}
 				{subPage && <i onClick={() => subPage.headerAction()} class="material-icons">{subPage.headerActionIcon}</i>}

@@ -1,16 +1,148 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body, html {
+  overflow-x: hidden;
+  font-family: var(--font-stack);
+  background-color: var(--primary-background-color);
+  color: var(--primary-text-color-dark);
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: background-color .22s;
+  min-width: 100vw;
+  min-height: 100vh;
+  
+  &.darkTheme {
+    --primary-text-color-dark: rgba(255,255,255,.87);
+    --secondary-text-color-dark: rgba(255,255,255,.57);
+    --disabled-text-color-dark: rgba(255,255,255,.13);
+
+    --primary-text-color-light: rgba(0,0,0,.87);
+    --secondary-text-color-light: rgba(0,0,0,.57);
+    --disabled-text-color-light: rgba(0,0,0,.13);
+    
+    --primary-card-color: #424242;
+    --primary-background-color: #303030;
+  }
+}
+
+body {
+  padding-top: 56px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+a {
+  text-decoration: none;
+  font-weight: 700;
+  color: inherit;
+  
+  &:hover, &:focus {
+    color: var(--secondary-color-dark);
+    outline: none;
+    text-decoration: underline;
+  }
+}
+
+main, article {
+  transition: background-color .22s;
+  background-color: var(--primary-card-color);
+  width: calc(100% - 32px);
+  height: auto;
+  box-shadow: var(--box-shadow-lvl-1);
+  margin: 16px auto;
+  max-width: 700px;
+  padding: 8px 16px;
+  border-radius: 3px;
+  text-align: center;
+  
+  h1 {
+    line-height: 32px;
+    font-size: 28px;
+    margin: 0;
+    padding: 16px 0;
+  }
+  
+  p {
+    text-align: justify;
+    line-height: 1.5;
+    margin: 0;
+    margin-bottom: 16px;
+  }
+  
+  .infoBox {
+    background: var(--primary-color);
+    color: rgba(255,255,255,.87);
+    padding: 8px 16px;
+    display: inline-block;
+    margin-bottom: 16px;
+    border-radius: 3px;
+    
+    &.red {
+      background: #ff8a80;
+      color: rgba(0,0,0,.87);
+    }
+  }
+  
+  button {
+    cursor: pointer;
+    appearance: none;
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    line-height: 1;
+    padding: 8px 16px;
+    border-radius: 3px;
+    color: var(--primary-text-color);
+    transition: background .13s;
+    margin-bottom: 16px;
+    
+    &:hover, &:focus {
+      outline: none;
+      background: var(--disabled-text-color-dark);
+    }
+  }
+}
+
+article {
+  margin-bottom: 56px;
+}
+
+footer {
+  position: absolute;
+  bottom: 16px;
+  width: 100%;
+  text-align: center;
+}
+
 .datePicker {
+  text-align: left;
+  background: var(--primary-card-color);
+  border-radius: 3px;
   z-index: 200;
   position: fixed;
   height: auto;
   max-height: 90vh;
   width: 90vw;
   max-width: 448px;
-  transform-origin: bottom left;
+  transform-origin: top left;
   transition: transform .22s ease-in-out, opacity .22s ease-in-out;
   top: 50%;
   left: 50%;
   opacity: 0;
   transform: scale(0) translate(-50%, -50%);
+  user-select: none;
 
   &.opened {
     opacity: 1;
@@ -21,63 +153,76 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     padding: 24px;
+    height: 100px;
     background: var(--primary-color);
 
     h2, h3 {
+      cursor: pointer;
       color: #fff;
       line-height: 1;
       padding: 0;
       margin: 0;
       font-size: 32px;
-      user-select: none;
     }
 
     h3 {
       color: rgba(255,255,255,.57);
       font-size: 18px;
-      padding-bottom: 8px;
+      padding-bottom: 2px;
     }
   }
 
   nav {
-    padding: 24px;
-    height: 76px;
+    padding: 20px;
+    height: 56px;
 
     h4 {
       width: calc(100% - 60px);
       text-align: center;
       display: inline-block;
       padding: 0;
-      font-size: 16px;
+      font-size: 14px;
       line-height: 24px;
+      margin: 0;
       position: relative;
       top: -9px;
       color: var(--primary-text-color);
-      user-select: none;
     }
 
     i {
+      cursor: pointer;
       color: var(--secondary-text-color);
-      font-size: 30px;
+      font-size: 26px;
       user-select: none;
+      border-radius: 50%;
+      
+      &:hover {
+        background: var(--disabled-text-color-dark);
+      }
     }
+  }
+  
+  .scroll {
+    overflow-y: auto;
+    max-height: calc(90vh - 56px - 100px);
   }
 
   .calendar {
-    padding: 0 24px 24px 24px;
+    padding: 0 20px;
 
     .dayNames {
       width: 100%;
       display: grid;
       text-align: center;
-      grid-template-columns: 14.28% 14.28% 14.28% 14.28% 14.28% 14.28% 14.28%;
+      
+      // there's probably a better way to do this, but wanted to try out CSS grid
+      grid-template-columns: calc(100% / 7) calc(100% / 7) calc(100% / 7) calc(100% / 7) calc(100% / 7) calc(100% / 7) calc(100% / 7);
 
       span {
-        color: var(--secondary-text-color);
+        color: var(--secondary-text-color-dark);
         font-size: 14px;
         line-height: 42px;
         display: inline-grid;
-        user-select: none;
       }
     }
 
@@ -85,14 +230,15 @@
       width: 100%;
       display: grid;
       text-align: center;
-      grid-template-columns: 14.28% 14.28% 14.28% 14.28% 14.28% 14.28% 14.28%;
+      grid-template-columns: calc(100% / 7) calc(100% / 7) calc(100% / 7) calc(100% / 7) calc(100% / 7) calc(100% / 7) calc(100% / 7);
 
       span {
-        color: var(--primary-text-color);
+        color: var(--primary-text-color-dark);
         line-height: 42px;
         font-size: 14px;
         display: inline-grid;
         transition: color .22s;
+        height: 42px;
         position: relative;
         cursor: pointer;
         user-select: none;
@@ -111,6 +257,10 @@
           transform: scale(0);
           opacity: 0;
         }
+        
+        &[disabled=true] {
+          cursor: unset;
+        }
 
         &.today {
           font-weight: 700;
@@ -127,16 +277,38 @@
       }
     }
   }
+  
+  .selectYear {
+    padding: 0 20px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    max-height: 362px;
+    
+    span {
+      display: block;
+      width: 100%;
+      font-size: 24px;
+      margin: 20px auto;
+      cursor: pointer;
+      
+      &.selectedYear {
+        font-size: 42px;
+        color: var(--primary-color);
+      }
+    }
+  }
 
   div.actions {
-    height: 52px;
     width: 100%;
     padding: 8px;
     text-align: right;
 
     button {
+      margin-bottom: 0;
+      font-size: 15px;
       cursor: pointer;
-      color: var(--primary-color);
+      color: var(--primary-text-color);
       border: none;
       margin-left: 8px;
       min-width: 64px;
@@ -147,25 +319,11 @@
       border-radius: 3px;
       transition: background-color .13s;
 
-      &:hover {
+      &:hover, &:focus {
         outline: none;
-        background-color: rgba(0,0,0,.07);
-      }
-
-      &:focus {
-        outline: none;
-        background-color: rgba(0,0,0,.13);
+        background-color: var(--disabled-text-color-dark);
       }
     }
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 

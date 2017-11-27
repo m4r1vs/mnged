@@ -24,7 +24,7 @@ export default class AddTask extends Component {
 			.collection('tasks')
 			.add({
 				title: this.inputTask.value,
-				due: new Date(),
+				due: this.state.dueDate ? this.state.dueDate : new Date(),
 				created: new Date(),
 				group: this.state.selectedGroupColor || null
 			})
@@ -42,7 +42,7 @@ export default class AddTask extends Component {
 	
 	expandForm() {
 		this.colorIndicatorElement.classList.add(style.active);
-		this.moreActions.style.height = '32px';
+		this.moreActions.style.height = '100%';
 		this.moreActions.style.transform = 'scaley(1)';
 		this.formElement.style.minHeight = '84px';
 		this.formElement.style.height = 'auto';
@@ -82,8 +82,8 @@ export default class AddTask extends Component {
 
 	setDueDate(e) {
 		e.preventDefault();
-
-		
+		if (!this.state.dueDate) this.props.stores.uiStore.datePicker.open(dueDate => this.setState({ dueDate }));
+		else this.setState({ dueDate: null });
 	}
 
 	setSelectedGroup(e) {
@@ -153,9 +153,10 @@ export default class AddTask extends Component {
 				<div ref={el => this.moreActions = el} class={style.moreActions}>
 
 					<button title="Add to group" onClick={this.addGroup}><i class="material-icons">&#xE2CC;</i></button>
-					<button title="Remind me" onClick={this.setDueDate}><i class="material-icons">&#xE7F7;</i></button>
+					<button title="Remind me" onClick={this.setDueDate}><i class="material-icons">{this.state.dueDate ? 'notifications_active' : 'notifications_none'}</i></button>
 					
 					<input style={{ float: 'right' }} type="submit" value="Create" />
+					<span>{this.state.dueDate && this.state.dueDate.toLocaleDateString()}</span>
 				</div>
 			</form>
 		);

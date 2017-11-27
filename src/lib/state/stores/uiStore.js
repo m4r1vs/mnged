@@ -14,6 +14,21 @@ class SubPage {
 	}
 }
 
+class DatePicker {
+	@observable opened
+	@observable recieverFunction
+
+	@action open(recieverFunction) {
+		this.opened = true;
+		this.recieverFunction = recieverFunction;
+	}
+
+	@action close() {
+		this.opened = false;
+		this.recieverFunction = () => false;
+	}
+}
+
 export default class UiStore {
 	@observable notification = null
 	@observable dialog = null
@@ -23,6 +38,7 @@ export default class UiStore {
 	@observable subPage = false
 	@observable wasFirestoreLoaded = false
 	@observable appMode = null
+	@observable datePicker = new DatePicker()
 
 	/**
 	 * set app loaded to true
