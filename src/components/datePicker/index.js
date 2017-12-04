@@ -17,7 +17,7 @@ export default class DatePicker extends Component {
 
 		const element = e.target; // the actual element clicked
 
-		if (element.innerHTML === '') return false; // don't continue if <span /> empty
+		if (element.innerHTML === '' || (element.getAttribute('disabled'))) return false; // don't continue if <span /> empty
 
 		// get date from clicked element (gets attached when rendered)
 		const date = new Date(element.getAttribute('date'));
@@ -50,6 +50,7 @@ export default class DatePicker extends Component {
 			calendar.push({
 				day: (day === 0 || day === null) ? null : day, // null or number
 				date: (day === 0 || day === null) ? null : new Date(year, month, day), // null or Date()
+				disabled: this.props.onlyFutureDates ? ((day < this.now.getDate() || month < this.now.getMonth() || year < this.now.getFullYear()) && (month <= this.now.getMonth() && year <= this.now.getFullYear())) : false,
 				today: (day === this.now.getDate() && month === this.now.getMonth() && year === this.now.getFullYear()) // boolean
 			});
 		}
@@ -254,7 +255,8 @@ export default class DatePicker extends Component {
 											return (
 												<span
 													class={(day.today ? style.today : '') + ' ' + (selected ? style.selected : '')}
-													disabled={!day.date}
+													displayed={!!day.date}
+													disabled={day.disabled}
 													date={day.date}
 												>
 													{day.day}

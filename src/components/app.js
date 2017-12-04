@@ -54,7 +54,7 @@ export default class App extends Component {
 
 				<SnackBar stores={stores} />
 				<Dialog uiStore={stores.uiStore} />
-				<DatePicker uiStore={stores.uiStore} />
+				<DatePicker onlyFutureDates uiStore={stores.uiStore} />
 				
 				{/* only show the header and nav drawer if in app mode */}
 				{stores.userStore.user && (

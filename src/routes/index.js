@@ -3,6 +3,7 @@ import { Router } from 'preact-router';
 import { observer } from 'preact-mobx';
 
 import Home from './home';
+import Donate from './donate';
 import Welcome from './welcome';
 import ErrorPage from './errorpage';
 
@@ -21,7 +22,8 @@ export default class Routes extends Component {
 			if (stores.userStore.user) {
 				return (
 					<Router onChange={this.handleRoute}>
-						<Home stores={stores} />
+						<Home path="/" stores={stores} />
+						<Donate path="/donate" />
 						<ErrorPage default />
 					</Router>
 				);

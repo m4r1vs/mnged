@@ -240,6 +240,88 @@ export const AboutIcon = () => (
 	</svg>
 );
 
+export const DonationIcon = () => (
+
+	<svg class={style.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title"
+		aria-describedby="desc" role="img"
+	>
+		<title>Donate</title>
+		<desc>A color styled icon from Orion Icon Library.</desc>
+		<path class="applyHoverEffect" d="M52 36.997h10v22.002H52z"
+			fill="#c3d6f9" data-name="layer3"
+		/>
+		<circle class="applyHoverEffect" fill="#fc6" r="8" cy="11.001" cx="34.055" data-name="layer2" />
+		<circle class="applyHoverEffect" fill="#fc6" r="8" cy="29.001" cx="20.008" data-name="layer2" />
+		<path class="applyHoverEffect" fill="#ffd4c7" d="M36.051 53h-10a4 4 0 0 1-4-4 4 4 0 0 1 4-4h4C42 45 38 39 52 39v16.187C50 55.187 37.063 61 30 61c-4.24 0-7.949-2.17-16-6-3.82-1.82-12-6.613-12-10 0-4 10.893 1.063 20.051 4"
+			data-name="layer1"
+		/>
+		<path class="applyHoverEffect" opacity=".15" fill="#000064" d="M52 51.187C50 51.187 37.063 57 30 57c-4.24 0-7.949-2.17-16-6-2.911-1.386-8.344-4.5-10.769-7.4A1.334 1.334 0 0 0 2 45c0 3.388 8.18 8.181 12 10 8.051 3.83 11.76 6 16 6 7.063 0 20-5.812 22-5.812V59h10v-4H52z"
+			data-name="opacity"
+		/>
+		<path d="M52 36.997h10v22.002H52zm0 18.19C50 55.187 37.063 61 30 61c-4.24 0-7.949-2.17-16-6-3.82-1.82-12-6.613-12-10 0-4 10.893 1.063 20.051 4"
+			stroke-width="2" stroke-linejoin="miter" stroke-linecap="round" stroke="#2e4369"
+			fill="none" data-name="stroke"
+		/>
+		<circle stroke-width="2" stroke-linejoin="miter" stroke-linecap="round"
+			stroke="#2e4369" fill="none" r="8" cy="11.001" cx="34.055" data-name="stroke"
+		/>
+		<circle stroke-width="2" stroke-linejoin="miter" stroke-linecap="round"
+			stroke="#2e4369" fill="none" r="8" cy="29.001" cx="20.008" data-name="stroke"
+		/>
+		<path stroke-width="2" stroke-linejoin="miter" stroke-linecap="round"
+			stroke="#2e4369" fill="none" d="M36.051 53h-10a4 4 0 0 1-4-4 4 4 0 0 1 4-4h4c11.949 0 7.914-6 21.914-6"
+			data-name="stroke"
+		/>
+	</svg>
+);
+
+export const ProjectsIcon = () => (
+
+	<svg class={style.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title"
+		aria-describedby="desc" role="img"
+	>
+		<title>Prkects</title>
+		<desc>A color styled icon from Orion Icon Library.</desc>
+		<path class="applyHoverEffect" data-name="layer3"
+			fill="#f27e7c" d="M51 8h8v42h-8"
+		/>
+		<path class="applyHoverEffect" data-name="layer2" fill="#9cf" d="M9 2h42v60H9z" />
+		<path class="applyHoverEffect" data-name="layer1" fill="#eaf7ff" d="M21 12h20v14H21z" />
+		<path class="applyHoverEffect" data-name="opacity" fill="#000064" opacity=".15" d="M51 8h4v42h-4zM9 2h8v60H9z" />
+		<path data-name="stroke" fill="none" stroke="#2e4369" stroke-linecap="round"
+			stroke-miterlimit="10" stroke-width="2" d="M51 8h8v42h-8m8-28h-8m8 14h-8M9 2h42v60H9zm4 10H3m10 10H3m10 10H3m10 10H3m10 10H3"
+			stroke-linejoin="miter"
+		/>
+		<path data-name="stroke" fill="none" stroke="#2e4369" stroke-linecap="round"
+			stroke-miterlimit="10" stroke-width="2" d="M21 12h20v14H21z" stroke-linejoin="miter"
+		/>
+	</svg>
+);
+
+export const LabelIcon = () => (
+
+	<svg class={style.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title"
+		aria-describedby="desc" role="img"
+	>
+		<title>Label</title>
+		<desc>A color styled icon from Orion Icon Library.</desc>
+		<path class="applyHoverEffect" data-name="layer1"
+			d="M59.6 4.4L38.4 3 3 38.4 19.9 44l5.7 17L61 25.6zM48 20a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"
+			fill="#f27e7c"
+		/>
+		<path class="applyHoverEffect" data-name="opacity" fill="#000064" opacity=".15" d="M28.6 54l-5.7-17L9 32.4l-6 6L19.9 44l5.7 17L61 25.6l-.2-3.7L28.6 54z" />
+		<path data-name="stroke" fill="none" stroke="#2e4369" stroke-linecap="round"
+			stroke-linejoin="miter" stroke-width="2" d="M25.6 61l-5.7-17L3 38.4 38.4 3l21.2 1.4L61 25.6 25.6 61z"
+		/>
+		<circle data-name="stroke" cx="48" cy="16" r="4" fill="none" stroke="#2e4369"
+			stroke-linecap="round" stroke-linejoin="miter" stroke-width="2"
+		/>
+		<path data-name="stroke" fill="none" stroke="#2e4369" stroke-linecap="round"
+			stroke-linejoin="miter" stroke-width="2" d="M22.8 35.5L37 21.4m-8.5 19.8l8.4-8.5"
+		/>
+	</svg>
+);
+
 export const LogoutIcon = () => (
 
 	<svg class={style.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title"
@@ -249,10 +331,10 @@ export const LogoutIcon = () => (
 		<desc>A color styled icon from Orion Library.</desc>
 		<path class="applyHoverEffect" data-name="layer1"
 			d="M45.513 6.62a3 3 0 0 0-3.006 5.192 21 21 0 1 1-21.006-.004 3 3 0 0 0-3.006-5.192 27 27 0 1 0 27.018.004z"
-			fill="#bacae9"
+			fill="#f27e7c"
 		/>
 		<path class="applyHoverEffect" data-name="layer1" d="M32 31a3 3 0 0 0 3-3V4a3 3 0 0 0-6 0v24a3 3 0 0 0 3 3z"
-			fill="#bacae9"
+			fill="#f27e7c"
 		/>
 		<path data-name="stroke" d="M45.513 6.62a3 3 0 0 0-3.006 5.192 21 21 0 1 1-21.006-.004 3 3 0 0 0-3.006-5.192 27 27 0 1 0 27.018.004z"
 			fill="none" stroke="#000000" stroke-linecap="butt" stroke-linejoin="miter"

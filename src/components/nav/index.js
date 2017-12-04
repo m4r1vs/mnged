@@ -3,7 +3,7 @@ import { Link } from 'preact-router/match';
 import { route } from 'preact-router';
 import { auth } from '../../lib/firebase';
 
-import { DashboardIcon, TasksIcon, ExamsIcon, NotesIcon, CafeteriaIcon, ClassesIcon, SettingsIcon, FeedbackIcon, AboutIcon, LogoutIcon } from './icons';
+import { TasksIcon, NotesIcon, ProjectsIcon, SettingsIcon, FeedbackIcon, AboutIcon, LogoutIcon, DonationIcon } from './icons';
 
 import { observer } from 'preact-mobx';
 import style from './style';
@@ -249,12 +249,10 @@ export default class Nav extends Component {
 
 						<div class={style.drawerSubContent} style={{ display: this.state.moreOpened ? 'none' : 'block' }} >
 
-							<Link activeClassName="active" href="/" onClick={this.closeDrawer}><div><span> <DashboardIcon />Dashboard</span></div></Link>
-							<Link activeClassName="active" href="/tasks" onClick={this.closeDrawer}><div><span> <TasksIcon />Tasks</span></div></Link>
-							<Link activeClassName="active" href="/exams" onClick={this.closeDrawer}><div><span> <ExamsIcon />Exams</span></div></Link>
-							<Link activeClassName="active" href="/classes" onClick={this.closeDrawer}><div><span> <ClassesIcon />Classes</span></div></Link>
-							<Link activeClassName="active" href="/notes" onClick={this.closeDrawer}><div><span> <NotesIcon />Notes</span></div></Link>
-							<Link activeClassName="active" href="/cafeteria-menu" onClick={this.closeDrawer}><div><span> <CafeteriaIcon />Cafeteria Menu</span></div></Link>
+							<Link activeClassName="active" href="/" onClick={this.closeDrawer}><div><span> <TasksIcon />Tasks</span></div></Link>
+							<Link activeClassName="active" href="/projects" onClick={this.closeDrawer}><div><span> <ProjectsIcon />Projects</span></div></Link>
+							<Link activeClassName="active" href="/settings" onClick={this.closeDrawer}><div><span> <SettingsIcon />Settings</span></div></Link>
+							<Link activeClassName="active" href="/about" onClick={this.closeDrawer}><div><span> <AboutIcon />About</span></div></Link>
 
 						</div>
 						
@@ -262,9 +260,8 @@ export default class Nav extends Component {
 
 						<div class={style.drawerSubContent} style={{ display: this.state.moreOpened ? 'block' : 'none' }} >
 
-							<Link activeClassName="active" href="/settings" onClick={this.closeDrawer}><div><span> <SettingsIcon />Settings</span></div></Link>
 							<Link activeClassName="active" href="/feedback" onClick={this.closeDrawer}><div><span> <FeedbackIcon />Feedback</span></div></Link>
-							<Link activeClassName="active" href="/about" onClick={this.closeDrawer}><div><span> <AboutIcon />About</span></div></Link>
+							<Link activeClassName="active" href="/donate" onClick={this.closeDrawer}><div><span> <DonationIcon />Donate</span></div></Link>
 							<Link href="/" onClick={signOut}><div><span> <LogoutIcon />Log Out</span></div></Link>
             
 						</div>

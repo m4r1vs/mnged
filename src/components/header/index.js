@@ -5,14 +5,6 @@ import style from './style';
 @observer
 export default class Header extends Component {
 
-	toggleDarkMode() {
-		if (typeof window !== 'undefined') {
-			document.body.classList.toggle('nightmode');
-			if (localStorage.getItem('nightmode') === 'true') localStorage.setItem('nightmode', 'false');
-			else localStorage.setItem('nightmode', 'true');
-		}
-	}
-
 	openDrawer(e) {
 		if (typeof window !== 'undefined') {
 			if (e.path[0].id === 'navbtn-arrow' || e.path[1].id === 'navbtn-arrow') window.history.back();
@@ -72,16 +64,7 @@ export default class Header extends Component {
 
 				<h1 onClick={this.scrollToTop}>{subPage ? subPage.headerTitle : 'Managed Me!'}</h1>
 
-				{!subPage && <i style={{ display: 'block', cursor: 'pointer' }} class={style.moreMenuIcon + ' material-icons'}>&#xE5D4;</i>}
 				{subPage && <i onClick={() => subPage.headerAction()} class="material-icons">{subPage.headerActionIcon}</i>}
-
-				<div class={style.moreMenu} id="moreMenu">
-					<ul>
-						<li onClick={this.toggleDarkMode}>Toggle darkmode</li>
-						<li>option 2</li>
-						<li>option 3</li>
-					</ul>
-				</div>
 
 			</header>
 		);

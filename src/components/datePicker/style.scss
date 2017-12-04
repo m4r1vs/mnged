@@ -258,8 +258,12 @@ footer {
           opacity: 0;
         }
         
-        &[disabled=true] {
+        &[displayed=false] {
           cursor: unset;
+        }
+
+        &[disabled=true] {
+          color: var(--disabled-text-color-dark);
         }
 
         &.today {
