@@ -13,7 +13,7 @@ const About = () => (
 				So this is what I came up with. MNGED is still under heavy development but it won't hopefully take that long until v1.0 hopefully. So stay tuned for updates and <a href="/feedback">report</a> any issues and ideas to me
 			</p>
 			<hr />
-			<h2>Security</h2>
+			<h2 class="border">Security</h2>
 			<p>
         MNGED uses <a href="https://firebase.google.com/">Firebase</a> for authentication and as a database. Firesbase is developed and maintained
 				by Google. The authentication is build by the same team that also build Google Sign In and is responsible for other security at Google.

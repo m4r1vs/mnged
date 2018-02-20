@@ -1,5 +1,111 @@
 @import '../../style/vars.scss';
 
+$primaryColor: #282F35;
+$secondaryColor: #FFF;
+$cometsMinWidth: 150;
+$starRadius: (min: 1, max: 2);
+
+@keyframes starsMovement {
+  0% {
+    transform: scale(1.5) rotate(0deg)
+  }
+  100% {
+    transform: scale(1.5) rotate(360deg)
+  }
+}
+
+@keyframes glow {
+  6% {opacity: 1}
+  12% {opacity: .5}
+  18% {opacity: .9}
+  24% {opacity: .4}
+  30% { opacity: 1}
+  100% { opacity: 1}
+}
+
+.welcome {
+  width: 100vw;
+  background: $primaryColor;
+  margin-top: -56px;
+  padding: 112px 0;
+  min-height: 100vh;
+
+  .bg {
+    width: 100%;
+    z-index: -1;
+    height: 100%;
+
+    .stars {
+      animation: starsMovement #{60*4}s linear infinite;
+      transform-origin: center;
+
+      circle {
+        fill: $secondaryColor;
+        animation: glow 1s infinite forwards;
+      
+        @for $i from 1 through 100 {
+          &:nth-of-type(#{$i}) {
+            r: ((map-get($starRadius, min) + random(map-get($starRadius, max))) - map-get($starRadius, min));
+            cy: random(100) * 1%;
+            cx: random(100) * 1%;
+            animation-delay: #{random(100) / 10}s;
+          }
+        }
+      }
+    }
+  }
+
+  .welcomeCard {
+    position: fixed;
+    max-width: 512px;
+    padding: 16px;
+    background: #fff;
+    margin: 0 auto;
+    top: 112px;
+    left: calc(50vw - (512px / 2));
+    border-radius: 24px;
+    text-align: center;
+
+    h1 {
+      margin: 0;
+      font-weight: 100;
+    }
+
+    h2 {
+      font-weight: 500;
+    }
+
+    .rocket {
+      background: url(https://maniyt.de/onboarding.svg);
+      margin: 0 16px;
+      height: 270px;
+      max-height: 270px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    button {
+      background: transparent;
+      color: #009688;
+      margin: 42px auto 8px auto;
+      cursor: pointer;
+      display: block;
+      border: none;
+      font-size: 20px;
+      padding: 8px 18px;
+      border: solid 3px #009688;
+      border-radius: 112px;
+      transition: background .13s, color .13s;
+
+      &:hover, &:focus, &:active {
+        outline: none;
+        background: #009688;
+        color: #fff;
+      }
+    }
+  }
+}
+
 .welcome_old {
   background: url('/assets/imgs/login_background.jpg');
   min-height: 100vh;

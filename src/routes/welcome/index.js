@@ -41,8 +41,68 @@ export default class Welcome extends Component {
 	render({ stores }) {
 		return (
 			<div class={style.welcome}>
-        Welcome to MNGED!
-        <button onClick={() => this.signInWithProvider(googleAuthProvider)}> SIGN IN</button>
+			
+			<svg class={style.bg} viewBox="0 0 800 600" preserveAspectRatio="xMinYMid slice">
+					
+					<g class={style.stars}>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+						<circle></circle>
+					</g>
+
+				</svg>
+
+				<div class={style.welcomeCard}>
+				<div class={style.rocket} transition="fadeUp"></div>
+        	<h1 transition="fadeUp">
+						Welcome to <strong>MNGED</strong>ME!
+					</h1>
+					<h2 transition="fadeUp">Get sh*t done with the taskmanager from outer space!</h2>
+					<button
+						transition="fadeUp"
+						onClick={() => this.signInWithProvider(googleAuthProvider)}
+						class="fadeInSlow inactive"
+					>
+						GET STARTED
+					</button>
+				</div>
 			</div>
 		);
 	}
