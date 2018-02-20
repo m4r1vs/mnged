@@ -20,9 +20,9 @@ export default class Donate extends Component {
 		return (
 			<div class={style.donate}>
 				DONATE<br />
-				One pizza would be: 5CAD$ <br />or {Math.round((5 / this.state.price) * 100000000) / 100000000 || '...'}Ƀ<br /><br />
-				One KFC meal: 15CAD$ <br />or {Math.round((15 / this.state.price) * 100000000) / 100000000 || '...'}Ƀ<br /><br />
-				A month of Adobe Creative Cloud: 60CAD$ <br />or {Math.round((60 / this.state.price) * 100000000) / 100000000 || '...'}Ƀ
+				One pizza would be: 5CAD$ <br />or {Math.round((5 / this.state.price) * 100000000) / 100 || '...'}ƀ<br /><br />
+				One KFC meal: 15CAD$ <br />or {Math.round((15 / this.state.price) * 100000000) / 100 || '...'}ƀ<br /><br />
+				A month of Adobe Creative Cloud: 60CAD$ <br />or {Math.round((60 / this.state.price) * 100000000) / 100 || '...'}ƀ
 			</div>
 		);
 	}
