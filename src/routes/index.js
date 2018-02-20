@@ -4,6 +4,7 @@ import { observer } from 'preact-mobx';
 
 import Home from './home';
 import Donate from './donate';
+import About from './about';
 import Welcome from './welcome';
 import ErrorPage from './errorpage';
 
@@ -24,6 +25,7 @@ export default class Routes extends Component {
 					<Router onChange={this.handleRoute}>
 						<Home path="/" stores={stores} />
 						<Donate path="/donate" />
+						<About path="/about" />
 						<ErrorPage default />
 					</Router>
 				);

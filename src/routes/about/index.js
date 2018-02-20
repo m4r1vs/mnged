@@ -6,6 +6,13 @@ import Card from '../../components/card';
 const About = () => (
 	<div class={style.about + ' fadeIn'}>
 		<Card>
+			<h2>General</h2>
+			<p>
+        This project started as a project for my High School's IT class and after I handed it in I asked myself why not continue working on MNGED since I always
+				struggled finding a good task manager for myself that isn't too feature rich like evernote and listens to their users <a href="https://issuetracker.google.com/issues/36760910">unlike Google Keep</a>.
+				So this is what I came up with. MNGED is still under heavy development but it won't hopefully take that long until v1.0 hopefully. So stay tuned for updates and <a href="/feedback">report</a> any issues and ideas to me
+			</p>
+			<hr />
 			<h2>Security</h2>
 			<p>
         MNGED uses <a href="https://firebase.google.com/">Firebase</a> for authentication and as a database. Firesbase is developed and maintained

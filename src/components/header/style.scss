@@ -32,11 +32,23 @@
 	&.hidden {
 		top: -56px;
 	}
-
+	
 	i {
-		float: right;
 		color: #fff;
+	}
+
+	i.actionsIcon {
+		float: right;
 		display: none;
+	}
+
+	i.mngedIcon {
+		position: absolute;
+		margin-left: 4px;
+
+		@media (max-width: 1024px) {
+			display: none;
+		}
 	}
 
 	// svg {
@@ -62,6 +74,7 @@
 
 		@media (min-width: 1025px) {
 			opacity: 0;
+			cursor: unset;
 			margin-left: 8px !important;
 		}
 

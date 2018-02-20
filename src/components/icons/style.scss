@@ -1,4 +1,4 @@
-svg.icon {
+.icon {
   height: 24px;
   position: relative;
   top: 6px;
@@ -17,7 +17,7 @@ svg.icon {
 }
 
 a:hover, a[class=active] {
-  svg.icon {
+  .icon {
     path[class=applyHoverEffect], circle[class=applyHoverEffect], rect[class=applyHoverEffect] {
       fill: var(--hover-color);
     }

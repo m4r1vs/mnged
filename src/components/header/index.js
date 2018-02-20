@@ -62,9 +62,11 @@ export default class Header extends Component {
 					<span id="navbtn-span3" />
 				</div>
 
+				<i class={'material-icons ' + style.mngedIcon}>school</i>
+
 				<h1 onClick={this.scrollToTop}>{subPage ? subPage.headerTitle : 'Managed Me!'}</h1>
 
-				{subPage && <i onClick={() => subPage.headerAction()} class="material-icons">{subPage.headerActionIcon}</i>}
+				{subPage && <i onClick={() => subPage.headerAction()} class={'material-icons ' + style.actionsIcon}>{subPage.headerActionIcon}</i>}
 
 			</header>
 		);

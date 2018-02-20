@@ -1,3 +1,22 @@
 .donate {
-	padding: 16px;
+	
+	padding: 12px 0px 0px;
+  width: 100%;
+  background: #fff;
+
+  @media (min-width: 500px) {
+    background: transparent !important;
+  }
+
+	.icons {
+		
+		text-align: center;
+
+		svg {
+			margin: 12px;
+    	cursor: pointer;
+			height: 57px;
+			position: unset;
+		}
+	}
 }

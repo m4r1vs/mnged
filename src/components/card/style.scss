@@ -3,13 +3,10 @@
 .card {
   padding: 0 16px;
   background: #fff;
-  display: inline-block;
-  width: 100%;
-  height: 100%;
+  display: block;
 
   @media (min-width: 500px) {
     margin: 0 auto;
-    margin-top: 56px;
     border-radius: 3px;
     box-shadow: $card-box-shadow;
     max-width: 450px;
