@@ -349,13 +349,13 @@ export const LogoutIcon = () => (
 
 export const DoughnutIcon = ({ title }) => (
 
-	< svg class = {
-		style.icon
-	}
-	xmlns = "http://www.w3.org/2000/svg"
-	viewBox = "0 0 64 64"
-	ariaLabelledby="title"
-		ariaDescribedby="desc" role="img"
+	<svg
+		class={style.icon}
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox="0 0 64 64"
+		ariaLabelledby="title"
+		ariaDescribedby="desc"
+		role="img"
 	>
 		<title>{title}</title>
 		<desc>A color styled icon from Orion Icon Library.</desc>

@@ -24,7 +24,7 @@ export default class AddTask extends Component {
 			.collection('tasks')
 			.add({
 				title: this.inputTask.value,
-				due: this.state.dueDate ? this.state.dueDate : new Date(),
+				due: this.state.dueDate ? this.state.dueDate : null,
 				created: new Date(),
 				group: this.state.selectedGroupColor || null
 			})

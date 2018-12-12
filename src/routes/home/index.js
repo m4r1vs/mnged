@@ -31,11 +31,29 @@ export default class Home extends Component {
 
 		return (
 			<div class={style.home} >
+
 				<AddTask stores={stores} />
-				<h2 class={style.title}>Up Next</h2>
-				{stores.taskStore.listTasksByDate.map(task => (
-					<TaskItem key={task.id} task={task} uiStore={stores.uiStore} />
-				))}
+				
+				{stores.taskStore.taskList.overdue.length > 0 && <div><h2 class={style.title}>Overdue</h2>
+					{stores.taskStore.taskList.overdue.map(task => (
+						<TaskItem key={task.id} task={task} uiStore={stores.uiStore} />
+					))}</div>}
+
+				{stores.taskStore.taskList.next.length > 0 && <div><h2 class={style.title}>Up Next</h2>
+					{stores.taskStore.taskList.next.map(task => (
+						<TaskItem key={task.id} task={task} uiStore={stores.uiStore} />
+					))}</div>}
+
+				{stores.taskStore.taskList.later.length > 0 && <div><h2 class={style.title}>Sometime Later</h2>
+					{stores.taskStore.taskList.later.map(task => (
+						<TaskItem key={task.id} task={task} uiStore={stores.uiStore} />
+					))}</div>}
+
+				{stores.taskStore.taskList.notDue.length > 0 && <div><h2 class={style.title}>Not due for a while</h2>
+					{stores.taskStore.taskList.notDue.map(task => (
+						<TaskItem key={task.id} task={task} uiStore={stores.uiStore} />
+					))}</div>}
+
 			</div>
 		);
 	}

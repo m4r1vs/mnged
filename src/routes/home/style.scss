@@ -1,10 +1,11 @@
 .home {
   max-width: 512px;
+  padding-bottom: 12px;
   margin: 0 auto;
 
   @media (max-width: 600px) {
     max-width: none;
-    padding-bottom: 56px;
+    padding-bottom: 87px;
   }
 
   .title {

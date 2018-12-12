@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { Link } from 'preact-router/match';
 import { auth, googleAuthProvider, facebookAuthProvider, githubAuthProvider, twitterAuthProvider } from '../../lib/firebase';
 
 import style from './style';
@@ -42,55 +43,55 @@ export default class Welcome extends Component {
 		return (
 			<div class={style.welcome}>
 			
-			<svg class={style.bg} viewBox="0 0 800 600" preserveAspectRatio="xMinYMid slice">
+				<svg class={style.bg} viewBox="0 0 800 600" preserveAspectRatio="xMinYMid slice">
 					
 					<g class={style.stars}>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
-						<circle></circle>
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
+						<circle />
 					</g>
 
 				</svg>
 
 				<div class={style.welcomeCard}>
-				<div class={style.rocket} transition="fadeUp"></div>
+					<div class={style.rocket} transition="fadeUp" />
         	<h1 transition="fadeUp">
 						Welcome to <strong>MNGED</strong>ME!
 					</h1>
@@ -100,8 +101,9 @@ export default class Welcome extends Component {
 						onClick={() => this.signInWithProvider(googleAuthProvider)}
 						class="fadeInSlow inactive"
 					>
-						GET STARTED
+						SIGN INTO MNGED
 					</button>
+					<Link href="/register">create account</Link>
 				</div>
 			</div>
 		);

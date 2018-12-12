@@ -82,6 +82,7 @@ class Task {
 	 * the time left in the task
 	 */
 	@computed get timeLeft() {
+		if (!this.due) return null;
 		const millisToTime = (millisec) => {
 			if (millisec < 0) return 'overdue';
 			let seconds = (millisec / 1000).toFixed(0);
@@ -104,7 +105,7 @@ class Task {
 	 * Returns the time left as a readable date
 	 */
 	@computed get timeReadable() {
-		if (!this.due) return null;
+		if (!this.due) return 'not set';
 		const dueDate = this.due;
 		const now = new Date();
 
@@ -125,13 +126,16 @@ class Task {
 		
 		const month = months[dueDate.getMonth()];
 		const day = dueDate.getDate();
-		const hours = dueDate.getHours();
-		const minutes = dueDate.getMinutes();
+		let hours = dueDate.getHours();
+		let minutes = dueDate.getMinutes();
 
 		let date = month + ' ' + day;
 		if (now.getDate() === day && now.getMonth() === dueDate.getMonth() && now.getFullYear() === dueDate.getFullYear()) date = 'Today';
-		if (now.getDate() === day - 1 && now.getMonth() === dueDate.getMonth() && now.getFullYear() === dueDate.getFullYear()) date = 'Yesterday';
-		if (now.getDate() === day + 1 && now.getMonth() === dueDate.getMonth() && now.getFullYear() === dueDate.getFullYear()) date = 'Tomorrow';
+		if (now.getDate() === day - 1 && now.getMonth() === dueDate.getMonth() && now.getFullYear() === dueDate.getFullYear()) date = 'Tomorrow';
+		if (now.getDate() === day + 1 && now.getMonth() === dueDate.getMonth() && now.getFullYear() === dueDate.getFullYear()) date = 'Yesterday';
+
+		if (hours < 10) hours = '0' + hours;
+		if (minutes < 10) minutes = '0' + minutes;
 
 		const time = hours + ':' + minutes;
 
@@ -157,9 +161,29 @@ export default class TaskStore {
 	/**
 	 * get the tasks ordered by date
 	 */
-	@computed get listTasksByDate() {
-		const taskList = this.tasks.sort((a, b) => a.due.getTime() - b.due.getTime());
-		return taskList;
+	@computed get taskList() {
+
+		const taskList = {
+			overdue: [],
+			next: [],
+			later: [],
+			notDue: []
+		};
+
+		this.tasks.forEach(task => {
+			if (!task.due) taskList.later.push(task);
+			else if (task.timeLeft === 'overdue') taskList.overdue.push(task);
+			else if (task.due.getTime() - new Date().getTime() > 604799999) taskList.notDue.push(task);
+			else taskList.next.push(task);
+		});
+
+		return {
+			overdue: taskList.overdue.sort((a, b) => a.due.getTime() - b.due.getTime()),
+			next: taskList.next.sort((a, b) => a.due.getTime() - b.due.getTime()),
+			later: taskList.later,
+			notDue: taskList.notDue.sort((a, b) => a.due.getTime() - b.due.getTime())
+		};
+
 	}
 	
 	/**
